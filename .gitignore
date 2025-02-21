@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Generated API
-/app/api/
+/src/app/swagger/
