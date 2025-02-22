@@ -1,3 +1,11 @@
 :host {
     display: flex;
 }
+
+:host > * {
+    padding: 1em 1em;
+}
+
+app-filter-sidebar {
+    width: 296px;
+}

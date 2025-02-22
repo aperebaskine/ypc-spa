@@ -2,3 +2,32 @@ form {
     display: flex;
     flex-direction: column;
 }
+
+mat-form-field {
+    margin-bottom: 8px;
+}
+
+.inline-form-fields {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.inline-form-fields span.divider {
+    position: relative;
+    bottom: 12px;
+}
+
+input.example-right-align::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.example-right-align {
+    appearance: inherit;
+    -moz-appearance: textfield;
+}
+
+.example-right-align {
+    text-align: right;
+}
