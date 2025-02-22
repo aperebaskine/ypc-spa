@@ -1,5 +1,19 @@
+
 :host {
     width: 100%;
-    height: 4em;
-    background-color: var(--mat-sys-tertiary);
+    height: 3em;
+    background-color: var(--mat-sys-primary-container);
+
+    display: flex;
+    align-items: center;
+}
+
+:host > a {
+    padding: 1em 2em;
+}
+
+/* TODO: Use a proper selector */
+:host * {
+    color: var(--mat-sys-on-primary-container);
+    
 }
