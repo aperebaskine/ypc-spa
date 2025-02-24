@@ -18,6 +18,11 @@ mat-form-field {
     bottom: 12px;
 }
 
+.form-reset-submit {
+    display: flex;
+    justify-content: right;
+}
+
 input.example-right-align::-webkit-outer-spin-button,
 input.example-right-align::-webkit-inner-spin-button {
     display: none;

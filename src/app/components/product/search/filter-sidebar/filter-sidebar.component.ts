@@ -1,4 +1,4 @@
-import { Attribute, Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -6,11 +6,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
 import { CategoryService } from '../../../../services/category.service';
-import { CategoryDTO } from '../../../../generated';
+import { Attribute, CategoryDTO } from '../../../../generated';
 import { Observable } from 'rxjs';
 import { AttributeService } from '../../../../services/attribute.service';
-import { ProductService } from '../../../../services/product.service';
+import { AttributeFilterComponent } from "../../../attribute/attribute-filter/attribute-filter.component";
 
 @Component({
   selector: 'app-filter-sidebar',
@@ -22,12 +23,14 @@ import { ProductService } from '../../../../services/product.service';
     MatDatepickerModule,
     MatSlideToggleModule,
     MatDividerModule,
-  ],
+    MatButtonModule,
+    AttributeFilterComponent
+],
   templateUrl: './filter-sidebar.component.html',
   styleUrl: './filter-sidebar.component.css',
 })
 export class FilterSidebarComponent {
-  categories: Observable<CategoryDTO[]>;
+  categories?: Observable<CategoryDTO[]>;
   attributes?: Observable<Attribute[]>;
 
   searchForm = new FormGroup({
@@ -52,16 +55,14 @@ export class FilterSidebarComponent {
     this.searchForm
       .get('categoryId')
       ?.valueChanges.subscribe((categoryId) =>
-        this.displayAttributeFilters(categoryId)
+        this.loadAttributeFilters(categoryId)
       );
   }
 
-  displayAttributeFilters(categoryId?: number | null) {
-    if (categoryId) {
-      this.attributeService
-        .findByCategory(categoryId, 'en-GB')
-        .subscribe((attributes) => console.log(attributes));
-    }
+  loadCategories() {}
+
+  loadAttributeFilters(categoryId: number) {
+    this.attributes = this.attributeService.findByCategory(categoryId, 'en-GB');
   }
 
   onSubmit() {
