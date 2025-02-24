@@ -31,3 +31,7 @@ input.example-right-align {
 .example-right-align {
     text-align: right;
 }
+
+mat-divider {
+    margin: 8px 0px;
+}

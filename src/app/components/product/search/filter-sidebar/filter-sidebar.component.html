@@ -1,13 +1,14 @@
 <div>
-    <p>Filters</p>
+    <h3>Filters</h3>
     <form [formGroup]="searchForm" (submit)="submitSearchForm()">
         <mat-form-field floatLabel="always">
             <mat-label>Name</mat-label>
-            <input matInput type="text" placeholder="Example: Ryzen 4070">
+            <input matInput type="text" placeholder="Example: Ryzen 4070" formControlName="name">
         </mat-form-field>
+        <mat-divider></mat-divider>
         <mat-form-field floatLabel="always">
             <mat-label>Category</mat-label>
-            <mat-select>
+            <mat-select formControlName="categoryId">
                 <mat-option
                     *ngFor="let category of categories | async"
                     [value]="category.id">
@@ -15,29 +16,33 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+        <mat-divider></mat-divider>
         <mat-form-field floatLabel="always">
             <mat-label>Launch date</mat-label>
             <mat-date-range-input [rangePicker]="picker">
-                <input matStartDate placeholder="Start date">
-                <input matEndDate placeholder="End date">
+                <input matStartDate placeholder="Start date" formControlName="launchDateFrom">
+                <input matEndDate placeholder="End date" formControlName="launchDateTo">
             </mat-date-range-input>
             <mat-datepicker-toggle matIconSuffix
                 [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
         </mat-form-field>
+        <mat-divider></mat-divider>
         <div class="inline-form-fields">
             <mat-form-field style="width:128px;" floatLabel="always">
                 <mat-label>from</mat-label>
-                <input matInput type="number" min="0" class="example-right-align">
+                <input matInput type="number" min="0" class="example-right-align" formControlName="priceMin">
                 <span matTextPrefix>€</span>
             </mat-form-field>
             <span class="divider"> - </span>
             <mat-form-field style="width:128px;" floatLabel="always">
                 <mat-label>to</mat-label>
-                <input matInput type="number" min="0" class="example-right-align">
+                <input matInput type="number" min="0" class="example-right-align" formControlName="priceMax">
                 <span matTextPrefix>€</span>
             </mat-form-field>
         </div>
-        <mat-slide-toggle labelPosition="before">Show only in stock</mat-slide-toggle>
+        <mat-divider></mat-divider>
+        <mat-slide-toggle labelPosition="before" formControlName="stockMin">Show only in stock</mat-slide-toggle>
+        <mat-divider></mat-divider>
     </form>
 </div>
