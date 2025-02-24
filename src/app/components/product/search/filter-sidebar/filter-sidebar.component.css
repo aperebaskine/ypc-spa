@@ -7,13 +7,13 @@ mat-form-field {
     margin-bottom: 8px;
 }
 
-.inline-form-fields {
+.inline-form-elements {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.inline-form-fields span.divider {
+.inline-form-elements span.divider {
     position: relative;
     bottom: 12px;
 }

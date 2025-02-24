@@ -1,7 +1,6 @@
-import { Attribute, Component, forwardRef } from '@angular/core';
+import { Attribute, Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FormControlState } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -11,6 +10,7 @@ import { CategoryService } from '../../../../services/category.service';
 import { CategoryDTO } from '../../../../generated';
 import { Observable } from 'rxjs';
 import { AttributeService } from '../../../../services/attribute.service';
+import { ProductService } from '../../../../services/product.service';
 
 @Component({
   selector: 'app-filter-sidebar',
@@ -21,13 +21,12 @@ import { AttributeService } from '../../../../services/attribute.service';
     MatSelectModule,
     MatDatepickerModule,
     MatSlideToggleModule,
-    MatDividerModule
+    MatDividerModule,
   ],
   templateUrl: './filter-sidebar.component.html',
-  styleUrl: './filter-sidebar.component.css'
+  styleUrl: './filter-sidebar.component.css',
 })
 export class FilterSidebarComponent {
-
   categories: Observable<CategoryDTO[]>;
   attributes?: Observable<Attribute[]>;
 
@@ -36,30 +35,36 @@ export class FilterSidebarComponent {
     categoryId: new FormControl(),
     launchDateFrom: new FormControl(),
     launchDateTo: new FormControl(),
-    stockMin: new FormControl(),
+    hasStock: new FormControl(),
     priceMin: new FormControl(),
     priceMax: new FormControl(),
-    attributes: new FormControl()
-  })
+    attributes: new FormControl(),
+  });
+
+  @Output() form = new EventEmitter<FormGroup>();
 
   constructor(
-    private categoryService: CategoryService,
-    private attributeService: AttributeService
+    private attributeService: AttributeService,
+    private categoryService: CategoryService
   ) {
-    this.categories = this.categoryService.findAll("en-GB");
+    this.categories = this.categoryService.findAll('en-GB');
 
-    this.searchForm.get('categoryId')?.valueChanges
-      .subscribe((categoryId) => this.displayAttributeFilters(categoryId));
+    this.searchForm
+      .get('categoryId')
+      ?.valueChanges.subscribe((categoryId) =>
+        this.displayAttributeFilters(categoryId)
+      );
   }
 
   displayAttributeFilters(categoryId?: number | null) {
     if (categoryId) {
-      this.attributeService.findByCategory(categoryId, "en-GB")
+      this.attributeService
+        .findByCategory(categoryId, 'en-GB')
         .subscribe((attributes) => console.log(attributes));
     }
   }
 
-  submitSearchForm() {
-
+  onSubmit() {
+    this.form.emit(this.searchForm);
   }
 }

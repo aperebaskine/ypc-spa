@@ -1,2 +1,18 @@
-<app-filter-sidebar></app-filter-sidebar>
-<app-search-results></app-search-results>
+<app-filter-sidebar (form)="handleFormSubmission($event)"></app-filter-sidebar>
+<div class="results">
+  <h3>Results</h3>
+  <div *ngIf="this.results">
+    <app-product-card
+      *ngFor="let result of this.results.page"
+      [product]="result"
+    ></app-product-card>
+    <mat-paginator
+      [pageIndex]="this.page"
+      [pageSize]="this.pageSizeOptions[0]"
+      [pageSizeOptions]="this.pageSizeOptions"
+      [length]="results.resultCount"
+      (page)="handlePageEvent($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>
