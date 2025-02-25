@@ -12,7 +12,7 @@ import {
   templateUrl: './set-filter.component.html',
   styleUrl: './set-filter.component.css',
 })
-export class SetFilterComponent extends BaseFilterComponent<any> {
+export class SetFilterComponent extends BaseFilterComponent<Set<String>> {
   checked = new Set<String>();
 
   handleChange(event: MatCheckboxChange) {
@@ -22,7 +22,7 @@ export class SetFilterComponent extends BaseFilterComponent<any> {
       this.checked.delete(event.source.value);
     }
 
-    this.values?.emit([...this.checked]);
+    this.valueEmitter?.emit(this.checked);
   }
 }
 

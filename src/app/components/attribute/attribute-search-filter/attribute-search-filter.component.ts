@@ -21,10 +21,10 @@ export class AttributeSearchFilterComponent {
   @Input() attribute?: Attribute;
 
   outlet?: Type<BaseFilterComponent<any>>;
-  values = new EventEmitter<any>();
+  valueEmitter = new EventEmitter<any>();
 
   public constructor() {
-    this.values.subscribe((v) => {
+    this.valueEmitter.subscribe((v) => {
       console.log({ id: this.attribute!.id, values: v });
     });
   }

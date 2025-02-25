@@ -5,11 +5,9 @@ import { Attribute } from '../../../../../generated';
   selector: 'app-base-filter',
   imports: [],
   templateUrl: './base-filter.component.html',
-  styleUrl: './base-filter.component.css'
+  styleUrl: './base-filter.component.css',
 })
 export abstract class BaseFilterComponent<T> {
-
   @Input() attribute?: Attribute;
-  @Input() values?: EventEmitter<T[]>;
-
+  @Input() valueEmitter?: EventEmitter<T>;
 }
