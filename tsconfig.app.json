@@ -11,6 +11,6 @@
   ],
   "include": [
     "src/**/*.d.ts",
-    "./src/app/components/attribute/attribute-filter/**/*.component.ts"
+    "./src/app/components/attribute/attribute-search-filter/dynamic/**/*.component.ts"
   ]
 }

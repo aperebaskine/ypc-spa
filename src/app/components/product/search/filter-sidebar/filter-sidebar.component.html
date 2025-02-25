@@ -67,6 +67,10 @@
             only in stock</mat-slide-toggle>
         <mat-divider></mat-divider>
         <ng-container *ngIf="attributes">
+            <app-attribute-search-filter
+                *ngFor="let attribute of attributes | async"
+                [attribute]="attribute">
+            </app-attribute-search-filter>
         </ng-container>
         <div class="form-reset-submit">
             <button mat-button type="reset">Reset</button>
