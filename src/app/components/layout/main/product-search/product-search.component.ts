@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { FilterSidebarComponent } from '../../product/search/filter-sidebar/filter-sidebar.component';
+import { FilterSidebarComponent } from '../../../product/search/filter-sidebar/filter-sidebar.component';
 import { FormGroup } from '@angular/forms';
-import { ProductService } from '../../../services/product.service';
+import { ProductService } from '../../../../services/product.service';
 import { PageEvent } from '@angular/material/paginator';
-import { ProductResults } from '../../../generated';
-import { ProductCardComponent } from '../../../product/product-card/product-card.component';
+import { ProductResults } from '../../../../generated';
+import { ProductCardComponent } from '../../../../product/product-card/product-card.component';
 
 @Component({
   selector: 'app-product-search',

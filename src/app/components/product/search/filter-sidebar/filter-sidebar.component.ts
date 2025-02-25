@@ -11,7 +11,6 @@ import { CategoryService } from '../../../../services/category.service';
 import { Attribute, CategoryDTO } from '../../../../generated';
 import { Observable } from 'rxjs';
 import { AttributeService } from '../../../../services/attribute.service';
-import { AttributeFilterComponent } from "../../../attribute/attribute-filter/attribute-filter.component";
 
 @Component({
   selector: 'app-filter-sidebar',
@@ -24,7 +23,6 @@ import { AttributeFilterComponent } from "../../../attribute/attribute-filter/at
     MatSlideToggleModule,
     MatDividerModule,
     MatButtonModule,
-    AttributeFilterComponent
 ],
   templateUrl: './filter-sidebar.component.html',
   styleUrl: './filter-sidebar.component.css',
