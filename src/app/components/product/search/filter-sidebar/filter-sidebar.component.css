@@ -21,6 +21,7 @@ mat-form-field {
 .form-reset-submit {
     display: flex;
     justify-content: right;
+    gap: 16px;
 }
 
 input.example-right-align::-webkit-outer-spin-button,

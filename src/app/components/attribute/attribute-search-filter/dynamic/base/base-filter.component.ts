@@ -10,6 +10,6 @@ import { Attribute } from '../../../../../generated';
 export abstract class BaseFilterComponent<T> {
 
   @Input() attribute?: Attribute;
-  @Input() event?: EventEmitter<T[]>;
+  @Input() values?: EventEmitter<T[]>;
 
 }

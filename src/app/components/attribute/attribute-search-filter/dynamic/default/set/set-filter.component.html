@@ -1,1 +1,9 @@
-<p>set-filter works!</p>
+<ng-container *ngIf="this.attribute">
+  <p>{{ attribute.name }}</p>
+  <mat-checkbox
+    *ngFor="let value of attribute?.values"
+    [value]="value.value!.toString()"
+    (change)="handleChange($event)"
+    >{{ value.value }}</mat-checkbox
+  >
+</ng-container>

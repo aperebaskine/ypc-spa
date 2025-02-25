@@ -1,3 +1,8 @@
 <ng-container *ngIf="outlet">
-    <ng-container *ngComponentOutlet="outlet"></ng-container>
+  <ng-container
+    *ngComponentOutlet="
+      outlet;
+      inputs: { attribute: attribute, values: values }
+    "
+  ></ng-container>
 </ng-container>

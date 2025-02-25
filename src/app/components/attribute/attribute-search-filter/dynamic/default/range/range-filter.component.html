@@ -1,1 +1,10 @@
-<p>range-filter works!</p>
+<p>{{ attribute!.name }}</p>
+<mat-slider
+  discrete
+  [displayWith]="formatLabel"
+  [min]="minValue"
+  [max]="maxValue"
+>
+  <input [(value)]="startValue" (change)="handleValueChange()" matSliderStartThumb />
+  <input [(value)]="endValue" (change)="handleValueChange()" matSliderEndThumb />
+</mat-slider>

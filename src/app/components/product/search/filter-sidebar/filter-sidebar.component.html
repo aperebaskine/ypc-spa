@@ -1,80 +1,89 @@
 <div>
-    <h3>Filters</h3>
-    <form [formGroup]="searchForm" (submit)="onSubmit()">
-        <mat-form-field floatLabel="always">
-            <mat-label>Name</mat-label>
-            <input
-                matInput
-                type="text"
-                placeholder="Example: Ryzen 4070"
-                formControlName="name" />
-        </mat-form-field>
+  <h3>Filters</h3>
+  <form [formGroup]="searchForm" (submit)="onSubmit()">
+    <mat-form-field floatLabel="always">
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        type="text"
+        placeholder="Example: Ryzen 4070"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <mat-form-field floatLabel="always">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="categoryId">
+        <mat-option
+          *ngFor="let category of categories | async"
+          [value]="category.id"
+        >
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <mat-form-field floatLabel="always">
+      <mat-label>Launch date</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input
+          matStartDate
+          placeholder="Start date"
+          formControlName="launchDateFrom"
+        />
+        <input
+          matEndDate
+          placeholder="End date"
+          formControlName="launchDateTo"
+        />
+      </mat-date-range-input>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <div class="inline-form-elements">
+      <mat-form-field style="width: 128px" floatLabel="always">
+        <mat-label>from</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          class="example-right-align"
+          formControlName="priceMin"
+        />
+        <span matTextPrefix>€</span>
+      </mat-form-field>
+      <span class="divider"> - </span>
+      <mat-form-field style="width: 128px" floatLabel="always">
+        <mat-label>to</mat-label>
+        <input
+          matInput
+          type="number"
+          min="0"
+          class="example-right-align"
+          formControlName="priceMax"
+        />
+        <span matTextPrefix>€</span>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+    <mat-slide-toggle labelPosition="before" formControlName="hasStock"
+      >Show only in stock</mat-slide-toggle
+    >
+    <mat-divider></mat-divider>
+    <ng-container *ngFor="let attribute of attributes | async">
+      <ng-container *ngIf="attribute.values!.length > 1">
+        <app-attribute-search-filter [attribute]="attribute">
+        </app-attribute-search-filter>
         <mat-divider></mat-divider>
-        <mat-form-field floatLabel="always">
-            <mat-label>Category</mat-label>
-            <mat-select formControlName="categoryId">
-                <mat-option
-                    *ngFor="let category of categories | async"
-                    [value]="category.id">
-                    {{ category.name }}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-        <mat-form-field floatLabel="always">
-            <mat-label>Launch date</mat-label>
-            <mat-date-range-input [rangePicker]="picker">
-                <input
-                    matStartDate
-                    placeholder="Start date"
-                    formControlName="launchDateFrom" />
-                <input
-                    matEndDate
-                    placeholder="End date"
-                    formControlName="launchDateTo" />
-            </mat-date-range-input>
-            <mat-datepicker-toggle
-                matIconSuffix
-                [for]="picker"></mat-datepicker-toggle>
-            <mat-date-range-picker #picker></mat-date-range-picker>
-        </mat-form-field>
-        <mat-divider></mat-divider>
-        <div class="inline-form-elements">
-            <mat-form-field style="width: 128px" floatLabel="always">
-                <mat-label>from</mat-label>
-                <input
-                    matInput
-                    type="number"
-                    min="0"
-                    class="example-right-align"
-                    formControlName="priceMin" />
-                <span matTextPrefix>€</span>
-            </mat-form-field>
-            <span class="divider"> - </span>
-            <mat-form-field style="width: 128px" floatLabel="always">
-                <mat-label>to</mat-label>
-                <input
-                    matInput
-                    type="number"
-                    min="0"
-                    class="example-right-align"
-                    formControlName="priceMax" />
-                <span matTextPrefix>€</span>
-            </mat-form-field>
-        </div>
-        <mat-divider></mat-divider>
-        <mat-slide-toggle labelPosition="before" formControlName="hasStock">Show
-            only in stock</mat-slide-toggle>
-        <mat-divider></mat-divider>
-        <ng-container *ngIf="attributes">
-            <app-attribute-search-filter
-                *ngFor="let attribute of attributes | async"
-                [attribute]="attribute">
-            </app-attribute-search-filter>
-        </ng-container>
-        <div class="form-reset-submit">
-            <button mat-button type="reset">Reset</button>
-            <button mat-flat-button type="submit">Submit</button>
-        </div>
-    </form>
+      </ng-container>
+    </ng-container>
+    <div class="form-reset-submit">
+      <button mat-button type="reset">Reset</button>
+      <button mat-flat-button type="submit">Submit</button>
+    </div>
+  </form>
 </div>
