@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ProductResults } from '../../../generated';
-import { ProductCardComponent } from '../../../product/product-card/product-card.component';
+import { ProductCardComponent } from '../../product/product-card/product-card.component';
 
 @Component({
   selector: 'app-product-search',
@@ -14,7 +14,7 @@ import { ProductCardComponent } from '../../../product/product-card/product-card
     CommonModule,
     FilterSidebarComponent,
     MatPaginatorModule,
-    ProductCardComponent,
+    ProductCardComponent
   ],
   templateUrl: './product-search.component.html',
   styleUrl: './product-search.component.css',
