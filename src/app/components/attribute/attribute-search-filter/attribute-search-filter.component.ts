@@ -21,11 +21,13 @@ export class AttributeSearchFilterComponent {
   @Input() attribute?: Attribute;
 
   outlet?: Type<BaseFilterComponent<any>>;
+
+  // TODO: Use a cleaner approach for communication between the static and dynamic components
   valueEmitter = new EventEmitter<any>();
 
   public constructor() {
     this.valueEmitter.subscribe((v) => {
-      console.log({ id: this.attribute!.id, values: v });
+      console.log(({ id: this.attribute!.id, values: [...v] }));
     });
   }
 
