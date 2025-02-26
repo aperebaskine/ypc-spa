@@ -2,10 +2,11 @@ import {
   Component,
   EventEmitter,
   Input,
+  Output,
   SimpleChanges,
   Type,
 } from '@angular/core';
-import { Attribute } from '../../../generated';
+import { Attribute, LightAttribute } from '../../../generated';
 import { BaseFilterComponent } from './dynamic/base/base-filter.component';
 import { CommonModule } from '@angular/common';
 
@@ -19,6 +20,7 @@ export class AttributeSearchFilterComponent {
   private static types = new Map<string, Type<BaseFilterComponent<any>>>();
 
   @Input() attribute?: Attribute;
+  @Output() attributeChange = new EventEmitter<LightAttribute>();
 
   outlet?: Type<BaseFilterComponent<any>>;
 
@@ -27,7 +29,7 @@ export class AttributeSearchFilterComponent {
 
   public constructor() {
     this.valueEmitter.subscribe((v) => {
-      console.log(({ id: this.attribute!.id, values: [...v] }));
+      this.attributeChange.emit({ id: this.attribute!.id, values: v });
     });
   }
 

@@ -8,10 +8,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { CategoryService } from '../../../../services/category.service';
-import { Attribute, CategoryDTO } from '../../../../generated';
+import { Attribute, CategoryDTO, LightAttribute } from '../../../../generated';
 import { Observable } from 'rxjs';
 import { AttributeService } from '../../../../services/attribute.service';
-import { AttributeSearchFilterComponent } from "../../../attribute/attribute-search-filter/attribute-search-filter.component";
+import { AttributeSearchFilterComponent } from '../../../attribute/attribute-search-filter/attribute-search-filter.component';
 
 @Component({
   selector: 'app-filter-sidebar',
@@ -24,8 +24,8 @@ import { AttributeSearchFilterComponent } from "../../../attribute/attribute-sea
     MatSlideToggleModule,
     MatDividerModule,
     MatButtonModule,
-    AttributeSearchFilterComponent
-],
+    AttributeSearchFilterComponent,
+  ],
   templateUrl: './filter-sidebar.component.html',
   styleUrl: './filter-sidebar.component.css',
 })
@@ -44,7 +44,7 @@ export class FilterSidebarComponent {
     attributes: new FormGroup({}),
   });
 
-  @Output() form = new EventEmitter<FormGroup>();
+  @Output() form = new EventEmitter<any>();
 
   constructor(
     private attributeService: AttributeService,
@@ -63,7 +63,22 @@ export class FilterSidebarComponent {
     this.attributes = this.attributeService.findByCategory(categoryId, 'en-GB');
   }
 
+  attributeCriteriaChanged(attribute: LightAttribute) {
+    let attributeGroup = this.searchForm.get('attributes') as FormGroup;
+
+    if (attribute.values.length < 1) {
+      attributeGroup.removeControl(attribute.id.toString());
+    } else {
+      attributeGroup.addControl(
+        attribute.id.toString(),
+        new FormControl(attribute)
+      );
+    }
+  }
+
   onSubmit() {
-    this.form.emit(this.searchForm);
+    let res = { ...this.searchForm.value };
+    res.attributes = Object.values(res.attributes!);
+    this.form.emit(res);
   }
 }

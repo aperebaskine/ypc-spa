@@ -14,13 +14,13 @@ import { ProductCardComponent } from '../../product/product-card/product-card.co
     CommonModule,
     FilterSidebarComponent,
     MatPaginatorModule,
-    ProductCardComponent
+    ProductCardComponent,
   ],
   templateUrl: './product-search.component.html',
   styleUrl: './product-search.component.css',
 })
 export class ProductSearchComponent {
-  form?: FormGroup;
+  criteria? = {};
   results?: ProductResults;
 
   // TODO: Resolve dynamically
@@ -30,23 +30,24 @@ export class ProductSearchComponent {
 
   constructor(private productService: ProductService) {}
 
-  handleFormSubmission(form: FormGroup) {
-    this.form = form;
+  handleFormSubmission(criteria: any) {
+    this.criteria = criteria;
+    console.log(this.criteria);
     this.page = 0;
-    this.loadProducts(this.page, this.pageSize, form);
+    this.loadProducts(this.page, this.pageSize);
   }
 
   handlePageEvent(pageEvent: PageEvent) {
     this.pageSize = pageEvent.pageSize;
     this.page = pageEvent.pageIndex;
-    this.loadProducts(pageEvent.pageIndex, pageEvent.pageSize, this.form!);
+    this.loadProducts(pageEvent.pageIndex, pageEvent.pageSize);
   }
 
-  loadProducts(page: number, pageSize: number, formData: FormGroup) {
+  loadProducts(page: number, pageSize: number) {
     let pos = ProductSearchComponent.calcPos(page, pageSize);
 
     this.productService
-      .findBy(pos, pageSize, { ...formData.value })
+      .findBy(pos, pageSize, this.criteria!)
       .subscribe((results) => (this.results = results));
   }
 

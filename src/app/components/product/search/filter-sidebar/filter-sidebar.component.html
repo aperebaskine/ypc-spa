@@ -76,7 +76,10 @@
     <mat-divider></mat-divider>
     <ng-container *ngFor="let attribute of attributes | async">
       <ng-container *ngIf="attribute.values!.length > 1">
-        <app-attribute-search-filter [attribute]="attribute">
+        <app-attribute-search-filter
+          [attribute]="attribute"
+          (attributeChange)="attributeCriteriaChanged($event)"
+        >
         </app-attribute-search-filter>
         <mat-divider></mat-divider>
       </ng-container>
