@@ -41,7 +41,7 @@ export class FilterSidebarComponent {
     hasStock: new FormControl(),
     priceMin: new FormControl(),
     priceMax: new FormControl(),
-    attributes: new FormControl(),
+    attributes: new FormGroup({}),
   });
 
   @Output() form = new EventEmitter<FormGroup>();
@@ -58,8 +58,6 @@ export class FilterSidebarComponent {
         this.loadAttributeFilters(categoryId)
       );
   }
-
-  loadCategories() {}
 
   loadAttributeFilters(categoryId: number) {
     this.attributes = this.attributeService.findByCategory(categoryId, 'en-GB');
