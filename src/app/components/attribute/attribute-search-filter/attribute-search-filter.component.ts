@@ -43,17 +43,17 @@ export class AttributeSearchFilterComponent {
     attribute: Attribute
   ): Promise<Type<BaseFilterComponent<any>>> {
     let component = AttributeSearchFilterComponent.types.get(
-      attribute.dataType!
+      attribute.dataType
     );
 
     if (!component) {
       try {
-        component = await resolveForDataType(attribute.dataType!);
+        component = await resolveForDataType(attribute.dataType);
       } catch (e) {
-        component = await resolveDefault(attribute.handlingMode!);
+        component = await resolveDefault(attribute.handlingMode);
       }
 
-      AttributeSearchFilterComponent.types.set(attribute.dataType!, component!);
+      AttributeSearchFilterComponent.types.set(attribute.dataType, component!);
     }
 
     return component!;
