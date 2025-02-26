@@ -9,7 +9,7 @@ import { MatSliderModule } from '@angular/material/slider';
   templateUrl: './range-filter.component.html',
   styleUrl: './range-filter.component.css',
 })
-export class RangeFilterComponent extends BaseFilterComponent<number[]> {
+export class RangeFilterComponent extends BaseFilterComponent<number> {
   minValue?: number;
   maxValue?: number;
 
@@ -28,6 +28,22 @@ export class RangeFilterComponent extends BaseFilterComponent<number[]> {
     }
   }
 
+  calculateStep() {
+    if (this.startValue! > 1000000) {
+      return 100000;
+    }
+
+    if (this.startValue! > 1000) {
+      return 100;
+    }
+
+    if (this.startValue != Math.trunc(this.startValue!)) {
+      return 0.01;
+    }
+
+    return 1;
+  }
+
   formatLabel(value: number) {
     if (value > 999999) {
       return `${(value / 1000000).toFixed(1)}M`;
@@ -41,7 +57,12 @@ export class RangeFilterComponent extends BaseFilterComponent<number[]> {
   }
 
   handleValueChange() {
-    this.valueEmitter?.emit([this.startValue!, this.endValue!]);
+    if (this.startValue === this.minValue && this.endValue === this.maxValue) {
+      this.valueEmitter?.emit([]);
+    } else {
+      this.valueEmitter?.emit([this.startValue!, this.endValue!]);
+    }
+
   }
 }
 

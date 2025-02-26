@@ -1,10 +1,14 @@
-<p>{{ attribute!.name }}</p>
-<mat-slider
-  discrete
-  [displayWith]="formatLabel"
-  [min]="minValue"
-  [max]="maxValue"
->
-  <input [(value)]="startValue" (change)="handleValueChange()" matSliderStartThumb />
-  <input [(value)]="endValue" (change)="handleValueChange()" matSliderEndThumb />
-</mat-slider>
+<ng-container *ngIf="this.attribute">
+  <p>{{ attribute.name }}</p>
+  <mat-slider
+    discrete
+    [displayWith]="formatLabel"
+    [min]="minValue"
+    [max]="maxValue"
+    [step]="calculateStep()">
+    <input [(value)]="startValue" (change)="handleValueChange()"
+      matSliderStartThumb />
+    <input [(value)]="endValue" (change)="handleValueChange()"
+      matSliderEndThumb />
+  </mat-slider>
+</ng-container>

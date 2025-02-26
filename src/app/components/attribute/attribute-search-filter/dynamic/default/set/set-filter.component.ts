@@ -12,14 +12,17 @@ import {
   templateUrl: './set-filter.component.html',
   styleUrl: './set-filter.component.css',
 })
-export class SetFilterComponent extends BaseFilterComponent<Set<String>> {
-  checked = new Set<String>();
+export class SetFilterComponent extends BaseFilterComponent<string> {
+  checked: string[] = [];
 
   handleChange(event: MatCheckboxChange) {
     if (event.checked) {
-      this.checked.add(event.source.value);
+      this.checked.push(event.source.value);
     } else {
-      this.checked.delete(event.source.value);
+      const i = this.checked.indexOf(event.source.value);
+      if (i > -1) {
+        this.checked.splice(i, 1);
+      }
     }
 
     this.valueEmitter?.emit(this.checked);

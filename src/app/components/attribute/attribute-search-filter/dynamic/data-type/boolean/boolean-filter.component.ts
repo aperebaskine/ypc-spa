@@ -10,7 +10,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 })
 export class BooleanFilterComponent extends BaseFilterComponent<boolean> {
   handleToggle(value: boolean) {
-    this.valueEmitter?.emit(value);
+    this.valueEmitter?.emit([value]);
   }
 }
 
