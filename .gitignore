@@ -43,3 +43,6 @@ Thumbs.db
 
 # Generated API
 /src/app/generated/
+
+# Scripts
+.regenerate-api-client.bat
