@@ -5,7 +5,7 @@ import { DefaultService } from '../generated';
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private defaultService: DefaultService) {}
+  constructor(private defaultService: DefaultService) { }
 
   findById(id: number) {
     return this.defaultService.findProductById('en-GB', id);
