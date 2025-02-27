@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DefaultService, LightAttribute } from '../generated';
-import { FormGroup } from '@angular/forms';
+import { DefaultService } from '../generated';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +22,7 @@ export class ProductService {
       priceMin?: number;
       priceMax?: number;
       categoryId?: number;
-      attributes?: LightAttribute[];
+      attributes?: any[];
     }
   ) {
     return this.defaultService.findProductBy(
@@ -38,7 +37,7 @@ export class ProductService {
       filters.priceMin,
       filters.priceMax,
       filters.categoryId,
-      filters.attributes
+      JSON.stringify(filters.attributes)
     );
   }
 }

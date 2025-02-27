@@ -6,7 +6,7 @@ import {
   SimpleChanges,
   Type,
 } from '@angular/core';
-import { Attribute, LightAttribute } from '../../../generated';
+import { Attribute } from '../../../generated';
 import { BaseFilterComponent } from './dynamic/base/base-filter.component';
 import { CommonModule } from '@angular/common';
 
@@ -20,7 +20,7 @@ export class AttributeSearchFilterComponent {
   private static types = new Map<string, Type<BaseFilterComponent<any>>>();
 
   @Input() attribute?: Attribute;
-  @Output() attributeChange = new EventEmitter<LightAttribute>();
+  @Output() attributeChange = new EventEmitter<any>();
 
   outlet?: Type<BaseFilterComponent<any>>;
 
