@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private defaultService: DefaultService) {}
+  constructor(private defaultService: DefaultService) { }
 
   findById(id: number) {
     return this.defaultService.findProductById('en-GB', id);
@@ -28,17 +28,7 @@ export class ProductService {
   ) {
     return this.defaultService.findProductBy(
       'en-GB',
-      pos,
-      pageSize,
-      filters.name,
-      filters.launchDateFrom,
-      filters.launchDateTo,
-      filters.hasStock === undefined ? undefined : Number(filters.hasStock),
-      undefined,
-      filters.priceMin,
-      filters.priceMax,
-      filters.categoryId,
-      filters.attributes
+      { pos, pageSize, ...filters }
     );
   }
 }
