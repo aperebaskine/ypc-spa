@@ -1,6 +1,11 @@
+:host {
+    min-width: 18em;
+}
+
 form {
     display: flex;
     flex-direction: column;
+    min-width: 18em;
 }
 
 mat-form-field {
