@@ -1,7 +1,6 @@
-<ng-container *ngIf="outlet">
-  <ng-container
-    *ngComponentOutlet="
+ <ng-container
+  *ngComponentOutlet="
       outlet | async;
       inputs: { attribute: attribute, valueEmitter: valueEmitter }
-    "></ng-container>
+    ">
 </ng-container>
