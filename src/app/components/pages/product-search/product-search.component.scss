@@ -1,17 +1,15 @@
 :host {
     display: flex;
-}
-
-:host > * {
+    gap: 1em;
     padding: 1em 1em;
 }
 
-app-filter-sidebar {
-    width: 296px;
-}
-
-.search-results {
+.product-cards {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.search-results {
+    width: 100%;
 }
