@@ -22,7 +22,7 @@ export class AttributeSearchFilterComponent {
   @Input() attribute?: Attribute;
   @Output() attributeChange = new EventEmitter<any>();
 
-  outlet?: Type<BaseFilterComponent<any>>;
+  outlet?: Promise<Type<BaseFilterComponent<any>>>;
 
   // TODO: Use a cleaner approach for communication between the static and dynamic components
   valueEmitter = new EventEmitter<any>();
@@ -35,9 +35,7 @@ export class AttributeSearchFilterComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['attribute']) {
-      this.resolveComponent(changes['attribute'].currentValue).then(
-        (type) => (this.outlet = type)
-      );
+      this.outlet = this.resolveComponent(changes['attribute'].currentValue);
     }
   }
 
