@@ -1,1 +1,9 @@
-<p>product-details works!</p>
+<ng-container *ngIf="this.product">
+  <h2>{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <ul>
+    <li *ngFor="let attribute of product.attributes">
+      {{ attribute.name }}: {{ attribute | formatAttributeValues }}
+    </li>
+  </ul>
+</ng-container>
