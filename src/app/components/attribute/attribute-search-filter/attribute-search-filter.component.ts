@@ -5,6 +5,7 @@ import {
   Output,
   SimpleChanges,
   Type,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Attribute } from '../../../generated';
 import { BaseFilterComponent } from './dynamic/base/base-filter.component';
@@ -15,6 +16,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './attribute-search-filter.component.html',
   styleUrl: './attribute-search-filter.component.scss',
+  encapsulation: ViewEncapsulation.None
 })
 export class AttributeSearchFilterComponent {
   private static types = new Map<string, Type<BaseFilterComponent<any>>>();
