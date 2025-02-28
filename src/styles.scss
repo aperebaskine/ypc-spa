@@ -6,10 +6,14 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html {
-  color-scheme: light dark;
+  color-scheme: light;
   @include mat.theme((
     color: mat.$violet-palette,
     typography: Roboto,
-    density: 0
+    density: -1
   ));
+}
+
+body.dark-mode {
+  color-scheme: dark;
 }
