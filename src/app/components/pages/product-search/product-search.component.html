@@ -2,17 +2,17 @@
 <div class="results">
   <h3>Results</h3>
   <ng-container *ngIf="this.results">
-    <app-product-card
-      *ngFor="let result of this.results.page"
-      [product]="result"
-    ></app-product-card>
+    <div class="search-results">
+      <app-product-card
+        *ngFor="let result of this.results.page"
+        [product]="result"></app-product-card>
+    </div>
     <mat-paginator
       [pageIndex]="this.page"
       [pageSize]="this.pageSizeOptions[0]"
       [pageSizeOptions]="this.pageSizeOptions"
       [length]="results.resultCount"
-      (page)="handlePageEvent($event)"
-    >
+      (page)="handlePageEvent($event)">
     </mat-paginator>
   </ng-container>
 </div>
