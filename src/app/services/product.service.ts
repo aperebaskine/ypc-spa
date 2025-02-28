@@ -37,7 +37,7 @@ export class ProductService {
       filters.priceMin,
       filters.priceMax,
       filters.categoryId,
-      JSON.stringify(filters.attributes)
+      btoa(JSON.stringify(filters.attributes))
     );
   }
 }
