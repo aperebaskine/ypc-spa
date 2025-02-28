@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-attribute-search-filter',
   imports: [CommonModule],
   templateUrl: './attribute-search-filter.component.html',
-  styleUrl: './attribute-search-filter.component.css',
+  styleUrl: './attribute-search-filter.component.scss',
 })
 export class AttributeSearchFilterComponent {
   private static types = new Map<string, Type<BaseFilterComponent<any>>>();

@@ -9,6 +9,6 @@ import {MatIconModule} from '@angular/material/icon';
     MatIconModule
   ],
   templateUrl: './user-menu.component.html',
-  styleUrl: './user-menu.component.css',
+  styleUrl: './user-menu.component.scss',
 })
 export class UserMenuComponent {}

@@ -7,7 +7,7 @@ import { MatSliderModule } from '@angular/material/slider';
   selector: 'app-range-filter',
   imports: [CommonModule, MatSliderModule],
   templateUrl: './range-filter.component.html',
-  styleUrl: './range-filter.component.css',
+  styleUrl: './range-filter.component.scss',
 })
 export class RangeFilterComponent extends BaseFilterComponent<number> {
   minValue?: number;

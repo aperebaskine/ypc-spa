@@ -9,7 +9,7 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
     UserMenuComponent
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
 

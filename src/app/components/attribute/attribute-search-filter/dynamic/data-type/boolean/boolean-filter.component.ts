@@ -6,7 +6,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
   selector: 'app-boolean-filter',
   imports: [MatSlideToggleModule],
   templateUrl: './boolean-filter.component.html',
-  styleUrl: './boolean-filter.component.css',
+  styleUrl: './boolean-filter.component.scss',
 })
 export class BooleanFilterComponent extends BaseFilterComponent<boolean> {
   handleToggle(value: boolean) {

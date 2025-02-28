@@ -10,7 +10,7 @@ import {
   selector: 'app-set-filter',
   imports: [CommonModule, MatCheckboxModule],
   templateUrl: './set-filter.component.html',
-  styleUrl: './set-filter.component.css',
+  styleUrl: './set-filter.component.scss',
 })
 export class SetFilterComponent extends BaseFilterComponent<string> {
   checked: string[] = [];

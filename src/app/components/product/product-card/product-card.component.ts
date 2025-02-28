@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-product-card',
   imports: [MatCardModule, MatButtonModule],
   templateUrl: './product-card.component.html',
-  styleUrl: './product-card.component.css'
+  styleUrl: './product-card.component.scss'
 })
 export class ProductCardComponent {
 

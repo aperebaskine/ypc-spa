@@ -27,7 +27,7 @@ import { AttributeSearchFilterComponent } from '../../../attribute/attribute-sea
     AttributeSearchFilterComponent,
   ],
   templateUrl: './filter-sidebar.component.html',
-  styleUrl: './filter-sidebar.component.css',
+  styleUrl: './filter-sidebar.component.scss',
 })
 export class FilterSidebarComponent {
   categories?: Observable<CategoryDTO[]>;

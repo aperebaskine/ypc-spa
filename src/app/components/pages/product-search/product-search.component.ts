@@ -17,7 +17,7 @@ import { ProductCardComponent } from '../../product/product-card/product-card.co
     ProductCardComponent,
   ],
   templateUrl: './product-search.component.html',
-  styleUrl: './product-search.component.css',
+  styleUrl: './product-search.component.scss',
 })
 export class ProductSearchComponent {
   criteria? = {};
