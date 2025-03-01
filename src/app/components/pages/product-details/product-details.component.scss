@@ -1,0 +1,33 @@
+.product-details {
+    display: grid;
+    grid-template:
+        "product-images product-data"
+        "product-description product-description"
+        "product-attributes product-attributes";
+    grid-template-columns: 
+        [product-images] 50% [product-data] 50%
+        [product-description] 100%
+        [product-attributes] 100%;
+}
+
+.product-images {
+    grid-area: product-images;
+    justify-self: end;
+}
+
+.product-data {
+    grid-area: product-data;
+    justify-self: start;
+}
+
+.product-description {
+    grid-area: product-description;
+}
+
+.product-attributes {
+    grid-area: product-attributes;
+}
+
+.product-attributes>ul>li {
+    padding: 8px 0px;
+}
