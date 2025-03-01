@@ -1,16 +1,17 @@
-<a [routerLink]="['/product', product?.id]">
-  <mat-card>
+ <mat-card>
+  <a [routerLink]="['/product', product?.id]">
     <mat-card-header>
       <img mat-card-image src="images/unknown-image.png" />
     </mat-card-header>
     <mat-card-content>
       {{ product?.name }}
     </mat-card-content>
-    <mat-card-footer>
-      <mat-card-actions>
-        <span>{{product?.salePrice | currency }}</span>
-        <button mat-flat-button>Add to cart</button>
-      </mat-card-actions>
-    </mat-card-footer>
-  </mat-card>  
-</a>
+  </a>
+  <mat-card-footer>
+    <mat-card-actions>
+      <span>{{product?.salePrice | currency }}</span>
+      <button mat-flat-button type="button" (click)="addToCart($event)">Add to
+        cart</button>
+    </mat-card-actions>
+  </mat-card-footer>
+</mat-card>

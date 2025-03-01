@@ -13,4 +13,7 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductCardComponent {
   @Input() product?: Product;
+
+  addToCart(event: Event) {
+  }
 }
