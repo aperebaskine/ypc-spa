@@ -70,7 +70,7 @@ export class FilterSidebarComponent {
     this.attributes = this.attributeService.findByCategory(categoryId, 'en-GB');
   }
 
-  attributeCriteriaChanged(attribute: any) {
+  attributeCriteriaChanged(attribute: any) { // TODO: Cleanup
     let attributeGroup = this.searchForm.get('attributes') as FormGroup;
     attributeGroup.removeControl(attribute.id.toString());
 
