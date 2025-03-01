@@ -12,7 +12,7 @@ import {
   templateUrl: './set-filter.component.html',
   styleUrl: './set-filter.component.scss',
 })
-export class SetFilterComponent extends BaseFilterComponent<string> {
+export class SetFilterComponent extends BaseFilterComponent<any> {
   checked: string[] = [];
 
   handleChange(event: MatCheckboxChange) {
