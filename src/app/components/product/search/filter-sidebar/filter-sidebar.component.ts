@@ -72,10 +72,9 @@ export class FilterSidebarComponent {
 
   attributeCriteriaChanged(attribute: any) {
     let attributeGroup = this.searchForm.get('attributes') as FormGroup;
+    attributeGroup.removeControl(attribute.id.toString());
 
-    if (attribute.values.length < 1) {
-      attributeGroup.removeControl(attribute.id.toString());
-    } else {
+    if (attribute.values.length > 1) {
       attributeGroup.addControl(
         attribute.id.toString(),
         new FormControl(attribute)
