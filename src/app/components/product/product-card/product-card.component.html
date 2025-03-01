@@ -7,9 +7,11 @@
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions>
-      <button mat-raised-button [routerLink]="['/product', product?.id]">
-        View
-      </button>
+      <a [routerLink]="['/product', product?.id]">
+        <button mat-raised-button>
+          View
+        </button>
+      </a>
       <button mat-flat-button>Add to cart</button>
     </mat-card-actions>
   </mat-card-footer>
