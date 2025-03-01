@@ -5,7 +5,7 @@
     [displayWith]="formatLabel"
     [min]="minValue"
     [max]="maxValue"
-    [step]="calculateStep()">
+    [step]="step">
     <input [(value)]="startValue" (change)="handleValueChange()"
       matSliderStartThumb />
     <input [(value)]="endValue" (change)="handleValueChange()"

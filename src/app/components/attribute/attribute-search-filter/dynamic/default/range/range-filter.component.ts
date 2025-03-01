@@ -10,6 +10,8 @@ import { MatSliderModule } from '@angular/material/slider';
   styleUrl: './range-filter.component.scss',
 })
 export class RangeFilterComponent extends BaseFilterComponent<any> {
+  step?: number;
+
   minValue?: number;
   maxValue?: number;
 
@@ -18,10 +20,10 @@ export class RangeFilterComponent extends BaseFilterComponent<any> {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['attribute']) {
-      let attribute = changes['attribute'].currentValue;
+      this.step = this.calculateStep();
 
-      this.minValue = attribute.values[0].value;
-      this.maxValue = attribute.values[attribute.values.length - 1].value;
+      this.minValue = this.calculateMinValue();
+      this.maxValue = this.calculateMaxValue();
 
       this.startValue = this.minValue;
       this.endValue = this.maxValue;
@@ -29,19 +31,32 @@ export class RangeFilterComponent extends BaseFilterComponent<any> {
   }
 
   calculateStep() {
-    if (this.startValue! > 1000000) {
+
+    let startValue = this.attribute!.values[0].value as number;
+
+    if (startValue > 1000000) {
       return 100000;
     }
 
-    if (this.startValue! > 1000) {
+    if (startValue > 1000) {
       return 100;
     }
 
-    if (this.startValue != Math.trunc(this.startValue!)) {
+    if (startValue != Math.trunc(startValue)) {
       return 0.01;
     }
 
     return 1;
+  }
+
+  calculateMinValue() {
+    let minValue = this.attribute?.values[0].value as number;
+    return minValue - (minValue % this.step!);
+  }
+
+  calculateMaxValue() {
+    let maxValue = this.attribute!.values[this.attribute!.values.length - 1].value as number;
+    return maxValue % this.step! < 0.00001 ? maxValue : maxValue + this.step! - (maxValue % this.step!);
   }
 
   formatLabel(value: number) {
