@@ -14,9 +14,11 @@ body {
 
 html {
   color-scheme: light;
-  @include mat.theme((color: mat.$violet-palette,
+  @include mat.theme((
+    color: mat.$violet-palette,
       typography: Roboto,
-      density: -1));
+      density: -1
+    ));
 }
 
 html.dark-mode {
