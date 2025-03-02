@@ -19,8 +19,14 @@ mat-card-header img {
 }
 
 mat-card-content {
-    height: 3em;
-    vertical-align: middle;
+    height: 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+mat-card-content p {
+    font-size: large;
 }
 
 mat-card-actions {

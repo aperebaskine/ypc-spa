@@ -3,7 +3,8 @@
     <img mat-card-image src="images/unknown-image.png" />
   </mat-card-header>
   <mat-card-content>
-    {{ product?.name }}
+    <span>{{ product?.name }}</span>
+    <p>{{ product?.salePrice | currency:'EUR' }}</p>
   </mat-card-content>
   <mat-card-footer>
     <mat-card-actions>
