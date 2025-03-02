@@ -46,3 +46,6 @@ Thumbs.db
 
 # Scripts
 .regenerate-api-client.bat
+
+# Product images
+/public/images/product/
