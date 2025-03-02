@@ -1,33 +1,62 @@
 .product-details {
     display: grid;
-    grid-template:
-        "product-images product-data"
-        "product-description product-description"
-        "product-attributes product-attributes";
-    grid-template-columns: 
-        [product-images] 50% [product-data] 50%
-        [product-description] 100%
-        [product-attributes] 100%;
+    grid-template-columns:
+        [one] 8% [two] auto [three] auto [four] 8%;
+    grid-template-rows:
+        [first] auto [second] auto [third] auto;
+
 }
 
 .product-images {
-    grid-area: product-images;
+    grid-column-start: two;
+    grid-column-end: two;
+    grid-row-start: first;
+    grid-row-end: second;
     justify-self: end;
+    text-align: right;
+}
+
+.product-images img {
+    width: 80%;
 }
 
 .product-data {
-    grid-area: product-data;
+    grid-column-start: three;
+    grid-column-end: three;
+    grid-row-start: first;
+    grid-row-end: second;
     justify-self: start;
+    padding-top: 5%;
+}
+
+.add-to-cart form {
+    display: flex;
+    align-items: start;
+    gap: 2em;
+}
+
+.add-to-cart button {
+    height: 3.6em;
 }
 
 .product-description {
-    grid-area: product-description;
+    grid-column-start: two;
+    grid-column-end: four;
+    grid-row-start: second;
+    grid-row-end: third;
 }
 
 .product-attributes {
-    grid-area: product-attributes;
+    grid-column-start: two;
+    grid-column-end: four;
+    grid-row-start: third;
+    grid-row-end: third;
 }
 
 .product-attributes>ul>li {
     padding: 8px 0px;
+}
+
+mat-form-field {
+    width: 6em;
 }

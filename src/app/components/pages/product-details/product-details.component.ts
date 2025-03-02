@@ -4,10 +4,13 @@ import { Product } from '../../../generated';
 import { ProductService } from '../../../services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormatAttributeValuesPipe } from '../../../pipes/format-attribute-values.pipe';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-product-details',
-  imports: [CommonModule, FormatAttributeValuesPipe],
+  imports: [CommonModule, MatInputModule, MatButtonModule, MatIconModule, FormatAttributeValuesPipe],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })

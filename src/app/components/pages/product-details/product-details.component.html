@@ -1,10 +1,23 @@
 <ng-container *ngIf="this.product">
   <div class="product-details">
     <div class="product-images">
-      <img src="/images/unknown-image.png" />
+      <img src="/images/product/{{ product.id }}.webp" />
     </div>
     <div class="product-data">
-      <h2>{{ product.name }}</h2>
+      <h1>{{ product.name }}</h1>
+      <h2>{{ product.salePrice | currency:'EUR' }}</h2>
+      <div class="add-to-cart">
+        <form>
+          <mat-form-field>
+            <input matInput type="number" min="1" max="{{product.stock}}"
+              value="1">
+          </mat-form-field>
+          <button type="button" mat-fab extended>
+            <mat-icon>shopping_cart</mat-icon>
+            Add to cart
+          </button>
+        </form>
+      </div>
     </div>
     <div class="product-description">
       <h3>Description</h3>
