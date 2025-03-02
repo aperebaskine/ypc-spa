@@ -7,8 +7,7 @@
         matInput
         type="text"
         placeholder="Example: Ryzen 4070"
-        formControlName="name"
-      />
+        formControlName="name" />
     </mat-form-field>
     <mat-divider></mat-divider>
     <mat-form-field floatLabel="always">
@@ -16,8 +15,7 @@
       <mat-select formControlName="categoryId">
         <mat-option
           *ngFor="let category of categories | async"
-          [value]="category.id"
-        >
+          [value]="category.id">
           {{ category.name }}
         </mat-option>
       </mat-select>
@@ -29,18 +27,15 @@
         <input
           matStartDate
           placeholder="Start date"
-          formControlName="launchDateFrom"
-        />
+          formControlName="launchDateFrom" />
         <input
           matEndDate
           placeholder="End date"
-          formControlName="launchDateTo"
-        />
+          formControlName="launchDateTo" />
       </mat-date-range-input>
       <mat-datepicker-toggle
         matIconSuffix
-        [for]="picker"
-      ></mat-datepicker-toggle>
+        [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
     <mat-divider></mat-divider>
@@ -52,8 +47,7 @@
           type="number"
           min="0"
           class="example-right-align"
-          formControlName="priceMin"
-        />
+          formControlName="priceMin" />
         <span matTextPrefix>€</span>
       </mat-form-field>
       <span class="divider"> - </span>
@@ -64,22 +58,22 @@
           type="number"
           min="0"
           class="example-right-align"
-          formControlName="priceMax"
-        />
+          formControlName="priceMax" />
         <span matTextPrefix>€</span>
       </mat-form-field>
     </div>
     <mat-divider></mat-divider>
-    <mat-slide-toggle labelPosition="before" formControlName="hasStock"
-      >Show only in stock</mat-slide-toggle
-    >
+    <p>
+      <mat-slide-toggle labelPosition="before" formControlName="hasStock">
+        <span>Show only in stock</span>
+      </mat-slide-toggle>
+    </p>
     <mat-divider></mat-divider>
     <ng-container *ngFor="let attribute of attributes | async">
       <ng-container *ngIf="attribute.values!.length > 1">
         <app-attribute-search-filter
           [attribute]="attribute"
-          (attributeChange)="attributeCriteriaChanged($event)"
-        >
+          (attributeChange)="attributeCriteriaChanged($event)">
         </app-attribute-search-filter>
         <mat-divider></mat-divider>
       </ng-container>
