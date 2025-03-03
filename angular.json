@@ -9,10 +9,10 @@
 				"sourceLocale": "en-GB",
 				"locales": {
 					"fr-FR": {
-						"translation": "src/locale/messages.fr-FR.xlf"
+						"translation": "src/i18n/messages.fr-FR.xlf"
 					},
 					"es-ES": {
-						"translation": "src/locale/messages.es-ES.xlf"
+						"translation": "src/i18n/messages.es-ES.xlf"
 					}
 				}
 			},
