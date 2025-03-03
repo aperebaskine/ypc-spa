@@ -50,7 +50,7 @@ export class FilterSidebarComponent {
     private attributeService: AttributeService,
     private categoryService: CategoryService
   ) {
-    this.categories = this.categoryService.findAll('en-GB');
+    this.categories = this.categoryService.findAll();
 
     this.searchForm.get('categoryId')?.valueChanges.subscribe((categoryId) => {
       // TODO: Clean up code
@@ -67,7 +67,7 @@ export class FilterSidebarComponent {
   }
 
   loadAttributeFilters(categoryId: number) {
-    this.attributes = this.attributeService.findByCategory(categoryId, 'en-GB');
+    this.attributes = this.attributeService.findByCategory(categoryId);
   }
 
   attributeCriteriaChanged(attribute: any) {

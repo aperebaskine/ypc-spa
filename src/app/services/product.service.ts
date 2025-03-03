@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { DefaultService } from '../generated';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  constructor(private defaultService: DefaultService) { }
+  constructor(
+    private defaultService: DefaultService,
+    @Inject(LOCALE_ID) private locale: string) {
+  }
 
   findById(id: number) {
-    return this.defaultService.findProductById('en-GB', id);
+    return this.defaultService.findProductById(this.locale, id);
   }
 
   findBy(
@@ -26,7 +29,7 @@ export class ProductService {
     }
   ) {
     return this.defaultService.findProductBy(
-      'en-GB',
+      this.locale,
       pos,
       pageSize,
       filters.name,

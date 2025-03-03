@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { DefaultService } from '../generated';
 
 @Injectable({
@@ -6,18 +6,20 @@ import { DefaultService } from '../generated';
 })
 export class AttributeService {
 
-  constructor(private defaultService: DefaultService) { }
-
-  findById(id: number, locale: string, unassignedValues: boolean = false, categoryId?: number) {
-    return this.defaultService.findAttributeById(locale, id, categoryId, unassignedValues);
-    }
-
-  findByName(name: string, locale: string, unassignedValues: boolean = false, categoryId?: number) {
-    return this.defaultService.findAttributeByName(locale, name, categoryId, unassignedValues);
+  constructor(private defaultService: DefaultService,
+    @Inject(LOCALE_ID) private locale: string) {
   }
 
-  findByCategory(categoryId: number, locale: string, unassignedValues: boolean = false) {
-    return this.defaultService.findAttributeByCategory(locale, categoryId, unassignedValues);
+  findById(id: number, unassignedValues: boolean = false, categoryId?: number) {
+    return this.defaultService.findAttributeById(this.locale, id, categoryId, unassignedValues);
+  }
+
+  findByName(name: string, unassignedValues: boolean = false, categoryId?: number) {
+    return this.defaultService.findAttributeByName(this.locale, name, categoryId, unassignedValues);
+  }
+
+  findByCategory(categoryId: number, unassignedValues: boolean = false) {
+    return this.defaultService.findAttributeByCategory(this.locale, categoryId, unassignedValues);
   }
 
 }

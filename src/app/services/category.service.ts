@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoryDTO, DefaultService } from '../generated';
 
@@ -7,10 +7,12 @@ import { CategoryDTO, DefaultService } from '../generated';
 })
 export class CategoryService {
 
-  constructor(private defaultService: DefaultService) {
+  constructor(
+    private defaultService: DefaultService,
+    @Inject(LOCALE_ID) private locale: string) {
   }
 
-  findAll(locale: string) {
-    return this.defaultService.findAllCategories(locale);
+  findAll() {
+    return this.defaultService.findAllCategories(this.locale);
   }
 }

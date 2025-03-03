@@ -71,6 +71,12 @@
 							"optimization": false,
 							"extractLicenses": false,
 							"sourceMap": true
+						},
+						"fr-FR": {
+							"localize": ["fr-FR"]
+						},
+						"es": {
+							"localize": ["es-ES"]
 						}
 					},
 					"defaultConfiguration": "production"
@@ -83,6 +89,12 @@
 						},
 						"development": {
 							"buildTarget": "ypc-spa:build:development"
+						},
+						"fr-FR": {
+							"buildTarget": "ypc-spa:build:development,fr-FR"
+						},
+						"es-ES": {
+							"buildTarget": "ypc-spa:build:development,es-ES"
 						}
 					},
 					"defaultConfiguration": "development"
