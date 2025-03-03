@@ -5,6 +5,17 @@
 	"projects": {
 		"ypc-spa": {
 			"projectType": "application",
+			"i18n": {
+				"sourceLocale": "en-GB",
+				"locales": {
+					"fr-FR": {
+						"translation": "src/locale/messages.fr-FR.xlf"
+					},
+					"es-ES": {
+						"translation": "src/locale/messages.es-ES.xlf"
+					}
+				}
+			},
 			"schematics": {
 				"@schematics/angular:component": {
 					"style": "scss"
@@ -34,7 +45,9 @@
 						"styles": [
 							"src/styles.scss"
 						],
-						"scripts": []
+						"scripts": [],
+						"localize": true,
+						"i18nMissingTranslation": "error"
 					},
 					"configurations": {
 						"production": {
@@ -96,9 +109,6 @@
 						"scripts": []
 					}
 				}
-			},
-			"i18n": {
-				"sourceLocale": "en-GB"
 			}
 		}
 	},
