@@ -3,7 +3,8 @@
     <mat-menu #localeMenu>
         @for (locale of this.locales; track $index) {
         <button mat-menu-item value="{{locale.id}}"
-            (click)="switchLocale(locale.id)">
+            (click)="switchLocale(locale)"
+            disabled="{{this.currentLocale.id == locale.id}}">
             {{locale.name}}
         </button>
         }

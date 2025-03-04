@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { Router } from '@angular/router';
+import { LocaleService } from '../../../services/locale.service';
+import { Locale } from '../../../model/locale';
 
 @Component({
   selector: 'app-locale-menu',
@@ -12,17 +13,16 @@ import { Router } from '@angular/router';
 })
 export class LocaleMenuComponent {
 
-  locales = [
-    { id: "en-GB", name: "English" },
-    { id: "fr-FR", name: "Français" },
-    { id: "es-ES", name: "Español" }
-  ];
+  locales!: Locale[];
+  currentLocale!: Locale;
 
-  constructor(private router: Router) {
+  constructor(private localeService: LocaleService) {
+    this.locales = this.localeService.getSupportedLocales();
+    this.currentLocale = this.localeService.getCurrentLocale();
   }
 
-  switchLocale(locale: string) {
-    window.location.href = `/${locale}${this.router.url}`;
+  switchLocale(locale: Locale) {
+    this.localeService.switchLocale(locale);
   }
 
 }
