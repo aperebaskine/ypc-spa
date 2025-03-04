@@ -7,18 +7,13 @@ body {
   height: 100%;
 }
 
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
 html {
   color-scheme: light;
   @include mat.theme((
     color: mat.$violet-palette,
       typography: Roboto,
       density: -1
-    ));
+      ));
 }
 
 html.dark-mode {
@@ -26,6 +21,9 @@ html.dark-mode {
 }
 
 body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+
   max-width: 1600px;
   margin: auto;
 }
