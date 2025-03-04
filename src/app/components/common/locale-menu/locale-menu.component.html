@@ -1,0 +1,11 @@
+<button mat-icon-button [matMenuTriggerFor]="localeMenu">
+    <mat-icon>language</mat-icon>
+    <mat-menu #localeMenu>
+        @for (locale of this.locales; track $index) {
+        <button mat-menu-item value="{{locale.id}}"
+            (click)="switchLocale(locale.id)">
+            {{locale.name}}
+        </button>
+        }
+    </mat-menu>
+</button>
