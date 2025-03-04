@@ -14,17 +14,17 @@
           </mat-form-field>
           <button type="button" mat-fab extended>
             <mat-icon>shopping_cart</mat-icon>
-            Add to cart
+            <ng-container i18n>Add to cart</ng-container>
           </button>
         </form>
       </div>
     </div>
     <div class="product-description">
-      <h3>Description</h3>
+      <h3 i18n>Description</h3>
       <p>{{ product.description }}</p>
     </div>
     <div class="product-attributes">
-      <h3>Specifications</h3>
+      <h3 i18n>Specifications</h3>
       <ul>
         <li *ngFor="let attribute of product.attributes">
           {{ attribute.name }}: {{ attribute | formatAttributeValues }}

@@ -2,18 +2,148 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-GB" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="203640934072099136" datatype="html">
-        <source>@@yes</source>
+      <trans-unit id="2336550011721758066" datatype="html">
+        <source>Log in</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pipes/format-attribute-values.pipe.ts</context>
-          <context context-type="linenumber">10</context>
+          <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="6112264926531605947" datatype="html">
-        <source>@@no</source>
+      <trans-unit id="3301086086650990787" datatype="html">
+        <source>Register</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4398863504443682316" datatype="html">
+        <source>Cart</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1063195851397612585" datatype="html">
+        <source>All products</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/navbar/navbar.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5871412787804796799" datatype="html">
+        <source>Add to cart</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/product-details/product-details.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/product-card/product-card.component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4902817035128594900" datatype="html">
+        <source>Description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/product-details/product-details.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6154338858131704843" datatype="html">
+        <source>Specifications</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/product-details/product-details.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5968132631442328843" datatype="html">
+        <source>Results</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/product-search/product-search.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7101514678290864976" datatype="html">
+        <source> View </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/product-card/product-card.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4163272119298020373" datatype="html">
+        <source>Filters</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">2,3</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8953033926734869941" datatype="html">
+        <source>Name</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1806667489382256324" datatype="html">
+        <source>Category</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3865850783651292972" datatype="html">
+        <source>Launch date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="23518581647153834" datatype="html">
+        <source>from</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3207050836358092212" datatype="html">
+        <source>to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5331979707183945950" datatype="html">
+        <source>In stock only</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7808756054397155068" datatype="html">
+        <source>Reset</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">82,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="935187492052582731" datatype="html">
+        <source>Submit</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">83,84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2807800733729323332" datatype="html">
+        <source>Yes</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pipes/format-attribute-values.pipe.ts</context>
           <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3542042671420335679" datatype="html">
+        <source>No</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipes/format-attribute-values.pipe.ts</context>
+          <context context-type="linenumber">12</context>
         </context-group>
       </trans-unit>
     </body>
