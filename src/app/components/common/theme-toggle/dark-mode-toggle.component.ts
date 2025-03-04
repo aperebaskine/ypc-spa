@@ -6,10 +6,10 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-theme-toggle',
   imports: [MatButtonModule, MatIconModule],
-  templateUrl: './theme-toggle.component.html',
-  styleUrl: './theme-toggle.component.scss'
+  templateUrl: './dark-mode-toggle.component.html',
+  styleUrl: './dark-mode-toggle.component.scss'
 })
-export class ThemeToggleComponent {
+export class DarkModeToggleComponent {
 
   iconName!: string;
 
