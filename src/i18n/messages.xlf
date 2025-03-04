@@ -2,6 +2,20 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-GB" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="203640934072099136" datatype="html">
+        <source>@@yes</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipes/format-attribute-values.pipe.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6112264926531605947" datatype="html">
+        <source>@@no</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pipes/format-attribute-values.pipe.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
     </body>
   </file>
 </xliff>

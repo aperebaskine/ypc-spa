@@ -6,8 +6,18 @@ import { Attribute } from '../generated';
 })
 export class FormatAttributeValuesPipe implements PipeTransform {
 
-  transform(value: Attribute): string {
-    return value.values.map((v) => v.value).join(", ");
+  // TODO: Implement a strategy pattern
+  formattedBooleanValues: Record<string, string> = {
+    "true": $localize`Yes`,
+    "false": $localize`No`
+  }
+
+  transform(attribute: Attribute): string {
+    return attribute.values
+      .map(attribute.dataType === "boolean" ?
+        (v) => this.formattedBooleanValues[v.value!.toString()] :
+        (v) => v.value)
+      .join(", ");
   }
 
 }
