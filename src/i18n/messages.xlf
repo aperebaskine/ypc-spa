@@ -83,53 +83,74 @@
           <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="611614030225693422" datatype="html">
+        <source>Example: Ryzen 4070</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1806667489382256324" datatype="html">
         <source>Category</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">15</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3865850783651292972" datatype="html">
         <source>Launch date</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
-          <context context-type="linenumber">25</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="888341446683346521" datatype="html">
+        <source>Start date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="126074860850048964" datatype="html">
+        <source>End date</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
+          <context context-type="linenumber">36,37</context>
         </context-group>
       </trans-unit>
       <trans-unit id="23518581647153834" datatype="html">
         <source>from</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3207050836358092212" datatype="html">
         <source>to</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
-          <context context-type="linenumber">55</context>
+          <context context-type="linenumber">58</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5331979707183945950" datatype="html">
         <source>In stock only</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
-          <context context-type="linenumber">68,69</context>
+          <context context-type="linenumber">71,72</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7808756054397155068" datatype="html">
         <source>Reset</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
-          <context context-type="linenumber">82,83</context>
+          <context context-type="linenumber">85,86</context>
         </context-group>
       </trans-unit>
       <trans-unit id="935187492052582731" datatype="html">
         <source>Submit</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/product/search/filter-sidebar/filter-sidebar.component.html</context>
-          <context context-type="linenumber">83,84</context>
+          <context context-type="linenumber">86,87</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2807800733729323332" datatype="html">
