@@ -6,6 +6,7 @@
       <input
         matInput
         type="text"
+        i18n-placeholder
         placeholder="Example: Ryzen 4070"
         formControlName="name" />
     </mat-form-field>
@@ -26,10 +27,12 @@
       <mat-date-range-input [rangePicker]="picker">
         <input
           matStartDate
+          i18n-placeholder
           placeholder="Start date"
           formControlName="launchDateFrom" />
         <input
           matEndDate
+          i18n-placeholder
           placeholder="End date"
           formControlName="launchDateTo" />
       </mat-date-range-input>
