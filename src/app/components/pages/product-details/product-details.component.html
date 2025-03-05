@@ -8,7 +8,7 @@
       <h2>{{ product.salePrice | currency:'EUR' }}</h2>
       <div class="add-to-cart">
         <form>
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <input matInput type="number" min="1" max="{{product.stock}}"
               value="1">
           </mat-form-field>
