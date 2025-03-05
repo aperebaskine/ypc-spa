@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class CartService {
 
   private readonly key = "cart";
+  private event = new EventEmitter<any>();
 
   constructor() { }
 
@@ -17,11 +18,12 @@ export class CartService {
   private saveCart(cart: { [id: number]: number }) {
     const serializedCart = JSON.stringify(cart);
     localStorage.setItem(this.key, serializedCart);
+    this.event.emit(cart);
   }
 
   addItem(productId: number, quantity: number) {
     const cart = this.getCart();
-    cart[productId] = quantity;
+    cart[productId] = (cart[productId] ?? 0) + quantity;
     this.saveCart(cart);
     return cart;
   }
@@ -48,5 +50,9 @@ export class CartService {
     delete cart[productId];
     this.saveCart(cart);
     return cart;
+  }
+
+  subscribe(eventListener: Function) {
+    this.event.subscribe(eventListener);
   }
 }
