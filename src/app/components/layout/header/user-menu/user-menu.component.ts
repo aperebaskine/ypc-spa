@@ -5,10 +5,12 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { LocaleMenuComponent } from "../../../common/locale-menu/locale-menu.component";
 import { DarkModeToggleComponent } from "../../../common/theme-toggle/dark-mode-toggle.component";
 import { CartService } from '../../../../services/cart.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-user-menu',
   imports: [
+    RouterModule,
     MatButtonModule,
     MatIconModule,
     MatBadgeModule,
@@ -23,7 +25,7 @@ export class UserMenuComponent {
 
   constructor(private cartService: CartService) {
     this.cartService.subscribe((cart) => {
-      this.cartSize = cart.size > 0 ? cart.size : null;
+      this.cartSize = cart.products.length > 0 ? cart.products.length : null;
     });
   }
 }

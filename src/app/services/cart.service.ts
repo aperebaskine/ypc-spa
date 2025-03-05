@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Cart } from '../model/cart';
 
 @Injectable({
   providedIn: 'root'
@@ -7,54 +8,64 @@ import { Subscription } from 'rxjs';
 export class CartService {
 
   private readonly key = "cart";
-  private event = new EventEmitter<{ size: number, [id: number]: number }>();
+  private event = new EventEmitter<Cart>();
 
   constructor() { }
 
-  private getCart(): { [id: number]: number } {
+  private getCart(): Cart {
     const serializedCart = localStorage.getItem(this.key);
-    return serializedCart ? JSON.parse(serializedCart) : {};
+    return serializedCart ? JSON.parse(serializedCart) : { products: [] };
   }
 
-  private saveCart(cart: { [id: number]: number }) {
+  private saveCart(cart: Cart) {
     const serializedCart = JSON.stringify(cart);
     localStorage.setItem(this.key, serializedCart);
     this.emitCart(cart);
   }
 
+  private emitCart(cart = this.getCart()) {
+    console.log(cart);
+    this.event.emit(cart);
+  }
+
   addItem(productId: number, quantity: number) {
     const cart = this.getCart();
-    cart[productId] = (cart[productId] ?? 0) + quantity;
+    const index = cart.products.findIndex((p) => p.id === productId);
+
+    if (index > -1) {
+      cart.products[index].qty += quantity;
+    } else {
+      cart.products.push({ id: productId, qty: quantity });
+    }
+
     this.saveCart(cart);
   }
 
   modifyItem(productId: number, quantity: number) {
     const cart = this.getCart();
+    const index = cart.products.findIndex((p) => p.id = productId);
 
-    if (cart[productId] === undefined) {
+    if (index < 0) {
       throw `Cannot modify cart: no product with ID ${productId} present.`;
     }
 
-    cart[productId] = quantity;
+    cart.products[index].qty = quantity;
     this.saveCart(cart);
   }
 
   removeItem(productId: number) {
     const cart = this.getCart();
+    const index = cart.products.findIndex((p) => p.id = productId);
 
-    if (cart[productId] === undefined) {
+    if (index < 0) {
       throw `Cannot delete entry for product ID ${productId} from cart: entry not found.`;
     }
 
-    delete cart[productId];
+    cart.products.splice(index, 1);
     this.saveCart(cart);
   }
 
-  emitCart(cart = this.getCart()) {
-    this.event.emit({ size: Object.keys(cart).length, ...cart });
-  }
-
-  subscribe(eventListener: (cart: { size: number, [id: number]: number }) => any): Subscription {
+  subscribe(eventListener: (cart: Cart) => any): Subscription {
     const subscription = this.event.subscribe(eventListener);
     this.emitCart();
     return subscription;
