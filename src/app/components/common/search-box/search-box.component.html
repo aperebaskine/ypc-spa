@@ -1,4 +1,9 @@
-<mat-form-field appearance="outline">
-    <input matInput type="search" i18n-placeholder placeholder="Search...">
-    <mat-icon matSuffix>search</mat-icon>
-</mat-form-field>
+<form [formGroup]="form" (submit)="onSubmit()">
+    <mat-form-field appearance="outline">
+        <input matInput type="search" formControlName="name" i18n-placeholder
+            placeholder="Search...">
+        <button type="submit" mat-icon-button matSuffix>
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-form-field>
+</form>

@@ -7,6 +7,7 @@ import { ProductService } from '../../../services/product.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ProductResults } from '../../../generated';
 import { ProductCardComponent } from '../../product/product-card/product-card.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-search',
@@ -28,7 +29,14 @@ export class ProductSearchComponent {
   pageSize = this.pageSizeOptions[0];
   page = 0;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe((params) => {
+      this.handleFormSubmission(params);
+    })
+   }
 
   handleFormSubmission(criteria: any) {
     this.criteria = criteria;

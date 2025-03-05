@@ -40,7 +40,7 @@ export class ProductService {
       filters.priceMin,
       filters.priceMax,
       filters.categoryId,
-      btoa(JSON.stringify(filters.attributes))
+      (filters.attributes? btoa(JSON.stringify(filters.attributes)) : undefined)
     );
   }
 }
