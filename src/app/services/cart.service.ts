@@ -1,4 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,11 +7,11 @@ import { EventEmitter, Injectable } from '@angular/core';
 export class CartService {
 
   private readonly key = "cart";
-  private event = new EventEmitter<any>();
+  private event = new EventEmitter<{ size: number, [id: number]: number }>();
 
   constructor() { }
 
-  getCart(): { [id: number]: number } {
+  private getCart(): { [id: number]: number } {
     const serializedCart = localStorage.getItem(this.key);
     return serializedCart ? JSON.parse(serializedCart) : {};
   }
@@ -18,14 +19,13 @@ export class CartService {
   private saveCart(cart: { [id: number]: number }) {
     const serializedCart = JSON.stringify(cart);
     localStorage.setItem(this.key, serializedCart);
-    this.event.emit(cart);
+    this.emitCart(cart);
   }
 
   addItem(productId: number, quantity: number) {
     const cart = this.getCart();
     cart[productId] = (cart[productId] ?? 0) + quantity;
     this.saveCart(cart);
-    return cart;
   }
 
   modifyItem(productId: number, quantity: number) {
@@ -37,7 +37,6 @@ export class CartService {
 
     cart[productId] = quantity;
     this.saveCart(cart);
-    return cart;
   }
 
   removeItem(productId: number) {
@@ -49,10 +48,15 @@ export class CartService {
 
     delete cart[productId];
     this.saveCart(cart);
-    return cart;
   }
 
-  subscribe(eventListener: Function) {
-    this.event.subscribe(eventListener);
+  emitCart(cart = this.getCart()) {
+    this.event.emit({ size: Object.keys(cart).length, ...cart });
+  }
+
+  subscribe(eventListener: (cart: { size: number, [id: number]: number }) => any): Subscription {
+    const subscription = this.event.subscribe(eventListener);
+    this.emitCart();
+    return subscription;
   }
 }

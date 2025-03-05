@@ -7,10 +7,12 @@ import { FormatAttributeValuesPipe } from '../../../pipes/format-attribute-value
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product-details',
-  imports: [CommonModule, MatInputModule, MatButtonModule, MatIconModule, FormatAttributeValuesPipe],
+  imports: [CommonModule, MatInputModule, MatButtonModule, MatIconModule, FormatAttributeValuesPipe, ReactiveFormsModule],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss',
 })
@@ -18,8 +20,11 @@ export class ProductDetailsComponent {
   product?: Product;
   attributeValues?: string[];
 
+  cartQty = new FormControl(1);
+
   constructor(
     private productService: ProductService,
+    private cartService: CartService,
     private route: ActivatedRoute
   ) {
     this.productService
@@ -27,17 +32,9 @@ export class ProductDetailsComponent {
       .subscribe((product) => (this.product = product));
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['product']) {
-      this.formatAttributeValues();
-    }
-  }
+  addToCart(event: SubmitEvent) {
+    event.preventDefault();
 
-  formatAttributeValues() {
-    let res = [];
-
-    for (let attribute of this.product!.attributes) {
-      res.push(attribute.values.map((v) => v.value).join(", "));
-    }
+    this.cartService.addItem(this.product!.id, this.cartQty.value!);
   }
 }

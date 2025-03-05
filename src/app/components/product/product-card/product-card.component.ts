@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
+import { CartService } from '../../../services/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -14,6 +15,9 @@ import { CurrencyPipe } from '@angular/common';
 export class ProductCardComponent {
   @Input() product?: Product;
 
-  addToCart(event: Event) {
+  constructor(private cartService: CartService) {}
+
+  addToCart() {
+    this.cartService.addItem(this.product!.id, 1);
   }
 }
