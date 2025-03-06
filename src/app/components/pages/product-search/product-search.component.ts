@@ -35,12 +35,11 @@ export class ProductSearchComponent {
   ) {
     this.route.queryParams.subscribe((params) => {
       this.handleFormSubmission(params);
-    })
-   }
+    });
+  }
 
   handleFormSubmission(criteria: any) {
     this.criteria = criteria;
-    console.log(this.criteria);
     this.page = 0;
     this.loadProducts(this.page, this.pageSize);
   }
