@@ -1,0 +1,33 @@
+/* Funny quick and dirty hack, don't do this at home */
+header,
+nav,
+footer {
+  display: none;
+}
+
+app-login-page {
+    margin-top: 10%;
+}
+
+app-login-page,
+app-login-page > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border: var(--mat-sys-outline);
+}
+
+p {
+    font-size: large;
+}
+
+mat-form-field {
+    width: 24em;
+}
+
+.inline-form-buttons {
+    margin: 1em 1em;
+    display: flex;
+    gap: 1em;
+}

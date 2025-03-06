@@ -1,9 +1,11 @@
 <app-theme-toggle></app-theme-toggle>
 <app-locale-menu></app-locale-menu>
-<button mat-fab extended>
-    <mat-icon>person</mat-icon>
-    <ng-container i18n>Log in</ng-container>
-</button>
+<a [routerLink]="'login'">
+    <button mat-fab extended>
+        <mat-icon>person</mat-icon>
+        <ng-container i18n>Log in</ng-container>
+    </button>
+</a>
 <button mat-fab extended>
     <mat-icon>app_registration</mat-icon>
     <ng-container i18n>Register</ng-container>
