@@ -80,9 +80,9 @@ export class CartService {
     this.saveCart(cart);
   }
 
-  subscribe(eventListener: (cart: Cart) => any, emit: boolean = false): Subscription {
+  subscribe(eventListener: (cart: Cart) => any, emit: boolean = true): Subscription {
     const subscription = this.event.subscribe(eventListener);
-    if (!emit) {
+    if (emit) {
       this.emitCart();
     }
     return subscription;
