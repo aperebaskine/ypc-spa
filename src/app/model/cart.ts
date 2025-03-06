@@ -1,3 +1,5 @@
+import { CartItem } from "./cartItem";
+
 export interface Cart {
-    products: [{ id: number, qty: number }]
+    products: CartItem[]
 }

@@ -1,1 +1,23 @@
-<p>cart-details works!</p>
+<h2 i18n>Cart</h2>
+<mat-list>
+    <ng-template
+        *ngIf="this.cart && this.cart.products.length > 0; then cart else emptyCart">
+    </ng-template>
+</mat-list>
+
+<ng-template #emptyCart>
+    <p i18n>Your cart is empty.</p>
+</ng-template>
+
+<ng-template #cart>
+    <ng-container *ngFor="let cartItem of this.cart!.products">
+        <app-cart-list-item
+            [item]="cartItem">
+        </app-cart-list-item>
+        <mat-divider></mat-divider>
+    </ng-container>
+    <div class="place-order">
+        Subtotal: {{ calcSubtotal() | currency:'EUR' }}
+        <button mat-flat-button type="button" i18n>Place order</button>
+    </div>
+</ng-template>

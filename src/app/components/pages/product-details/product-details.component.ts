@@ -35,6 +35,6 @@ export class ProductDetailsComponent {
   addToCart(event: SubmitEvent) {
     event.preventDefault();
 
-    this.cartService.addItem(this.product!.id, this.cartQty.value!);
+    this.cartService.addItem(this.product!.id, this.cartQty.value!, this.product!.salePrice);
   }
 }

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
+import { FooterComponent } from './components/layout/footer/footer.component';
 import { HeaderComponent } from './components/layout/header/header.component';
 import { NavbarComponent } from './components/layout/navbar/navbar.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
+import { CartService } from './services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -17,4 +18,11 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 })
 export class AppComponent {
   title = 'ypc-spa';
+
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) {
+    this.cartService.subscribe(() => this.router.navigate(['cart']), false);
+  }
 }

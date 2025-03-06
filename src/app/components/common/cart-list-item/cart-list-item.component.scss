@@ -1,0 +1,22 @@
+.cart-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.cart-list-item-options {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.cart-list-item-qty {
+    text-align: center;
+}
+
+mat-list-item {
+    width: auto;
+}
+
+button {
+    margin: 0em 0.5em;
+}

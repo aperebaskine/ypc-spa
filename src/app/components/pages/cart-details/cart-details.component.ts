@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
-import { ProductService } from '../../../services/product.service';
+import { Component, SimpleChanges } from '@angular/core';
 import { CartService } from '../../../services/cart.service';
 import { Cart } from '../../../model/cart';
+import { CommonModule } from '@angular/common';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { CartListItemComponent } from "../../common/cart-list-item/cart-list-item.component";
 
 @Component({
   selector: 'app-cart-details',
-  imports: [],
+  imports: [CommonModule, MatListModule, MatButtonModule, CartListItemComponent],
   templateUrl: './cart-details.component.html',
   styleUrl: './cart-details.component.scss'
 })
@@ -14,13 +17,14 @@ export class CartDetailsComponent {
   cart?: Cart;
 
   constructor(
-    private productService: ProductService,
     private cartService: CartService) {
     this.cartService.subscribe((cart) => this.cart = cart);
   }
 
-  getProduct(id: number) {
-    return this.productService.findById(id);
+  calcSubtotal() {
+    return this.cart!.products
+      .map((item) => item.salePrice * item.qty)
+      .reduce((prev, current) => prev + current);
   }
 
 }
