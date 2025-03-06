@@ -6,28 +6,36 @@ footer {
 }
 
 app-login-page {
-    margin-top: 10%;
+  display: flex;
+  justify-content: center;
 }
 
-app-login-page,
-app-login-page > form {
+#login-page {
+  width: 32em;
+  margin-top: 10%;
+  padding: 2em 2em;
+
+  border: 1px solid var(--mat-sys-outline-variant);
+  border-radius: 8px;
+}
+
+#login-page,
+#login-page > form {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  border: var(--mat-sys-outline);
 }
 
 p {
-    font-size: large;
+  font-size: large;
 }
 
 mat-form-field {
-    width: 24em;
+  width: 24em;
 }
 
 .inline-form-buttons {
-    margin: 1em 1em;
-    display: flex;
-    gap: 1em;
+  margin-top: 1em;
+  display: flex;
+  gap: 1em;
 }
