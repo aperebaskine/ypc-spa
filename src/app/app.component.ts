@@ -23,6 +23,9 @@ export class AppComponent {
     private cartService: CartService,
     private router: Router
   ) {
+  }
+
+  ngOnInit() {
     this.cartService.subscribe(() => this.router.navigate(['cart']), false);
   }
 }
