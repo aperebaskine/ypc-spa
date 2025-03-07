@@ -1,14 +1,14 @@
 <div id="login-page">
   <img src="/images/logo.png" />
   <p i18n>Welcome to YPC</p>
-  <form>
+  <form [formGroup]="loginForm" (submit)="login()">
     <mat-form-field [floatLabel]="'always'">
-      <mat-label i18n>Username</mat-label>
-      <input matInput type="text" />
+      <mat-label i18n>Email</mat-label>
+      <input matInput type="text" formControlName="email" />
     </mat-form-field>
     <mat-form-field [floatLabel]="'always'">
       <mat-label i18n>Password</mat-label>
-      <input matInput type="password" />
+      <input matInput type="password" formControlName="password" />
       <mat-hint><a class="forgot-password" i18n>Forgot password?</a></mat-hint>
     </mat-form-field>
     <div class="inline-form-buttons">
