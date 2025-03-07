@@ -18,7 +18,7 @@ export class CartDetailsComponent {
 
   constructor(
     private cartService: CartService) {
-    this.cartService.subscribe((cart) => this.cart = cart);
+    this.cartService.cart.subscribe((cart) => this.cart = cart);
   }
 
   calcSubtotal() {

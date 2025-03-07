@@ -22,10 +22,5 @@ export class AppComponent {
   constructor(
     private cartService: CartService,
     private router: Router
-  ) {
-  }
-
-  ngOnInit() {
-    this.cartService.subscribe(() => this.router.navigate(['cart']), false);
-  }
+  ) { }
 }

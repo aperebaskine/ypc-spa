@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { Cart } from '../model/cart';
 
 @Injectable({
@@ -8,9 +8,13 @@ import { Cart } from '../model/cart';
 export class CartService {
 
   private readonly key = "cart";
-  private event = new EventEmitter<Cart>();
+  private readonly cartSubject!: BehaviorSubject<Cart>;
+  public readonly cart!: Observable<Cart>;
 
-  constructor() { }
+  constructor() {
+    this.cartSubject = new BehaviorSubject<Cart>(this.getCart());
+    this.cart = this.cartSubject.asObservable();
+  }
 
   private getCart(): Cart {
     const serializedCart = localStorage.getItem(this.key);
@@ -20,11 +24,7 @@ export class CartService {
   private saveCart(cart: Cart) {
     const serializedCart = JSON.stringify(cart);
     localStorage.setItem(this.key, serializedCart);
-    this.emitCart(cart);
-  }
-
-  private emitCart(cart = this.getCart()) {
-    this.event.emit(cart);
+    this.cartSubject.next(cart);
   }
 
   addItem(productId: number, quantity: number, salePrice: number) {
@@ -80,11 +80,4 @@ export class CartService {
     this.saveCart(cart);
   }
 
-  subscribe(eventListener: (cart: Cart) => any, emit: boolean = true): Subscription {
-    const subscription = this.event.subscribe(eventListener);
-    if (emit) {
-      this.emitCart();
-    }
-    return subscription;
-  }
 }

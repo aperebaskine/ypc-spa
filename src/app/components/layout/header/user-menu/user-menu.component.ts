@@ -24,7 +24,7 @@ export class UserMenuComponent {
   cartSize: number | null = null;
 
   constructor(private cartService: CartService) {
-    this.cartService.subscribe((cart) => {
+    this.cartService.cart.subscribe((cart) => {
       this.cartSize = cart.products.length > 0 ? cart.products.length : null;
     });
   }
