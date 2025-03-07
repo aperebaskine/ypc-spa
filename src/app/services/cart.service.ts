@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
 import { Cart } from '../model/cart';
+import { CartItem } from '../model/cartItem';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +9,19 @@ import { Cart } from '../model/cart';
 export class CartService {
 
   private readonly key = "cart";
+
   private readonly cartSubject!: BehaviorSubject<Cart>;
   public readonly cart!: Observable<Cart>;
+
+  private readonly addedItemSubject!: Subject<CartItem>;
+  public readonly addedItem!: Observable<CartItem>;
 
   constructor() {
     this.cartSubject = new BehaviorSubject<Cart>(this.getCart());
     this.cart = this.cartSubject.asObservable();
+
+    this.addedItemSubject = new Subject<CartItem>();
+    this.addedItem = this.addedItemSubject.asObservable();
   }
 
   private getCart(): Cart {
@@ -27,21 +35,22 @@ export class CartService {
     this.cartSubject.next(cart);
   }
 
-  addItem(productId: number, quantity: number, salePrice: number) {
+  addItem(item: CartItem) {
     const cart = this.getCart();
-    const index = cart.products.findIndex((p) => p.id === productId);
+    const index = cart.products.findIndex((p) => p.id === item.id);
 
     if (index > -1) {
-      if (cart.products[index].qty + quantity < 1) {
-        this.removeItem(productId);
+      if (cart.products[index].qty + item.qty < 1) {
+        this.removeItem(item.id);
         return;
       }
 
-      cart.products[index].qty += quantity;
+      cart.products[index].qty += item.qty;
     } else {
-      cart.products.push({ id: productId, qty: quantity, salePrice: salePrice });
+      cart.products.push({ id: item.id, qty: item.qty, salePrice: item.salePrice });
     }
 
+    this.addedItemSubject.next(item);
     this.saveCart(cart);
   }
 
