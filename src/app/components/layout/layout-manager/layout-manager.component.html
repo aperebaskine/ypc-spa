@@ -1,0 +1,23 @@
+<ng-container *ngTemplateOutlet="selectedTemplate">
+</ng-container>
+
+<ng-template #default>
+    <header>
+        <app-header></app-header>
+    </header>
+    <nav>
+        <app-navbar></app-navbar>
+    </nav>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+    <footer>
+        <app-footer></app-footer>
+    </footer>
+</ng-template>
+
+<ng-template #empty>
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+</ng-template>

@@ -1,11 +1,4 @@
-/* Funny quick and dirty hack, don't do this at home */
-header,
-nav,
-footer {
-  display: none;
-}
-
-app-login-page {
+:host {
   display: flex;
   justify-content: center;
 }

@@ -10,5 +10,5 @@ export const routes: Routes = [
     { path: 'product-search', component: ProductSearchComponent },
     { path: 'product/:id', component: ProductDetailsComponent },
     { path: 'cart', component: CartDetailsComponent },
-    { path: 'login', component: LoginPageComponent }
+    { path: 'login', component: LoginPageComponent, data: { layout: 'empty' } }
 ];
