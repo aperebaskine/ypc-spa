@@ -7,7 +7,6 @@ import { DefaultService } from '../generated';
 export class UserService {
 
   constructor(private defaultService: DefaultService) {
-   }
-
-   
+  }
+  
 }
