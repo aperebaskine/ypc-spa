@@ -6,6 +6,7 @@ import { CartDetailsComponent } from './components/pages/cart-details/cart-detai
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { AccountDashboardComponent } from './components/pages/account-dashboard/account-dashboard.component';
 import { authGuard } from './guards/auth.guard';
+import { RegistrationPageComponent } from './components/pages/registration-page/registration-page.component';
 
 export const routes: Routes = [
     { path: '', component: MainPageComponent },
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'product/:id', component: ProductDetailsComponent },
     { path: 'cart', component: CartDetailsComponent },
     { path: 'login', component: LoginPageComponent, data: { layout: 'empty' } },
+    { path: 'register', component: RegistrationPageComponent, data: { layout: 'empty' } },
     {
         path: 'user',
         canActivateChild: [authGuard],

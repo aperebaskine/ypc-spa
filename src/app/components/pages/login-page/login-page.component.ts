@@ -6,12 +6,13 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Observable } from 'rxjs';
 import { CommonModule, Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
   imports: [
     CommonModule,
+    RouterModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

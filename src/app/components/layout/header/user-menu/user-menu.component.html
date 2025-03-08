@@ -17,10 +17,12 @@
             <ng-container i18n>Log in</ng-container>
         </button>
     </a>
-    <button mat-fab extended>
-        <mat-icon>app_registration</mat-icon>
-        <ng-container i18n>Register</ng-container>
-    </button>
+    <a [routerLink]="'register'">
+        <button mat-fab extended>
+            <mat-icon>app_registration</mat-icon>
+            <ng-container i18n>Register</ng-container>
+        </button>
+    </a>
 </ng-template>
 
 <ng-template #authenticated>
