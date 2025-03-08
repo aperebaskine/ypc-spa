@@ -1,39 +1,51 @@
-import { Injectable } from '@angular/core';
-import { Customer, DefaultService } from '../generated';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { LocalStorageService } from './local-storage.service';
+import { EnvironmentInjector, inject, Injectable, runInInjectionContext } from '@angular/core';
+import { Configuration, DefaultService } from '../generated';
+import { BehaviorSubject, map, Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private readonly userSubject!: BehaviorSubject<Customer | null>;
-  public readonly user!: Observable<Customer | null>;
 
-  constructor(
-    private defaultService: DefaultService,
-    private localStorageService: LocalStorageService
-  ) {
-    this.userSubject = new BehaviorSubject<Customer | null>(null);
-    this.user = this.userSubject.asObservable();
+  // Lazily injected, use getter method
+  private defaultService: DefaultService | null = null;
+
+  private readonly tokenSubject!: BehaviorSubject<string | null>;
+  public readonly isAuthenticated!: Observable<boolean>;
+
+  constructor(private environmentInjector: EnvironmentInjector) {
+    this.tokenSubject = new BehaviorSubject<string | null>(null);
+    this.isAuthenticated = this.tokenSubject.pipe(map((token) => !!token), shareReplay(1));
+  }
+
+  private getDefaultService(): DefaultService {
+    if (this.defaultService === null) {
+      this.defaultService = runInInjectionContext(
+        this.environmentInjector,
+        () => this.defaultService = inject(DefaultService)
+      );
+    }
+
+    return this.defaultService!;
+  }
+
+  getApiCredentials(): Configuration {
+    return new Configuration({
+      credentials: {
+        "bearerAuth": () => this.tokenSubject.getValue() ?? undefined
+      }
+    })
   }
 
   login(email: string, password: string) {
-    this.defaultService.loginCustomer(email, password).subscribe((token) => {
-      console.log(token);
-      this.localStorageService.set('sessionToken', token);
-
-      this.defaultService.defaultHeaders.set(
-        'Authorization',
-        `Bearer ${token}`
-      );
-      this.defaultService.findUserBySessionToken().subscribe((user) => {
-        console.log(user);
-        this.userSubject.next(user);
-      });
-    });
-    return this.user;
+    this.getDefaultService()
+      .loginCustomer(email, password)
+      .subscribe(this.tokenSubject);
+    return this.isAuthenticated;
   }
 
-  logout() {}
+  logout() {
+    this.tokenSubject.next(null);
+  }
+
 }
