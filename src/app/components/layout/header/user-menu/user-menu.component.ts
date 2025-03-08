@@ -43,7 +43,6 @@ export class UserMenuComponent {
   }
 
   logout() {
-    console.log(this.logout);
     this.authService.logout();
   }
 }

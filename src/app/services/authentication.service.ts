@@ -1,6 +1,7 @@
 import { EnvironmentInjector, inject, Injectable, runInInjectionContext } from '@angular/core';
 import { Configuration, DefaultService } from '../generated';
 import { BehaviorSubject, connect, map, merge, Observable, share, shareReplay, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,9 @@ export class AuthenticationService {
   private readonly tokenSubject!: BehaviorSubject<string | null>;
   public readonly isAuthenticated!: Observable<boolean>;
 
-  constructor(private environmentInjector: EnvironmentInjector) {
+  constructor(
+    private environmentInjector: EnvironmentInjector,
+    private router: Router) {
     this.tokenSubject = new BehaviorSubject<string | null>(null);
     this.isAuthenticated = this.tokenSubject.pipe(
       map((token) => token != null),
@@ -54,6 +57,11 @@ export class AuthenticationService {
 
   logout() {
     this.tokenSubject.next(null);
+
+    // TODO: Clean this up
+    if (this.router.url.startsWith('/user')) {
+      this.router.navigate(['login']);
+    }
   }
 
 }
