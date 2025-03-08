@@ -1,6 +1,6 @@
 import { EnvironmentInjector, inject, Injectable, runInInjectionContext } from '@angular/core';
 import { Configuration, DefaultService } from '../generated';
-import { BehaviorSubject, map, Observable, shareReplay } from 'rxjs';
+import { BehaviorSubject, connect, map, merge, Observable, share, shareReplay, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +15,10 @@ export class AuthenticationService {
 
   constructor(private environmentInjector: EnvironmentInjector) {
     this.tokenSubject = new BehaviorSubject<string | null>(null);
-    this.isAuthenticated = this.tokenSubject.pipe(map((token) => !!token), shareReplay(1));
+    this.isAuthenticated = this.tokenSubject.pipe(
+      map((token) => token != null),
+      shareReplay(1)
+    );
   }
 
   private getDefaultService(): DefaultService {
@@ -37,11 +40,16 @@ export class AuthenticationService {
     })
   }
 
-  login(email: string, password: string) {
-    this.getDefaultService()
+  login(email: string, password: string): Observable<boolean> {
+    return this.getDefaultService()
       .loginCustomer(email, password)
-      .subscribe(this.tokenSubject);
-    return this.isAuthenticated;
+      .pipe(
+        tap({
+          next: (token) => this.tokenSubject.next(token),
+          error: () => this.tokenSubject.next(null)
+        }),
+        map((token) => token != null)
+      );
   }
 
   logout() {

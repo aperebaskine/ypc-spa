@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Observable } from 'rxjs';
 import { CommonModule, Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -30,6 +31,7 @@ export class LoginPageComponent {
 
   constructor(
     private authService: AuthenticationService,
+    private router: Router,
     private location: Location
   ) {
     this.isAuthenticated = this.authService.isAuthenticated;
@@ -49,7 +51,12 @@ export class LoginPageComponent {
   }
 
   goBack() {
-    this.location.back();
+    if (this.router.lastSuccessfulNavigation?.previousNavigation) {
+      this.location.back();
+    } else {
+      this.router.navigate(['']);
+    }
+
   }
 
 }

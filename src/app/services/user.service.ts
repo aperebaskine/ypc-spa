@@ -26,6 +26,7 @@ export class UserService {
             (user) => this.userSubject.next(user)
           );
       } else {
+        console.log("test");
         this.userSubject.next(null);
       }
     });

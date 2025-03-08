@@ -1,15 +1,7 @@
 <app-theme-toggle></app-theme-toggle>
 <app-locale-menu></app-locale-menu>
-<a [routerLink]="'login'">
-    <button mat-fab extended>
-        <mat-icon>person</mat-icon>
-        <ng-container i18n>Log in</ng-container>
-    </button>
-</a>
-<button mat-fab extended>
-    <mat-icon>app_registration</mat-icon>
-    <ng-container i18n>Register</ng-container>
-</button>
+<ng-container
+    *ngIf="user | async; then authenticated else unauthenticated"></ng-container>
 <a [routerLink]="'cart'">
     <button mat-fab extended>
         <mat-icon
@@ -17,3 +9,30 @@
         <ng-container i18n>Cart</ng-container>
     </button>
 </a>
+
+<ng-template #unauthenticated>
+    <a [routerLink]="'login'">
+        <button mat-fab extended>
+            <mat-icon>login</mat-icon>
+            <ng-container i18n>Log in</ng-container>
+        </button>
+    </a>
+    <button mat-fab extended>
+        <mat-icon>app_registration</mat-icon>
+        <ng-container i18n>Register</ng-container>
+    </button>
+</ng-template>
+
+<ng-template #authenticated>
+    <span i18n>Hello, {{(user | async)?.firstName}}</span>
+    <a>
+        <button mat-fab extended>
+            <mat-icon>account_circle</mat-icon>
+            <ng-container i18n>My account</ng-container>
+        </button>
+    </a>
+    <button mat-fab extended (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <ng-container i18n>Log out</ng-container>
+    </button>
+</ng-template>
