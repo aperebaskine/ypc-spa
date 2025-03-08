@@ -43,9 +43,7 @@ export class LoginPageComponent {
       .subscribe({
         error: () => {
           this.loginForm.reset();
-          Object.values(this.loginForm.controls).forEach((control) =>
-            control.setErrors({ 'incorrect': true }
-            ));
+          this.loginForm.setErrors({'incorrect': true});
         }
       });
   }
@@ -56,7 +54,6 @@ export class LoginPageComponent {
     } else {
       this.router.navigate(['']);
     }
-
   }
 
 }
