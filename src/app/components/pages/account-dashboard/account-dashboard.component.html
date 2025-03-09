@@ -1,1 +1,11 @@
-<p>account-dashboard works!</p>
+<mat-drawer-container>
+    <mat-drawer mode="side" opened>
+        <div class="dashboard-menu">
+            <button mat-button i18n (click)="view('addresses')">My addresses</button>
+            <button mat-button i18n (click)="view('orders')">My orders</button>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <ng-container *ngComponentOutlet="outlet"></ng-container>
+    </mat-drawer-content>
+</mat-drawer-container>

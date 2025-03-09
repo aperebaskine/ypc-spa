@@ -1,0 +1,10 @@
+.dashboard-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.dashboard-menu > button {
+    border-radius: 0px;
+    padding: 2em 0em;
+}
