@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Product } from '../../../generated';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,9 +15,22 @@ import { CartService } from '../../../services/cart.service';
 export class ProductCardComponent {
   @Input() product?: Product;
 
-  constructor(private cartService: CartService) { }
+  src?: string;
+
+  constructor(private cartService: CartService) {
+   }
 
   addToCart() {
     this.cartService.addItem({ id: this.product!.id, qty: 1, salePrice: this.product!.salePrice, name: this.product!.name });
+  }
+
+  setDefaultImage() {
+    this.src = "/images/unknown-image.png";
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.product) {
+      this.src = `/images/product/${this.product.id}.webp`;
+    }
   }
 }
