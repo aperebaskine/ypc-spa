@@ -1,0 +1,16 @@
+<ng-container *ngIf="address">
+    <mat-card appearance="outlined">
+        <mat-card-content>
+            <p i18n>ID: {{address.id}}</p>
+            <p i18n>Street name: {{address.streetName}}</p>
+            <p i18n>Street number: {{address.streetNumber ?? 'N/A' }}</p>
+            <p i18n *ngIf="address.floor">Floor: {{address.floor}}</p>
+            <p i18n *ngIf="address.door">Door: {{address.door}}</p>
+            <p i18n>ZIP Code: {{address.zipCode}}</p>
+            <p i18n>City: {{address.city}}</p>
+            <p i18n>Province: {{address.province}}</p>
+            <p i18n>Country: {{address.country}}</p>
+        </mat-card-content>
+    </mat-card>
+
+</ng-container>

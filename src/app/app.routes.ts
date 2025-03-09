@@ -8,6 +8,7 @@ import { AccountDashboardComponent } from './components/pages/account-dashboard/
 import { authGuard } from './guards/auth.guard';
 import { RegistrationPageComponent } from './components/pages/registration-page/registration-page.component';
 import { guestGuard } from './guards/guest.guard';
+import { OrderPageComponent } from './components/pages/order-page/order-page.component';
 
 export const routes: Routes = [
     {
@@ -51,5 +52,10 @@ export const routes: Routes = [
                 component: AccountDashboardComponent
             }
         ]
+    },
+    {
+        path: 'order',
+        canActivate: [authGuard],
+        component: OrderPageComponent
     }
 ];

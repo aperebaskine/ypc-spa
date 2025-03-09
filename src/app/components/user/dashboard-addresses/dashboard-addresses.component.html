@@ -1,1 +1,4 @@
-<p>dashboard-addresses works!</p>
+<ng-container *ngFor="let address of addresses">
+    <app-address-card [address]="address">
+    </app-address-card>
+</ng-container>

@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { CartListItemComponent } from "../../common/cart-list-item/cart-list-item.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cart-details',
-  imports: [CommonModule, MatListModule, MatButtonModule, CartListItemComponent],
+  imports: [CommonModule, RouterModule, MatListModule, MatButtonModule, CartListItemComponent],
   templateUrl: './cart-details.component.html',
   styleUrl: './cart-details.component.scss'
 })

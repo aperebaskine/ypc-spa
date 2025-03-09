@@ -1,0 +1,41 @@
+<h2 i18n>Place order</h2>
+<ng-container *ngIf="this.success; then success else order">
+
+</ng-container>
+
+<ng-template #order>
+    <mat-stepper>
+        <mat-step>
+            <ng-template matStepLabel i18n>Address</ng-template>
+            <div class="order-step">
+                <div class="address">
+                    <p>Billing address</p>
+                    <app-address-card [address]="billingAddress">
+
+                    </app-address-card>
+                </div>
+                <div class="address">
+                    <p>Shipping address</p>
+                    <app-address-card [address]="shippingAddress">
+
+                    </app-address-card>
+                </div>
+            </div>
+            <button mat-button matStepperNext i18n>Next</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel i18n>Payment method</ng-template>
+            <button mat-button matStepperNext i18n>Next</button>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel i18n>Confirm</ng-template>
+
+            <button mat-flat-button i18n (click)="placeOrder()">Confirm
+                order</button>
+        </mat-step>
+    </mat-stepper>
+</ng-template>
+
+<ng-template #success>
+    <p i18n>Your order was successfully placed!</p>
+</ng-template>

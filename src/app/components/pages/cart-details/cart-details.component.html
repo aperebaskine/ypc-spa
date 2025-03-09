@@ -18,6 +18,8 @@
     </ng-container>
     <div class="place-order">
         Subtotal: {{ calcSubtotal() | currency:'EUR' }}
-        <button mat-flat-button type="button" i18n>Place order</button>
+        <a [routerLink]="'/order'">
+            <button mat-flat-button type="button" i18n>Place order</button>
+        </a>
     </div>
 </ng-template>

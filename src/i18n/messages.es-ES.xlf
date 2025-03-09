@@ -2,6 +2,106 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en-GB" datatype="plaintext" original="ng2.template" target-language="es-ES">
     <body>
+      <trans-unit id="9151916945186592877" datatype="html">
+        <source><x id="PH" equiv-text="cartItem.name ?? $localize`Product`"/> successfully added to cart!</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7616770651914901276" datatype="html">
+        <source>Product</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1536087519743707362" datatype="html">
+        <source>Dismiss</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.component.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="561897701456319077" datatype="html">
+        <source>ID: <x id="INTERPOLATION" equiv-text="{{address.id}}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/order/order-card/order-card.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2902521608596555413" datatype="html">
+        <source>Street name: <x id="INTERPOLATION" equiv-text="{{address.streetName}}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1645044528883035427" datatype="html">
+        <source>Street number: <x id="INTERPOLATION" equiv-text="{{address.streetNumber ?? 'N/A' }}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5381661875650127821" datatype="html">
+        <source>Floor: <x id="INTERPOLATION" equiv-text="{{address.floor}}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7574938528770322961" datatype="html">
+        <source>Door: <x id="INTERPOLATION" equiv-text="{{address.door}}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="36231249865263573" datatype="html">
+        <source>ZIP Code: <x id="INTERPOLATION" equiv-text="{{address.zipCode}}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2452605757429852214" datatype="html">
+        <source>City: <x id="INTERPOLATION" equiv-text="{{address.city}}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1063357193605556019" datatype="html">
+        <source>Province: <x id="INTERPOLATION" equiv-text="{{address.province}}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8985537790514514521" datatype="html">
+        <source>Country: <x id="INTERPOLATION" equiv-text="{{address.country}}"/></source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/common/address/address-card/address-card.component.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="6385348218646771008" datatype="html">
         <source>Unit price:</source>
         <target state="needs-translation"/>
@@ -18,12 +118,24 @@
           <context context-type="linenumber">4,5</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4398863504443682316" datatype="html">
+        <source>Cart</source>
+        <target state="translated">Carrito</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/cart-details/cart-details.component.html</context>
+          <context context-type="linenumber">1,2</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="2336550011721758066" datatype="html">
         <source>Log in</source>
         <target state="translated">Conectarse</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">5</context>
+          <context context-type="linenumber">17</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3301086086650990787" datatype="html">
@@ -31,19 +143,35 @@
         <target state="translated">Registrarse</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="4398863504443682316" datatype="html">
-        <source>Cart</source>
-        <target state="translated">Carrito</target>
+      <trans-unit id="3724591343089785757" datatype="html">
+        <source>Hello, <x id="INTERPOLATION" equiv-text="{{(user | async)?.firstName}}"/></source>
+        <target state="needs-translation"/>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">29,30</context>
         </context-group>
+      </trans-unit>
+      <trans-unit id="8893390761160292681" datatype="html">
+        <source>My account</source>
+        <target state="needs-translation"/>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/components/pages/cart-details/cart-details.component.html</context>
-          <context context-type="linenumber">1,2</context>
+          <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7507948636555938109" datatype="html">
+        <source>Log out</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
+          <context context-type="linenumber">38</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1063195851397612585" datatype="html">
@@ -52,6 +180,22 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/navbar/navbar.component.html</context>
           <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1970603225953476658" datatype="html">
+        <source>My addresses</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/account-dashboard/account-dashboard.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8417842421847722492" datatype="html">
+        <source>My orders</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/account-dashboard/account-dashboard.component.html</context>
+          <context context-type="linenumber">5,6</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5609220492185313571" datatype="html">
@@ -67,7 +211,147 @@
         <target state="needs-translation"/>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pages/cart-details/cart-details.component.html</context>
-          <context context-type="linenumber">21,22</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
+          <context context-type="linenumber">1,2</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2223025538241430721" datatype="html">
+        <source>Welcome to YPC</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3610817074548071131" datatype="html">
+        <source>Error: Invalid login and/or password.</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2727496946419791472" datatype="html">
+        <source>Forgot password?</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2454050363478003966" datatype="html">
+        <source>Login</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7555224818164315191" datatype="html">
+        <source>Logged in successfully.</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">32,33</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="734934965373819800" datatype="html">
+        <source>Go back</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6304432362546770951" datatype="html">
+        <source>Address</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3885497195825665706" datatype="html">
+        <source>Next</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
+          <context context-type="linenumber">28,29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">84,85</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5722353260643724736" datatype="html">
+        <source>Payment method</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9178182467454450952" datatype="html">
+        <source>Confirm</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1988370177317300098" datatype="html">
+        <source>Confirm order</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6854089268486191173" datatype="html">
+        <source>Your order was successfully placed!</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
+          <context context-type="linenumber">40,41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5871412787804796799" datatype="html">
@@ -104,6 +388,94 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pages/product-search/product-search.component.html</context>
           <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7285072439741532201" datatype="html">
+        <source>Email already in use.</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5373727393387841282" datatype="html">
+        <source>Repeat password</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1543538730036692975" datatype="html">
+        <source>Passwords do not match.</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5342432350421167093" datatype="html">
+        <source>First name</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3586674587150281199" datatype="html">
+        <source>Last name</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="801935936336376044" datatype="html">
+        <source>Second last name</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5066119607229701477" datatype="html">
+        <source>Document type</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6596565802220431784" datatype="html">
+        <source>Document number</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">73</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8121141462865337916" datatype="html">
+        <source>Phone number</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7546132920424600419" datatype="html">
+        <source>You're almost done!</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">91,92</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4536547451081480810" datatype="html">
+        <source>Confirm registration</source>
+        <target state="needs-translation"/>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">93</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7101514678290864976" datatype="html">
