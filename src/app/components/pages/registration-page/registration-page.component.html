@@ -12,6 +12,11 @@
                         <mat-label i18n>Email</mat-label>
                         <input matInput type="email" formControlName="email"
                             required>
+                        @if
+                        (registrationForm.get('credentials')?.get('email')?.hasError('EMAIL_IN_USE'))
+                        {
+                        <mat-error i18n>Email already in use.</mat-error>
+                        }
                     </mat-form-field>
                     <mat-form-field [floatLabel]="'always'">
                         <mat-label i18n>Password</mat-label>
@@ -23,6 +28,11 @@
                         <mat-label i18n>Repeat password</mat-label>
                         <input matInput type="password"
                             formControlName="repeatPassword" required>
+                        @if
+                        (registrationForm.get('credentials')?.get('repeatPassword')?.hasError('PASSWORDS_DO_NOT_MATCH'))
+                        {
+                        <mat-error i18n>Passwords do not match.</mat-error>
+                        }
                     </mat-form-field>
                     <div class="inline-form-buttons">
                         <button type="button" mat-button matStepperNext
