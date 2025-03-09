@@ -1,4 +1,88 @@
-<div id="login-page">
+<div id="registration-page">
     <img src="/images/logo.png" />
     <p class="welcome-text" i18n>Welcome to YPC</p>
+    <form [formGroup]="registrationForm" (submit)="onSubmit()">
+        <mat-stepper [linear]="false" #stepper>
+            <mat-step
+                [stepControl]="registrationForm.get('credentials')!"
+                formGroupName="credentials">
+                <ng-template matStepLabel>Credentials</ng-template>
+                <div class="registration-step">
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>Email</mat-label>
+                        <input matInput type="email" formControlName="email"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>Password</mat-label>
+                        <input matInput type="password"
+                            formControlName="password"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>Repeat password</mat-label>
+                        <input matInput type="password"
+                            formControlName="repeatPassword" required>
+                    </mat-form-field>
+                    <div class="inline-form-buttons">
+                        <button type="button" mat-button matStepperNext
+                            i18n>Next</button>
+                    </div>
+                </div>
+            </mat-step>
+            <mat-step [stepControl]="registrationForm.get('personalData')!"
+                formGroupName="personalData">
+                <ng-template matStepLabel>Personal data</ng-template>
+                <div class="registration-step">
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>First name</mat-label>
+                        <input matInput type="text" formControlName="firstName"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>Last name</mat-label>
+                        <input matInput type="text"
+                            formControlName="lastName1"
+                            required>
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>Second last name</mat-label>
+                        <input matInput type="text"
+                            formControlName="lastName2">
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>Document type</mat-label>
+                        <mat-select required formControlName="docType">
+                            <mat-option *ngFor="let docType of docTypes | async"
+                                [value]="docType.id">
+                                {{docType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>Document number</mat-label>
+                        <input matInput type="text"
+                            formControlName="docNumber">
+                    </mat-form-field>
+                    <mat-form-field [floatLabel]="'always'">
+                        <mat-label i18n>Phone number</mat-label>
+                        <input matInput type="tel"
+                            formControlName="phoneNumber">
+                    </mat-form-field>
+                    <div class="inline-form-buttons">
+                        <button type="button" mat-button matStepperNext
+                            i18n>Next</button>
+                    </div>
+                </div>
+            </mat-step>
+            <mat-step>
+                <ng-template matStepLabel>Confirm</ng-template>
+                <div class="registration-step">
+                    <p i18n>You're almost done!</p>
+                    <button mat-flat-button type="submit" i18n>Confirm
+                        registration</button>
+                </div>
+            </mat-step>
+        </mat-stepper>
+    </form>
 </div>

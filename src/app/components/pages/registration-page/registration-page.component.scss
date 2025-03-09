@@ -3,7 +3,7 @@
     justify-content: center;
 }
 
-#login-page {
+#registration-page {
     margin-top: 10%;
     padding: 4% 8%;
 
@@ -11,11 +11,17 @@
     border-radius: 8px;
 }
 
-#login-page,
-#login-page>form {
+#registration-page,
+.registration-step,
+.registration-step {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1em;
+}
+
+.registration-step {
+    padding: 2em 0em;
 }
 
 .welcome-text {
@@ -26,8 +32,14 @@ mat-form-field {
     width: 20em;
 }
 
+mat-stepper {
+    background-color: unset;
+}
+
 .inline-form-buttons {
-    margin-top: 2em;
+    width: 80%;
     display: flex;
+    justify-content: end;
+    align-items: end;
     gap: 1em;
 }
