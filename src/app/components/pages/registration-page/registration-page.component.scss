@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 1.5em;
 }
 
 .registration-step {
@@ -43,3 +43,8 @@ mat-stepper {
     align-items: end;
     gap: 1em;
 }
+
+mat-error, mat-hint {
+    white-space: inherit;
+    word-break: break-word; /* Ensures long words wrap properly */
+  }

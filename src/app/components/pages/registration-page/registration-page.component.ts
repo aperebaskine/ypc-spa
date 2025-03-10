@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { DocumentTypeService } from '../../../services/document-type.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/user.service';
+import { passwordValidator } from '../../../validators/passwordValidator';
 
 @Component({
   selector: 'app-registration-page',
@@ -28,13 +29,16 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './registration-page.component.scss'
 })
 export class RegistrationPageComponent {
+
+  passwordHint = $localize`8-20 characters, at least one uppercase letter, number and special character.`;
+
   private fb = inject(FormBuilder);
 
   registrationForm: FormGroup = this.fb.group({
     credentials: this.fb.group(
       {
         email: ['', [Validators.required, Validators.email], [emailExistsValidator()]],
-        password: ['', Validators.required],
+        password: ['', [Validators.required, passwordValidator()]],
         repeatPassword: ['', [Validators.required]],
       },
       {

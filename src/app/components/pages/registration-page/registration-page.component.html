@@ -2,7 +2,7 @@
     <img src="/images/logo.png" />
     <p class="welcome-text" i18n>Welcome to YPC</p>
     <form [formGroup]="registrationForm" (submit)="onSubmit()">
-        <mat-stepper [linear]="false" #stepper>
+        <mat-stepper [linear]="true" #stepper>
             <mat-step
                 [stepControl]="registrationForm.get('credentials')!"
                 formGroupName="credentials">
@@ -23,6 +23,12 @@
                         <input matInput type="password"
                             formControlName="password"
                             required>
+                        <mat-hint i18n>{{passwordHint}}</mat-hint>
+                        @if
+                        (registrationForm.get('credentials')?.get('password')?.hasError('INVALID_FORMAT'))
+                        {
+                        <mat-error i18n>{{passwordHint}}</mat-error>
+                        }
                     </mat-form-field>
                     <mat-form-field [floatLabel]="'always'">
                         <mat-label i18n>Repeat password</mat-label>
