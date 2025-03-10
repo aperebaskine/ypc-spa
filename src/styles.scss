@@ -27,3 +27,17 @@ body {
   max-width: 1600px;
   margin: auto;
 }
+
+/* Generic container styles */
+
+.container--horizontal {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+}
+
+.container--vertical {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+}

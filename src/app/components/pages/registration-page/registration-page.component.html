@@ -2,7 +2,7 @@
     <img src="/images/logo.png" />
     <p class="welcome-text" i18n>Welcome to YPC</p>
     <form [formGroup]="registrationForm" (submit)="onSubmit()">
-        <mat-stepper [linear]="true" #stepper>
+        <mat-stepper [linear]="false" #stepper>
             <mat-step
                 [stepControl]="registrationForm.get('credentials')!"
                 formGroupName="credentials">
