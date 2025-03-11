@@ -1,12 +1,17 @@
 <div id="registration-page">
     <img src="/images/logo.png" />
     <p class="welcome-text" i18n>Welcome to YPC</p>
+    <ng-container *ngIf="isAuthenticated | async; then registerSuccess else register"></ng-container>
+</div>
+
+<ng-template #register>
     <form [formGroup]="registrationForm" (submit)="onSubmit()">
         <mat-stepper [linear]="true" #stepper>
             <mat-step
                 [stepControl]="registrationForm.get('credentials')!"
                 formGroupName="credentials">
                 <ng-template matStepLabel>Credentials</ng-template>
+                <p *ngIf="error" class="error-text">An error occured. Please try again later.</p>
                 <div class="registration-step">
                     <mat-form-field [floatLabel]="'always'">
                         <mat-label i18n>Email</mat-label>
@@ -84,6 +89,11 @@
                         <mat-label i18n>Phone number</mat-label>
                         <input matInput type="tel"
                             formControlName="phoneNumber">
+                        @if
+                        (registrationForm.get('personalData')?.get('phoneNumber')?.hasError('PHONE_NUMBER_IN_USE'))
+                        {
+                        <mat-error i18n>Phone number already in use.</mat-error>
+                        }
                     </mat-form-field>
                     <div class="inline-form-buttons">
                         <button type="button" mat-button matStepperNext
@@ -101,4 +111,9 @@
             </mat-step>
         </mat-stepper>
     </form>
-</div>
+</ng-template>
+
+<ng-template #registerSuccess>
+    <p i18n>Registration complete!</p>
+    <button mat-flat-button i18n (click)="goBack()">Go back</button>
+  </ng-template>

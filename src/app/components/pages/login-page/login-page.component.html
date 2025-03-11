@@ -7,7 +7,7 @@
 </div>
 
 <ng-template #login>
-  <p class="error" *ngIf="this.loginForm.hasError('incorrect')" i18n>Error:
+  <p class="error-text" *ngIf="this.loginForm.hasError('incorrect')" i18n>Error:
     Invalid login and/or password.</p>
   <form [formGroup]="loginForm" (submit)="this.login()">
     <mat-form-field [floatLabel]="'always'">

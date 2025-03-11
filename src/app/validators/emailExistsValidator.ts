@@ -8,6 +8,6 @@ export function emailExistsValidator(): AsyncValidatorFn {
     const userService = inject(UserService);
 
     return (control: AbstractControl<any, any>) =>
-        userService.emailExists(control.value)
-            .pipe(map((exists) => exists ? { "EMAIL_IN_USE": true } : null))
+        userService.exists({ email: control.value })
+            .pipe(map((exists) => exists.email ? { "EMAIL_IN_USE": true } : null));
 }

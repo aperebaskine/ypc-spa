@@ -64,4 +64,33 @@ export class AuthenticationService {
     }
   }
 
+  register(data: {
+    firstName: string,
+    lastName1: string,
+    lastName2?: string,
+    docType: string,
+    docNumber: string,
+    phoneNumber: string,
+    email: string,
+    password: string
+  }) {
+    console.log(data);
+    return this.getDefaultService().registerCustomer(
+      data.firstName,
+      data.lastName1,
+      data.docType,
+      data.docNumber,
+      data.phoneNumber,
+      data.email,
+      data.password,
+      data.lastName2
+    ).pipe(
+      tap({
+        next: (response) => this.tokenSubject.next(response.token ?? null),
+        error: () => this.tokenSubject.next(null)
+      }),
+      map((token) => token != null)
+    );
+  }
+
 }

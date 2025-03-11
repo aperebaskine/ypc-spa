@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, Directive, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -19,6 +19,6 @@ export const appConfig: ApplicationConfig = {
       provide: Configuration,
       useFactory: (authService: AuthenticationService) => authService.getApiCredentials(),
       deps: [AuthenticationService]
-    }
-  ]
+    },
+  ],
 };

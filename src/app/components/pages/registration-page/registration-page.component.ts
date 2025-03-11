@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { repeatPasswordValidator } from '../../../validators/repeatPasswordValidator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,9 +10,11 @@ import { emailExistsValidator } from '../../../validators/emailExistsValidator';
 import { DocumentType } from '../../../generated';
 import { Observable } from 'rxjs';
 import { DocumentTypeService } from '../../../services/document-type.service';
-import { CommonModule } from '@angular/common';
-import { UserService } from '../../../services/user.service';
+import { CommonModule, Location } from '@angular/common';
 import { passwordValidator } from '../../../validators/passwordValidator';
+import { phoneNumberExistsValidator } from '../../../validators/phoneNumberExistsValidator';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration-page',
@@ -29,6 +31,11 @@ import { passwordValidator } from '../../../validators/passwordValidator';
   styleUrl: './registration-page.component.scss'
 })
 export class RegistrationPageComponent {
+
+  @ViewChild('stepper') stepper!: MatStepper;
+
+  isAuthenticated!: Observable<boolean>;
+  error: boolean = false;
 
   passwordHint = $localize`8-20 characters, at least one uppercase letter, number and special character.`;
 
@@ -51,7 +58,7 @@ export class RegistrationPageComponent {
       lastName2: [''],
       docType: ['', Validators.required],
       docNumber: ['', Validators.required],
-      phoneNumber: ['', Validators.required]
+      phoneNumber: ['', Validators.required, phoneNumberExistsValidator()]
     })
   })
 
@@ -59,15 +66,19 @@ export class RegistrationPageComponent {
 
   constructor(
     private docTypeService: DocumentTypeService,
-    private userService: UserService
+    private authService: AuthenticationService,
+    private router: Router,
+    private location: Location
   ) {
     this.docTypes = this.docTypeService.findAll();
+    this.isAuthenticated = this.authService.isAuthenticated;
   }
 
   onSubmit() {
     const credentials = this.registrationForm.value.credentials;
     const personalData = this.registrationForm.value.personalData;
-    this.userService.register({
+    
+    this.authService.register({
       firstName: personalData.firstName,
       lastName1: personalData.lastName1,
       lastName2: personalData.lastName2,
@@ -76,10 +87,22 @@ export class RegistrationPageComponent {
       phoneNumber: personalData.phoneNumber,
       email: credentials.email,
       password: credentials.password
-    }).subscribe({
+    }).subscribe({ 
+      
       next: (next) => console.log(next),
-      error: (error) => console.log(error)
-    });
+      error: (error) => {
+      console.log(error);
+      this.error = true;
+      this.stepper.reset();
+    } });
+  }
+
+  goBack() {
+    if (this.router.lastSuccessfulNavigation?.previousNavigation) {
+      this.location.back();
+    } else {
+      this.router.navigate(['']);
+    }
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Customer, DefaultService } from '../generated';
+import { Customer, DefaultService, Exists } from '../generated';
 import { AuthenticationService } from './authentication.service';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 
@@ -31,31 +31,8 @@ export class UserService {
     });
   }
 
-  emailExists(email: string) {
-    return this.defaultService.emailExists(email)
-      .pipe(map((exists) => exists === "true"));
-  }
-
-  register(data: {
-    firstName: string,
-    lastName1: string,
-    lastName2?: string,
-    docType: string,
-    docNumber: string,
-    phoneNumber: string,
-    email: string,
-    password: string
-  }) {
-    return this.defaultService.registerCustomer(
-      data.firstName,
-      data.lastName1,
-      data.docType,
-      data.docNumber,
-      data.phoneNumber,
-      data.email,
-      data.password,
-      data.lastName2
-    );
+  exists(exists: { email?: string, phoneNumber?: string }) {
+    return this.defaultService.exists(exists.email, exists.phoneNumber);
   }
 
 }
