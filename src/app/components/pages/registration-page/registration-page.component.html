@@ -6,7 +6,7 @@
 
 <ng-template #register>
     <form [formGroup]="registrationForm" (submit)="onSubmit()">
-        <mat-stepper [linear]="true" #stepper>
+        <mat-stepper [linear]="false" #stepper>
             <mat-step
                 [stepControl]="registrationForm.get('credentials')!"
                 formGroupName="credentials">

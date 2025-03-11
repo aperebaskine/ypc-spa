@@ -9,11 +9,9 @@ body {
 
 html {
   color-scheme: light;
-  @include mat.theme((
-    color: mat.$violet-palette,
+  @include mat.theme((color: mat.$violet-palette,
       typography: Roboto,
-      density: -1
-      ));
+      density: -1));
 }
 
 html.dark-mode {
@@ -30,4 +28,18 @@ body {
 
 .error-text {
   color: var(--mat-sys-error);
+}
+
+/* Generic container styles */
+
+.container--horizontal {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+}
+
+.container--vertical {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
 }
