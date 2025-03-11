@@ -1,6 +1,6 @@
 <div class="filter-sidebar">
   <app-filter-sidebar
-    (form)="handleFormSubmission($event)"></app-filter-sidebar>
+    (formSubmitted)="handleFormSubmission($event)"></app-filter-sidebar>
 </div>
 <ng-container *ngIf="this.results">
   <div class="search-results">

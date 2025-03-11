@@ -9,7 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { CategoryService } from '../../../../services/category.service';
 import { Attribute, CategoryDTO } from '../../../../generated';
-import { Observable } from 'rxjs';
+import { debounceTime, Observable } from 'rxjs';
 import { AttributeService } from '../../../../services/attribute.service';
 import { AttributeSearchFilterComponent } from '../../../attribute/attribute-search-filter/attribute-search-filter.component';
 
@@ -44,7 +44,7 @@ export class FilterSidebarComponent {
     attributes: new FormGroup({}),
   });
 
-  @Output() form = new EventEmitter<any>();
+  @Output() formSubmitted = new EventEmitter<any>();
 
   constructor(
     private attributeService: AttributeService,
@@ -64,6 +64,12 @@ export class FilterSidebarComponent {
         this.attributes = undefined;
       }
     });
+
+    this.searchForm.valueChanges
+      .pipe(debounceTime(250))
+      .subscribe(() => {
+        this.submit();
+      });
   }
 
   loadAttributeFilters(categoryId: number) {
@@ -82,9 +88,12 @@ export class FilterSidebarComponent {
     }
   }
 
-  onSubmit() {
-    let res = { ...this.searchForm.value };
-    res.attributes = Object.values(res.attributes!);
-    this.form.emit(res);
+  submit() {
+    if (this.searchForm.valid) {
+      let res = { ...this.searchForm.value };
+      console.log(res);
+      res.attributes = Object.values(res.attributes!);
+      this.formSubmitted.emit(res);
+    }
   }
 }
