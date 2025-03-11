@@ -91,7 +91,6 @@ export class FilterSidebarComponent {
   submit() {
     if (this.searchForm.valid) {
       let res = { ...this.searchForm.value };
-      console.log(res);
       res.attributes = Object.values(res.attributes!);
       this.formSubmitted.emit(res);
     }
