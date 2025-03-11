@@ -19,7 +19,7 @@ export class OrderService {
     return this.defaultService.createOrder(
       billingAddressId, 
       shippingAddressId, 
-      orderLines.map((orderLine) => JSON.stringify(orderLine))
+      JSON.stringify(orderLines)
     );
   }
 

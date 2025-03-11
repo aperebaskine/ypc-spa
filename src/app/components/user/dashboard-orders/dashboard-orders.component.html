@@ -1,4 +1,5 @@
-<h3 i18n>My orders</h3>
+<div class="container--vertical">
+    <h3 i18n>My orders</h3>
 <ng-container *ngIf="this.orders; then orders else empty"></ng-container>
 
 <ng-template #orders>
@@ -9,3 +10,5 @@
 <ng-template #empty>
     <p i18n>You don't have any orders placed.</p>
 </ng-template>
+
+</div>

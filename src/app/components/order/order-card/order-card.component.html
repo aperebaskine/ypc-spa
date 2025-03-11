@@ -1,16 +1,16 @@
 <ng-container *ngIf="order">
-    <mat-card appearance="outlined">
-        <mat-card-content>
-            <p i18n>ID: {{order.id}}</p>
-            <p>Date: {{order.orderDate | date}}</p>
-            Products:
-            <ul>
-                <li
-                    *ngFor="let orderLine of order.orderLines">{{orderLine.productName}}
-                    - Quantity: {{orderLine.quantity}} - Price:
-                    {{orderLine.salePrice}}</li>
-            </ul>
-            <p>Total: {{order.totalPrice | currency:'EUR'}}</p>
-        </mat-card-content>
-    </mat-card>
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <p i18n>ID: {{ order.id }}</p>
+      <p>Date: {{ order.orderDate | date : "medium" }}</p>
+      Products:
+      <ul>
+        <li *ngFor="let orderLine of order.orderLines" i18n>
+          {{ orderLine.productName }} - Quantity: {{ orderLine.quantity }} -
+          Price: {{ orderLine.salePrice | currency : "EUR" }}
+        </li>
+      </ul>
+      <p i18n>Total: {{ order.totalPrice | currency : "EUR" }}</p>
+    </mat-card-content>
+  </mat-card>
 </ng-container>

@@ -1,1 +1,30 @@
-<p>address-form works!</p>
+<form class="container--vertical" [formGroup]="form">
+  <ng-container *ngIf="address">
+    <h3 i18n>Edit address</h3>
+  </ng-container>
+  <ng-container *ngIf="!address">
+    <h3 i18n>New address</h3>
+  </ng-container>
+  <mat-form-field [floatLabel]="'always'">
+    <mat-label i18n>Street name</mat-label>
+    <input matInput type="text" formControlName="streetName" />
+  </mat-form-field>
+  <div class="container--horizontal">
+    <mat-form-field class="field--short" [floatLabel]="'always'">
+      <mat-label i18n>Street number</mat-label>
+      <input matInput type="number" formControlName="streetNumber" />
+    </mat-form-field>
+    <mat-form-field class="field--short" [floatLabel]="'always'">
+      <mat-label i18n>Floor</mat-label>
+      <input matInput type="number" formControlName="floor" />
+    </mat-form-field>
+    <mat-form-field class="field--short" [floatLabel]="'always'">
+      <mat-label i18n>Door</mat-label>
+      <input matInput type="text" formControlName="door" />
+    </mat-form-field>
+  </div>
+  <mat-form-field class="field--medium" [floatLabel]="'always'">
+    <mat-label i18n>ZIP Code</mat-label>
+    <input matInput type="text" formControlName="door" />
+  </mat-form-field>
+</form>

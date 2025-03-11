@@ -4,10 +4,9 @@ import { AuthenticationService } from './authentication.service';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
   private readonly userSubject!: BehaviorSubject<Customer | null>;
   public readonly user!: Observable<Customer | null>;
 
@@ -20,19 +19,20 @@ export class UserService {
 
     this.authService.isAuthenticated.subscribe((isAuthenticated) => {
       if (isAuthenticated) {
-        this.defaultService
-          .getAuthenticatedUser()
-          .subscribe(
-            (user) => this.userSubject.next(user)
-          );
+        this.updateUser();
       } else {
         this.userSubject.next(null);
       }
     });
   }
 
-  exists(exists: { email?: string, phoneNumber?: string }) {
-    return this.defaultService.exists(exists.email, exists.phoneNumber);
+  updateUser() {
+    this.defaultService
+      .getAuthenticatedUser()
+      .subscribe((user) => this.userSubject.next(user));
   }
 
+  exists(exists: { email?: string; phoneNumber?: string }) {
+    return this.defaultService.exists(exists.email, exists.phoneNumber);
+  }
 }

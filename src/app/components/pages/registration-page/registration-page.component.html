@@ -5,8 +5,8 @@
 </div>
 
 <ng-template #register>
-    <form [formGroup]="registrationForm" (submit)="onSubmit()">
-        <mat-stepper [linear]="false" #stepper>
+    <form [formGroup]="registrationForm" (keypress)="$event.preventDefault()" (submit)="onSubmit()">
+        <mat-stepper [linear]="true" #stepper>
             <mat-step
                 [stepControl]="registrationForm.get('credentials')!"
                 formGroupName="credentials">

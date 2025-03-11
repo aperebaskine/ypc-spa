@@ -35,11 +35,11 @@ body {
 .container--horizontal {
   display: flex;
   flex-direction: row;
-  padding: 1em;
+  gap: 1em;
 }
 
 .container--vertical {
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  gap: 1em;
 }

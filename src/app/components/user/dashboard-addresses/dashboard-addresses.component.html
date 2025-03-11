@@ -1,14 +1,17 @@
-<h3 i18n>My addresses</h3>
-<button mat-raised-button>New address</button>
-<ng-container *ngIf="this.addresses; then addresses else empty"></ng-container>
+<div class="container--vertical">
+  <h3 i18n>My addresses</h3>
+  <app-address-editor></app-address-editor>
+  <ng-container
+    *ngIf="this.addresses; then addresses; else empty"
+  ></ng-container>
 
-<ng-template #addresses>
+  <ng-template #addresses>
     <ng-container *ngFor="let address of this.addresses">
-        <app-address-card [address]="address">
-        </app-address-card>
+      <app-address-card [address]="address"> </app-address-card>
     </ng-container>
-</ng-template>
+  </ng-template>
 
-<ng-template #empty>
+  <ng-template #empty>
     <p i18n>You don't have any addresses registered.</p>
-</ng-template>
+  </ng-template>
+</div>

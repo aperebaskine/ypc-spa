@@ -1,0 +1,8 @@
+<ng-container *ngIf="this.address; then edit else new"></ng-container>
+<ng-template #new>
+    <button mat-button i18n (click)="this.edit()">New address</button>
+</ng-template>
+<ng-template #edit>
+    <button mat-button i18n (click)="this.edit()">Edit address</button>
+    <button mat-button i18n (click)="this.delete()">Delete address</button>
+</ng-template>
