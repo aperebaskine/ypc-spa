@@ -2,6 +2,7 @@ import { EnvironmentInjector, inject, Injectable, runInInjectionContext } from '
 import { Configuration, DefaultService } from '../generated';
 import { BehaviorSubject, connect, map, merge, Observable, share, shareReplay, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,7 @@ export class AuthenticationService {
 
   constructor(
     private environmentInjector: EnvironmentInjector,
+    private oauthService: OAuthService,
     private router: Router) {
     this.tokenSubject = new BehaviorSubject<string | null>(null);
     this.isAuthenticated = this.tokenSubject.pipe(
