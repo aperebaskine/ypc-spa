@@ -16,15 +16,17 @@ export class AddressEditorComponent {
   constructor(
     private addressService: AddressService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   @Input() address?: Address;
 
   edit() {
     const dialog = this.dialog.open(AddressFormComponent, {
+      disableClose: true,
       data: { address: this.address }
     });
   }
 
-  delete() {}
+  delete() { }
+  
 }

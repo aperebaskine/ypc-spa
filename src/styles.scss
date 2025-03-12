@@ -43,3 +43,10 @@ body {
   flex-direction: column;
   gap: 1em;
 }
+
+.container--horizontal-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 1em;
+}
