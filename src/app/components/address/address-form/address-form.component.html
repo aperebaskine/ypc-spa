@@ -23,51 +23,64 @@
       <input matInput type="text" formControlName="door" />
     </mat-form-field>
   </div>
-  <mat-form-field class="field--medium" [floatLabel]="'always'">
-    <mat-label i18n>ZIP Code</mat-label>
-    <input matInput type="text" formControlName="zipCode" />
-  </mat-form-field>
-  <mat-form-field [floatLabel]="'always'">
-    <mat-label i18n>City</mat-label>
-    <input
-      matInput
-      type="text"
-      formControlName="cityId"
-      [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete"
-      [displayWith]="displayCity()">
-      @for (city of filteredCities | async; track city) {
-      <mat-option
-        [value]="city.id">
-        {{city.name}}
-      </mat-option>
-      }
-    </mat-autocomplete>
-  </mat-form-field>
+  <div class="container--horizontal">
+    <mat-form-field class="field--short" [floatLabel]="'always'">
+      <mat-label i18n>ZIP Code</mat-label>
+      <input matInput type="text" formControlName="zipCode" />
+    </mat-form-field>
+    <mat-form-field class="field--grow" [floatLabel]="'always'">
+      <mat-label i18n>City</mat-label>
+      <input
+        #cityInput
+        matInput
+        type="text"
+        formControlName="cityId"
+        (input)="filterCities($event)"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        #auto="matAutocomplete"
+        [requireSelection]="true"
+        [displayWith]="displayCity()"
+      >
+        @for (city of filteredCitySubject | async; track city) {
+        <mat-option [value]="city.id">
+          {{ city.name }}
+        </mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
   <mat-form-field [floatLabel]="'always'">
     <mat-label i18n>Province</mat-label>
     <mat-select formControlName="provinceId">
-      <mat-option *ngFor="let province of provinces" [value]="province.id">
-        {{province.name}}
+      <mat-option
+        *ngFor="let province of provinceSubject | async"
+        [value]="province.id"
+      >
+        {{ province.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field [floatLabel]="'always'">
     <mat-label i18n>Country</mat-label>
     <mat-select formControlName="countryId">
-      <mat-option *ngFor="let country of countries" [value]="country.id">
-        {{country.name}}
+      <mat-option
+        *ngFor="let country of countrySubject | async"
+        [value]="country.id"
+      >
+        {{ country.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <div class="container--horizontal">
-    <mat-slide-toggle labelPosition="before"
-      formControlName="isDefault">Default address</mat-slide-toggle>
-    <mat-slide-toggle labelPosition="before"
-      formControlName="isBilling">Billing address</mat-slide-toggle>
-  </div>
+  <mat-slide-toggle labelPosition="before" formControlName="isDefault"
+    >Default address</mat-slide-toggle
+  >
+  <mat-slide-toggle labelPosition="before" formControlName="isBilling"
+    >Billing address</mat-slide-toggle
+  >
   <div class="container--horizontal-end">
-    <button mat-button type="reset" i18n>Reset</button>
+    <button mat-button type="button" (click)="initializeForm()" i18n>Reset</button>
     <button mat-flat-button type="submit" i18n>Confirm</button>
   </div>
 </form>

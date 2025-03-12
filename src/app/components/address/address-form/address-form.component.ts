@@ -1,4 +1,15 @@
-import { AfterViewInit, Component, inject, Inject, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Address, City, Country, Province } from '../../../generated';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,7 +28,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { map, Observable, startWith, tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -30,13 +41,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatSelectModule,
     MatSlideToggleModule,
     MatAutocompleteModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   templateUrl: './address-form.component.html',
   styleUrl: './address-form.component.scss',
 })
-export class AddressFormComponent implements OnInit {
-
+export class AddressFormComponent implements OnInit, AfterViewInit {
   @Input() address?: Address = inject(MAT_DIALOG_DATA).address;
 
   form = inject(FormBuilder).group({
@@ -45,67 +55,30 @@ export class AddressFormComponent implements OnInit {
     floor: [0],
     door: [''],
     zipCode: ['', Validators.required],
-    cityId: [{ value: 0 as number | string | null, disabled: true }, Validators.required],
+    cityId: [
+      { value: null as number | null, disabled: true },
+      Validators.required,
+    ],
     provinceId: [{ value: 0, disabled: true }, Validators.required],
     countryId: ['', Validators.required],
     isDefault: [false, Validators.required],
     isBilling: [false, Validators.required],
   });
 
-  cityFormControl = this.form.get('cityId') as FormControl;
+  countrySubject = new BehaviorSubject<Country[]>([]);
+  provinceSubject = new BehaviorSubject<Province[]>([]);
+  citySubject = new BehaviorSubject<City[]>([]);
 
-  countries: Country[] = [];
-  provinces: Province[] = [];
   cities: City[] = [];
-  filteredCities?: Observable<City[]>;
+  filteredCitySubject = new BehaviorSubject<City[]>([]);
 
   constructor(
     private countryService: CountryService,
     private provinceService: ProvinceService,
-    private cityService: CityService,
-  ) {
-    this.countryService
-      .findAll()
-      .subscribe((countries) => (this.countries = countries));
-
-    this.form.get('countryId')?.valueChanges.subscribe((countryId) => {
-      if (countryId) {
-        this.provinceService.findByCountry(countryId)
-          .pipe(
-            tap(
-              (provinces) => this.provinces = provinces
-            ),
-            tap(
-              () => this.form.get('provinceId')?.enable()
-            ))
-          .subscribe();
-
-      } else {
-        this.provinces = [];
-        this.form.get('provinceId')?.disable();
-      }
-    });
-
-    this.form.get('provinceId')?.valueChanges.subscribe((provinceId) => {
-      if (provinceId) {
-        this.cityService.findByProvince(provinceId)
-          .pipe(
-            tap(
-              (cities) => this.cities = cities
-            ),
-            tap(
-              () => this.form.get('cityId')?.enable()
-            ))
-          .subscribe();
-      } else {
-        this.cities = [];
-        this.form.get('cityId')?.disable();
-      }
-    });
-  }
+    private cityService: CityService
+  ) {}
 
   initializeForm() {
-
     this.form.reset({
       streetName: this.address?.streetName ?? '',
       streetNumber: this.address?.streetNumber ?? null,
@@ -116,36 +89,77 @@ export class AddressFormComponent implements OnInit {
       provinceId: this.address?.provinceId ?? null,
       countryId: this.address?.countryId ?? null,
       isDefault: this.address?.isDefault ?? false,
-      isBilling: this.address?.isBilling ?? false
+      isBilling: this.address?.isBilling ?? false,
     });
   }
 
   displayCity() {
     return (value: any) => {
-      console.log(value);
-      console.log(this.cities);
-      return this.cities!
-        .filter(city => city.id == value)
-        .map(city => city.name)
-        .pop()!;
-    }
+      return this.cities.find((city) => city.id == value)?.name ?? '';
+    };
   }
 
   ngOnInit() {
-    this.filteredCities = this.form.get('cityId')!.valueChanges
-      .pipe(
-        startWith(''),
-        map((value) => {
-          if (typeof value === 'string') {
-            return this.cities!.filter(
-              (city) => city.name!.toLowerCase().includes(value.trim().toLowerCase())
-            );
-          }
+    this.countryService.findAll().subscribe(this.countrySubject);
 
-          return this.cities!;
-        })
-      );
+    this.form.get('countryId')?.valueChanges.subscribe((countryId) => {
+      this.form.get('provinceId')?.reset(null, { emitEvent: false });
+
+      if (countryId) {
+        this.provinceService
+          .findByCountry(countryId)
+          .pipe(
+            tap((provinces) => this.provinceSubject.next(provinces)),
+            tap(() => {
+              if (!this.form.touched && this.address) {
+                this.form.get('provinceId')?.setValue(this.address.provinceId!);
+              }
+            }),
+            tap(() => this.form.get('provinceId')?.enable())
+          )
+          .subscribe();
+      } else {
+        this.provinceSubject.next([]);
+        this.form.get('provinceId')?.disable();
+      }
+    });
+
+    this.form.get('provinceId')?.valueChanges.subscribe((provinceId) => {
+      this.form.get('cityId')?.reset(null, { emitEvent: false });
+
+      if (provinceId) {
+        this.cityService
+          .findByProvince(provinceId)
+          .pipe(
+            tap((cities) => this.citySubject.next(cities)),
+            tap((cities) => (this.cities = cities)),
+            tap((cities) => this.filteredCitySubject.next(cities)),
+            tap(() => {
+              if (!this.form.touched && this.address) {
+                this.form.get('cityId')?.setValue(this.address.cityId!);
+              }
+            }),
+            tap(() => this.form.get('cityId')?.enable())
+          )
+          .subscribe();
+      } else {
+        this.citySubject.next([]);
+        this.form.get('cityId')?.disable();
+      }
+    });
+
     this.initializeForm();
   }
 
+  filterCities(event: Event) {
+    let cityInput = event.target as HTMLInputElement;
+
+    this.filteredCitySubject.next(
+      this.cities.filter((city) =>
+        city.name?.toLowerCase().includes(cityInput.value.trim().toLowerCase())
+      )
+    );
+  }
+
+  ngAfterViewInit() {}
 }
