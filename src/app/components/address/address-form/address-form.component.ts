@@ -1,28 +1,11 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  inject,
-  Inject,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Address, City, Country, Province } from '../../../generated';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CountryService } from '../../../services/country.service';
 import { ProvinceService } from '../../../services/province.service';
 import { CityService } from '../../../services/city.service';
-import {
-  FormBuilder,
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
@@ -46,10 +29,11 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './address-form.component.html',
   styleUrl: './address-form.component.scss',
 })
-export class AddressFormComponent implements OnInit, AfterViewInit {
+export class AddressFormComponent implements OnInit {
   @Input() address?: Address = inject(MAT_DIALOG_DATA).address;
 
   form = inject(FormBuilder).group({
+    id: [null as number | null],
     streetName: ['', Validators.required],
     streetNumber: [0],
     floor: [0],
@@ -75,23 +59,9 @@ export class AddressFormComponent implements OnInit, AfterViewInit {
   constructor(
     private countryService: CountryService,
     private provinceService: ProvinceService,
-    private cityService: CityService
+    private cityService: CityService,
+    private dialogRef: MatDialogRef<AddressFormComponent>
   ) {}
-
-  initializeForm() {
-    this.form.reset({
-      streetName: this.address?.streetName ?? '',
-      streetNumber: this.address?.streetNumber ?? null,
-      floor: this.address?.floor ?? null,
-      door: this.address?.door ?? '',
-      zipCode: this.address?.zipCode ?? '',
-      cityId: this.address?.cityId ?? null,
-      provinceId: this.address?.provinceId ?? null,
-      countryId: this.address?.countryId ?? null,
-      isDefault: this.address?.isDefault ?? false,
-      isBilling: this.address?.isBilling ?? false,
-    });
-  }
 
   displayCity() {
     return (value: any) => {
@@ -161,5 +131,27 @@ export class AddressFormComponent implements OnInit, AfterViewInit {
     );
   }
 
-  ngAfterViewInit() {}
+  initializeForm() {
+    this.form.reset({
+      id: this.address?.id,
+      streetName: this.address?.streetName ?? '',
+      streetNumber: this.address?.streetNumber ?? null,
+      floor: this.address?.floor ?? null,
+      door: this.address?.door ?? '',
+      zipCode: this.address?.zipCode ?? '',
+      cityId: this.address?.cityId ?? null,
+      provinceId: this.address?.provinceId ?? null,
+      countryId: this.address?.countryId ?? null,
+      isDefault: this.address?.isDefault ?? false,
+      isBilling: this.address?.isBilling ?? false,
+    });
+  }
+
+  cancel() {
+    this.dialogRef.close();
+  }
+
+  submit() {
+    this.dialogRef.close(this.form.value);
+  }
 }

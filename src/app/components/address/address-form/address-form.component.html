@@ -80,7 +80,8 @@
     >Billing address</mat-slide-toggle
   >
   <div class="container--horizontal-end">
+    <button mat-button type="button" (click)="cancel()" i18n>Cancel</button>
     <button mat-button type="button" (click)="initializeForm()" i18n>Reset</button>
-    <button mat-flat-button type="submit" i18n>Confirm</button>
+    <button mat-flat-button type="button" (click)="submit()" i18n>Confirm</button>
   </div>
 </form>
