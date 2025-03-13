@@ -5,7 +5,7 @@
 </div>
 
 <ng-template #register>
-    <form [formGroup]="registrationForm" (keypress)="$event.preventDefault()" (submit)="onSubmit()">
+    <form [formGroup]="registrationForm">
         <mat-stepper [linear]="true" #stepper>
             <mat-step
                 [stepControl]="registrationForm.get('credentials')!"
@@ -105,7 +105,7 @@
                 <ng-template matStepLabel>Confirm</ng-template>
                 <div class="registration-step">
                     <p i18n>You're almost done!</p>
-                    <button mat-flat-button type="submit" i18n>Confirm
+                    <button mat-flat-button type="button" (click)="onSubmit()" i18n>Confirm
                         registration</button>
                 </div>
             </mat-step>

@@ -90,8 +90,7 @@ export class RegistrationPageComponent {
     }).subscribe({ 
       
       next: (next) => console.log(next),
-      error: (error) => {
-      console.log(error);
+      error: () => {
       this.error = true;
       this.stepper.reset();
     } });
