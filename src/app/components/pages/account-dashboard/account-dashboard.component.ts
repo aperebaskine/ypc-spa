@@ -15,18 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AccountDashboardComponent {
 
-  outlet: Type<any> = DashboardAddressesComponent;
-
-  constructor(private userService: UserService) {
-
-  }
-
-  view(type: string) {
-    if (type === 'addresses') {
-      this.outlet = DashboardAddressesComponent;
-    } else if (type === 'orders') {
-      this.outlet = DashboardOrdersComponent;
-    }
+  constructor() {
   }
 
 }

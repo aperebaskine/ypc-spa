@@ -33,6 +33,6 @@ export class UserService {
   }
 
   exists(exists: { email?: string; phoneNumber?: string }) {
-    return this.defaultService.exists(exists.email, exists.phoneNumber);
+    return this.defaultService.exists(exists.email ?? undefined, exists.phoneNumber ?? undefined);
   }
 }

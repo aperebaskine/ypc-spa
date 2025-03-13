@@ -9,6 +9,9 @@ import { authGuard } from './guards/auth.guard';
 import { RegistrationPageComponent } from './components/pages/registration-page/registration-page.component';
 import { guestGuard } from './guards/guest.guard';
 import { OrderPageComponent } from './components/pages/order-page/order-page.component';
+import { DashboardAddressesComponent } from './components/user/dashboard-addresses/dashboard-addresses.component';
+import { DashboardOrdersComponent } from './components/user/dashboard-orders/dashboard-orders.component';
+import { DashboardProfileComponent } from './components/dashboard/dashboard-profile/dashboard-profile.component';
 
 export const routes: Routes = [
     {
@@ -49,7 +52,24 @@ export const routes: Routes = [
         children: [
             {
                 path: 'dashboard',
-                component: AccountDashboardComponent
+                component: AccountDashboardComponent,
+                children: [
+                    {
+                        path: '',
+                        component: DashboardProfileComponent,
+                        outlet: 'dashboard'
+                    },
+                    {
+                        path: 'addresses',
+                        component: DashboardAddressesComponent,
+                        outlet: 'dashboard'
+                    },
+                    {
+                        path: 'orders',
+                        component: DashboardOrdersComponent,
+                        outlet: 'dashboard'
+                    }
+                ]
             }
         ]
     },

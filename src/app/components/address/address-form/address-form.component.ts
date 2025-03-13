@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BehaviorSubject, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { AddressService } from '../../../services/address.service';
 
 @Component({
   selector: 'app-address-form',
@@ -31,6 +32,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class AddressFormComponent implements OnInit {
   @Input() address?: Address = inject(MAT_DIALOG_DATA).address;
+  addressCount: number = inject(MAT_DIALOG_DATA).addressCount!;
 
   form = inject(FormBuilder).group({
     id: [null as number | null],
@@ -61,7 +63,8 @@ export class AddressFormComponent implements OnInit {
     private provinceService: ProvinceService,
     private cityService: CityService,
     private dialogRef: MatDialogRef<AddressFormComponent>
-  ) {}
+  ) {
+  }
 
   displayCity() {
     return (value: any) => {
@@ -133,7 +136,7 @@ export class AddressFormComponent implements OnInit {
 
   initializeForm() {
     this.form.reset({
-      id: this.address?.id,
+      id: this.address?.id ?? null,
       streetName: this.address?.streetName ?? '',
       streetNumber: this.address?.streetNumber ?? null,
       floor: this.address?.floor ?? null,
@@ -142,9 +145,12 @@ export class AddressFormComponent implements OnInit {
       cityId: this.address?.cityId ?? null,
       provinceId: this.address?.provinceId ?? null,
       countryId: this.address?.countryId ?? null,
-      isDefault: this.address?.isDefault ?? false,
-      isBilling: this.address?.isBilling ?? false,
+      isDefault: this.address?.default ?? false,
+      isBilling: this.address?.billing ?? false,
     });
+
+    this.initDefaultToggle();
+    this.initBillingToggle();
   }
 
   cancel() {
@@ -153,5 +159,43 @@ export class AddressFormComponent implements OnInit {
 
   submit() {
     this.dialogRef.close(this.form.value);
+  }
+
+  initDefaultToggle() {
+    const toggle = this.form.get('isDefault')!;
+    console.log(this.addressCount);
+
+    if (!this.address) {
+      toggle.setValue(this.addressCount < 1);
+
+      if (this.addressCount < 1) {
+        toggle.disable();
+      }
+    } else {
+      toggle.setValue(this.address.default!);
+
+      if (this.address.default!) {
+        toggle.disable();
+      }
+    }
+  }
+
+  initBillingToggle() {
+    console.log(this.addressCount);
+    const toggle = this.form.get('isBilling')!;
+
+    if (!this.address) {
+      toggle.setValue(this.addressCount < 1);
+
+      if (this.addressCount < 1) {
+        toggle.disable();
+      }
+    } else {
+      toggle.setValue(this.address.billing!);
+
+      if (this.address.billing!) {
+        toggle.disable();
+      }
+    }
   }
 }

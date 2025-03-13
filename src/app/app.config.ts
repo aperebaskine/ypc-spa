@@ -1,7 +1,6 @@
 import {
   ApplicationConfig,
-  Directive,
-  importProvidersFrom,
+  DEFAULT_CURRENCY_CODE,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -35,5 +34,9 @@ export const appConfig: ApplicationConfig = {
       deps: [AuthenticationService],
     },
     provideOAuthClient(),
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'EUR'
+    }
   ],
 };

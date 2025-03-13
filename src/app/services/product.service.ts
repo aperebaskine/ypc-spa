@@ -32,15 +32,15 @@ export class ProductService {
       this.locale,
       pos,
       pageSize,
-      filters.name,
-      filters.launchDateFrom,
-      filters.launchDateTo,
+      filters.name ?? undefined,
+      filters.launchDateFrom ?? undefined,
+      filters.launchDateTo ?? undefined,
       filters.hasStock === undefined ? undefined : Number(filters.hasStock),
       undefined,
-      filters.priceMin,
-      filters.priceMax,
-      filters.categoryId,
-      (filters.attributes? btoa(JSON.stringify(filters.attributes)) : undefined)
+      filters.priceMin ?? undefined,
+      filters.priceMax ?? undefined,
+      filters.categoryId ?? undefined,
+      (filters.attributes ? btoa(JSON.stringify(filters.attributes)) : undefined)
     );
   }
 }

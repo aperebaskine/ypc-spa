@@ -39,13 +39,13 @@ export class OrderPageComponent {
     private orderService: OrderService
   ) {
 
-    this.addressService.findAll()
+    this.addressService.getAddresses()
       .pipe(
         tap((addresses) =>
-          this.billingAddress = addresses.filter((a) => a.billing).pop()
+          this.billingAddress = addresses.find((a) => a.billing)!
         ),
         tap((addresses) =>
-          this.shippingAddress = addresses.filter((a) => a.default).pop()
+          this.shippingAddress = addresses.find((a) => a.default)!
         )
       ).subscribe(
         (addresses) => this.addresses = addresses

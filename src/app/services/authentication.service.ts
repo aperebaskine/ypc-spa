@@ -85,7 +85,7 @@ export class AuthenticationService {
       data.phoneNumber,
       data.email,
       data.password,
-      data.lastName2
+      data.lastName2 ?? undefined
     ).pipe(
       tap({
         next: (response) => this.tokenSubject.next(response.token ?? null),

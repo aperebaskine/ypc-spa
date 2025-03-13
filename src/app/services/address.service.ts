@@ -1,18 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Address, DefaultService } from '../generated';
+import { BehaviorSubject, take, tap } from 'rxjs';
 import { UserService } from './user.service';
-import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddressService {
-  constructor(
-    private defaultService: DefaultService
-  ) {}
 
-  findAll() {
-    return this.defaultService.findAllAddresses();
+  private readonly addressesSubject = new BehaviorSubject<Address[]>([]);
+
+  constructor(
+    private defaultService: DefaultService,
+    private userService: UserService
+  ) {
+    this.userService.user.subscribe((user) => {
+      if (user == null) {
+        this.addressesSubject.next([]);
+      }
+    });
+    this.updateAddresses();
+  }
+
+  getAddresses() {
+    return this.addressesSubject.asObservable();
+  }
+
+  updateAddresses() {
+    this.defaultService
+      .findAllAddresses()
+      .subscribe((addresses) => this.addressesSubject.next(addresses));
   }
 
   create(address: Address) {
@@ -23,9 +40,11 @@ export class AddressService {
         address.cityId!,
         address.isDefault ?? false,
         address.isBilling ?? false,
-        address.streetNumber,
-        address.floor,
-        address.door
+        address.streetNumber ?? undefined,
+        address.floor ?? undefined,
+        address.door ?? undefined
+      ).pipe(
+        tap(() => this.updateAddresses())
       );
   }
 
@@ -38,9 +57,19 @@ export class AddressService {
         address.cityId!,
         address.isDefault ?? false,
         address.isBilling ?? false,
-        address.streetNumber,
-        address.floor,
-        address.door
+        address.streetNumber ?? undefined,
+        address.floor ?? undefined,
+        address.door ?? undefined
+      ).pipe(
+        tap(() => this.updateAddresses())
+      );
+  }
+
+  delete(id: number) {
+    return this.defaultService
+      .deleteAddressById(id)
+      .pipe(
+        tap(() => this.updateAddresses())
       );
   }
 }

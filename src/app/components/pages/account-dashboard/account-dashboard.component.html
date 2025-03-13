@@ -1,11 +1,15 @@
 <mat-drawer-container>
     <mat-drawer mode="side" opened>
         <div class="dashboard-menu">
-            <button mat-button i18n (click)="view('addresses')">My addresses</button>
-            <button mat-button i18n (click)="view('orders')">My orders</button>
+            <button mat-button i18n
+                [routerLink]="['/user/dashboard', {outlets: {dashboard: 'addresses'}}]">My
+                addresses</button>
+            <button mat-button i18n
+                [routerLink]="['/user/dashboard', {outlets: {dashboard: 'orders'}}]">My
+                orders</button>
         </div>
     </mat-drawer>
     <mat-drawer-content>
-        <ng-container *ngComponentOutlet="outlet"></ng-container>
+        <router-outlet name="dashboard"></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
