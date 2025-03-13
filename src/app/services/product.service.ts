@@ -18,14 +18,16 @@ export class ProductService {
     pos: number,
     pageSize: number,
     filters: {
-      name?: string;
-      launchDateFrom?: string;
-      launchDateTo?: string;
-      hasStock?: boolean;
-      priceMin?: number;
-      priceMax?: number;
-      categoryId?: number;
-      attributes?: any[];
+      name?: string,
+      launchDateFrom?: string,
+      launchDateTo?: string,
+      hasStock?: boolean,
+      priceMin?: number,
+      priceMax?: number,
+      categoryId?: number,
+      attributes?: any[],
+      orderBy?: string,
+      ascDesc?: 'asc' | 'desc'
     }
   ) {
     return this.defaultService.findProductBy(
@@ -40,7 +42,9 @@ export class ProductService {
       filters.priceMin ?? undefined,
       filters.priceMax ?? undefined,
       filters.categoryId ?? undefined,
-      (filters.attributes ? btoa(JSON.stringify(filters.attributes)) : undefined)
+      (filters.attributes ? btoa(JSON.stringify(filters.attributes)) : undefined),
+      filters.orderBy ?? undefined,
+      filters.ascDesc ?? undefined
     );
   }
 }

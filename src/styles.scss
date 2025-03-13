@@ -30,6 +30,10 @@ body {
   color: var(--mat-sys-error);
 }
 
+main {
+  padding: 0em 1em;
+}
+
 /* Generic container styles */
 
 .container--horizontal {
@@ -49,4 +53,8 @@ body {
   flex-direction: row;
   justify-content: end;
   gap: 1em;
+}
+
+.field--grow {
+  flex-grow: 1;
 }

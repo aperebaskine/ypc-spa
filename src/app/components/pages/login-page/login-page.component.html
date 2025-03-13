@@ -1,14 +1,14 @@
- <div id="login-page">
+<div id="login-page">
   <img src="/images/logo.png" />
   <p class="welcome-text" i18n>Welcome to YPC</p>
-  <ng-container
-    *ngIf="isAuthenticated | async; then loginSuccess else login">
+  <ng-container *ngIf="isAuthenticated | async; then loginSuccess; else login">
   </ng-container>
 </div>
 
 <ng-template #login>
-  <p class="error-text" *ngIf="this.loginForm.hasError('incorrect')" i18n>Error:
-    Invalid login and/or password.</p>
+  <p class="error-text" *ngIf="this.loginForm.hasError('incorrect')" i18n>
+    Error: Invalid login and/or password.
+  </p>
   <form [formGroup]="loginForm" (submit)="this.login()">
     <mat-form-field [floatLabel]="'always'">
       <mat-label i18n>Email</mat-label>
@@ -26,6 +26,11 @@
       </a>
     </div>
   </form>
+  <div class="container--vertical">
+    <button mat-button class="field--grow" (click)="oAuth()" i18n>
+      Log in with Google
+    </button>
+  </div>
 </ng-template>
 
 <ng-template #loginSuccess>

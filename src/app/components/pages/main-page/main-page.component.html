@@ -1,1 +1,10 @@
-<p>main-page works!</p>
+<div class="container--vertical">
+    <h2 i18n>New products</h2>
+    <app-product-grid [products]="(newProducts | async)?.page"></app-product-grid>
+    <h2 i18n>Sales</h2>
+    <app-product-grid [products]="(sales | async)?.page"></app-product-grid>
+    <h2 i18n>Processors</h2>
+    <app-product-grid [products]="(cpus | async)?.page"></app-product-grid>
+    <h2 i18n>Graphics Cards</h2>
+    <app-product-grid [products]="(gpus | async)?.page"></app-product-grid>
+</div>

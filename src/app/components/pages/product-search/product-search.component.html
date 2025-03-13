@@ -5,16 +5,12 @@
 <ng-container *ngIf="this.results">
   <div class="search-results">
     <h3 i18n>Results</h3>
-    <div class="product-cards">
-      <app-product-card
-        *ngFor="let result of this.results.page"
-        [product]="result"></app-product-card>
-    </div>
+    <app-product-grid [products]="(results | async)?.page"></app-product-grid>
     <mat-paginator
       [pageIndex]="this.page"
       [pageSize]="this.pageSizeOptions[0]"
       [pageSizeOptions]="this.pageSizeOptions"
-      [length]="results.resultCount"
+      [length]="(results | async)?.resultCount"
       (page)="handlePageEvent($event)">
     </mat-paginator>
   </div>

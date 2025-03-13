@@ -8,6 +8,8 @@ import { PageEvent } from '@angular/material/paginator';
 import { ProductResults } from '../../../generated';
 import { ProductCardComponent } from '../../product/product-card/product-card.component';
 import { ActivatedRoute } from '@angular/router';
+import { ProductGridComponent } from '../../product/product-grid/product-grid.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-search',
@@ -15,14 +17,14 @@ import { ActivatedRoute } from '@angular/router';
     CommonModule,
     FilterSidebarComponent,
     MatPaginatorModule,
-    ProductCardComponent,
+    ProductGridComponent,
   ],
   templateUrl: './product-search.component.html',
   styleUrl: './product-search.component.scss',
 })
 export class ProductSearchComponent {
   criteria? = {};
-  results?: ProductResults;
+  results?: Observable<ProductResults>;
 
   // TODO: Resolve dynamically
   pageSizeOptions = [12, 24, 48];
@@ -53,9 +55,7 @@ export class ProductSearchComponent {
   loadProducts(page: number, pageSize: number) {
     let pos = ProductSearchComponent.calcPos(page, pageSize);
 
-    this.productService
-      .findBy(pos, pageSize, this.criteria!)
-      .subscribe((results) => (this.results = results));
+    this.results = this.productService.findBy(pos, pageSize, this.criteria!);
   }
 
   private static calcPos(page: number, pageSize: number) {

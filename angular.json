@@ -1,132 +1,125 @@
 {
-	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-	"version": 1,
-	"newProjectRoot": "projects",
-	"projects": {
-		"ypc-spa": {
-			"projectType": "application",
-			"i18n": {
-				"sourceLocale": "en-GB",
-				"locales": {
-					"fr-FR": {
-						"translation": "src/i18n/messages.fr-FR.xlf",
-						"subPath": "fr-FR"
-					},
-					"es-ES": {
-						"translation": "src/i18n/messages.es-ES.xlf",
-						"subPath": "es-ES"
-					}
-				}
-			},
-			"schematics": {
-				"@schematics/angular:component": {
-					"style": "scss"
-				}
-			},
-			"root": "",
-			"sourceRoot": "src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:application",
-					"options": {
-						"outputPath": "dist/ypc-spa",
-						"index": "src/index.html",
-						"browser": "src/main.ts",
-						"polyfills": [
-							"zone.js",
-							"@angular/localize/init"
-						],
-						"tsConfig": "tsconfig.app.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "public"
-							}
-						],
-						"styles": [
-							"src/styles.scss"
-						],
-						"scripts": [],
-						"localize": true,
-						"i18nMissingTranslation": "error"
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kB",
-									"maximumError": "2MB"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "4kB",
-									"maximumError": "8kB"
-								}
-							],
-							"outputHashing": "all"
-						},
-						"development": {
-							"optimization": false,
-							"extractLicenses": false,
-							"sourceMap": true
-						},
-						"fr-FR": {
-							"localize": ["fr-FR"]
-						},
-						"es-ES": {
-							"localize": ["es-ES"]
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "@angular-devkit/build-angular:dev-server",
-					"configurations": {
-						"production": {
-							"buildTarget": "ypc-spa:build:production"
-						},
-						"development": {
-							"buildTarget": "ypc-spa:build:development"
-						},
-						"fr-FR": {
-							"buildTarget": "ypc-spa:build:development,fr-FR"
-						},
-						"es-ES": {
-							"buildTarget": "ypc-spa:build:development,es-ES"
-						}
-					},
-					"defaultConfiguration": "development"
-				},
-				"extract-i18n": {
-					"builder": "@angular-devkit/build-angular:extract-i18n"
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing",
-							"@angular/localize/init"
-						],
-						"tsConfig": "tsconfig.spec.json",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "public"
-							}
-						],
-						"styles": [
-							"src/styles.scss"
-						],
-						"scripts": []
-					}
-				}
-			}
-		}
-	},
-	"cli": {
-		"analytics": false
-	}
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ypc-spa": {
+      "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en-GB",
+        "locales": {
+          "fr-FR": {
+            "translation": "src/i18n/messages.fr-FR.xlf",
+            "subPath": "fr-FR"
+          },
+          "es-ES": {
+            "translation": "src/i18n/messages.es-ES.xlf",
+            "subPath": "es-ES"
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/ypc-spa",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "polyfills": ["zone.js", "@angular/localize/init"],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": ["src/styles.scss"],
+            "scripts": [],
+            "localize": true,
+            "i18nMissingTranslation": "error"
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            },
+            "fr-FR": {
+              "localize": ["fr-FR"]
+            },
+            "es-ES": {
+              "localize": ["es-ES"]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ypc-spa:build:production"
+            },
+            "development": {
+              "buildTarget": "ypc-spa:build:development"
+            },
+            "fr-FR": {
+              "buildTarget": "ypc-spa:build:development,fr-FR"
+            },
+            "es-ES": {
+              "buildTarget": "ypc-spa:build:development,es-ES"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing",
+              "@angular/localize/init"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": ["src/styles.scss"],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
 }

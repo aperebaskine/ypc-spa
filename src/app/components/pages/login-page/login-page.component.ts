@@ -57,4 +57,8 @@ export class LoginPageComponent {
     }
   }
 
+  oAuth() {
+    this.authService.oAuthLogin();
+  }
+
 }
