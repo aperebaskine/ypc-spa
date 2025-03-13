@@ -76,7 +76,6 @@ export class AuthenticationService {
     email: string,
     password: string
   }) {
-    console.log(data);
     return this.getDefaultService().registerCustomer(
       data.firstName,
       data.lastName1,
