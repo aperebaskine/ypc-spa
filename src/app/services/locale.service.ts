@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 export class LocaleService {
 
   private readonly locales: Locale[] = [
-    { id: "en-GB", name: "English", basePath: "", isDefault: true },
+    { id: "en-GB", name: "English", basePath: "en-GB", isDefault: true },
     { id: "fr-FR", name: "Français", basePath: "fr-FR", isDefault: false },
     { id: "es-ES", name: "Español", basePath: "es-ES", isDefault: false }
   ];
@@ -34,7 +34,7 @@ export class LocaleService {
   }
 
   switchLocale(targetLocale: Locale) {
-    window.location.href = `${targetLocale.basePath}${this.router.url}`;
+    window.location.href = `${window.location.origin}/${targetLocale.basePath}${this.router.url}`;
   }
 
 }
