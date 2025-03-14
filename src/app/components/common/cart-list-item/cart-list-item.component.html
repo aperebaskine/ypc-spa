@@ -1,7 +1,10 @@
 <ng-container *ngIf="productData">
     <div class="cart-list-item">
         <mat-list-item>
-            <p matListItemTitle>{{productData.name}}</p>
+            <p matListItemTitle>
+                <a
+                    [routerLink]="['/product', productData.id]">{{productData.name}}</a>
+            </p>
             <p matListItemLine>
                 <span i18n>Unit price:</span> {{ item!.salePrice |
                 currency:'EUR' }}
