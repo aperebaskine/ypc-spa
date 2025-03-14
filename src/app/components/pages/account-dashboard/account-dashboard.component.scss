@@ -1,3 +1,12 @@
+mat-drawer-container {
+    min-height: 40em;
+}
+
+mat-drawer-container,
+mat-drawer-content {
+    background-color: var(--mat-sys-surface);
+}
+
 .dashboard-menu {
     display: flex;
     flex-direction: column;
@@ -8,4 +17,9 @@
 .dashboard-menu > button {
     border-radius: 0px;
     padding: 2em 0em;
+}
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
 }

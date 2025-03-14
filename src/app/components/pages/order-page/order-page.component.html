@@ -25,17 +25,70 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel i18n>Payment method</ng-template>
+            <div class="order-step credit-card-form container--vertical">
+                <mat-form-field [floatLabel]="'always'">
+                    <mat-label i18n>Card holder</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
+                <mat-form-field [floatLabel]="'always'">
+                    <mat-label i18n>Card number</mat-label>
+                    <input matInput type="number">
+                </mat-form-field>
+                <div class="container--horizontal">
+                    <mat-form-field class="field--short"
+                        [floatLabel]="'always'">
+                        <mat-label i18n>Expiration date</mat-label>
+                        <input matInput type="text">
+                    </mat-form-field>
+                    <mat-form-field class="field--short"
+                        [floatLabel]="'always'">
+                        <mat-label i18n>CVV</mat-label>
+                        <input matInput type="text">
+                    </mat-form-field>
+                </div>
+            </div>
             <button mat-button matStepperNext i18n>Next</button>
         </mat-step>
         <mat-step>
             <ng-template matStepLabel i18n>Confirm</ng-template>
-
-            <button mat-flat-button i18n (click)="placeOrder()">Confirm
-                order</button>
+            <div class="order-step">
+                    <div class="container--vertical">
+                        <h2 i18n>Products</h2>
+                        <ng-container *ngFor="let orderLine of this.orderLines!; let i = index">
+                            <app-cart-list-item
+                            [item]="{id: orderLine.productId!, qty: orderLine.quantity!, salePrice: orderLine.salePrice!}"
+                            [controlsEnabled]="false"
+                            >
+                            </app-cart-list-item>
+                            <mat-divider></mat-divider>
+                        </ng-container>
+                        <p i18n>Total: {{total | currency}}</p>
+                    </div>
+                    <div class="container--vertical">
+                        <h2 i18n>Addresses</h2>
+                        <div class="address">
+                            <p>Billing address</p>
+                            <app-address-card [address]="billingAddress" [actions]="[]">
+        
+                            </app-address-card>
+                        </div>
+                        <div class="address">
+                            <p>Shipping address</p>
+                            <app-address-card [address]="shippingAddress" [actions]="[]">
+        
+                            </app-address-card>
+                        </div>
+                    </div>
+            </div>
+            <div class="container--horizontal-end">
+                <button mat-flat-button i18n (click)="placeOrder()">Confirm
+                    order</button>
+            </div>
         </mat-step>
     </mat-stepper>
 </ng-template>
 
 <ng-template #success>
     <p i18n>Your order was successfully placed!</p>
+    <button mat-flat-button i18n [routerLink]="'/user/dashboard/orders'">Go to orders</button>
 </ng-template>

@@ -18,6 +18,7 @@ import { RouterModule } from '@angular/router';
 export class CartListItemComponent {
 
   @Input() item?: CartItem;
+  @Input() controlsEnabled: boolean = true;
   productData?: Product;
 
   constructor(

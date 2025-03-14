@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Address } from '../../../generated';
 import { CommonModule } from '@angular/common';
 import { AddressService } from '../../../services/address.service';
@@ -16,6 +16,9 @@ import { map } from 'rxjs';
 })
 export class AddressEditorComponent {
 
+  @Input() actions: ('select' | 'edit' | 'delete')[] = ['edit', 'delete'];
+  @Output() selected = new EventEmitter<boolean>();
+
   addressCount!: number;
 
   constructor(
@@ -28,6 +31,10 @@ export class AddressEditorComponent {
   }
 
   @Input() address?: Address;
+
+  select() {
+    this.selected.emit(true);
+  }
 
   edit() {
     const dialog = this.dialog.open(AddressFormComponent, {

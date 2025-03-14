@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Customer, DefaultService, Exists } from '../generated';
 import { AuthenticationService } from './authentication.service';
-import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +34,14 @@ export class UserService {
 
   exists(exists: { email?: string; phoneNumber?: string }) {
     return this.defaultService.exists(exists.email ?? undefined, exists.phoneNumber ?? undefined);
+  }
+
+  uploadAvatar(avatar: File) {
+    return this.defaultService
+      .uploadAvatar(avatar);
+  }
+
+  downloadAvatar() {
+    return this.defaultService.downloadAvatar().pipe(map((blob) => URL.createObjectURL(blob)));
   }
 }

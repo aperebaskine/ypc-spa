@@ -17,9 +17,10 @@ export class AddressService {
     this.userService.user.subscribe((user) => {
       if (user == null) {
         this.addressesSubject.next([]);
+      } else {
+        this.updateAddresses();
       }
     });
-    this.updateAddresses();
   }
 
   getAddresses() {

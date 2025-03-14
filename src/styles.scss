@@ -14,6 +14,10 @@ html {
       density: -1));
 }
 
+html:not(.dark-mode) {
+  --mat-sys-surface: white;
+}
+
 html.dark-mode {
   color-scheme: dark;
 }
@@ -24,6 +28,10 @@ body {
 
   max-width: 1600px;
   margin: auto;
+}
+
+main {
+  min-height: 40em;
 }
 
 .error-text {
@@ -49,6 +57,19 @@ body {
   flex-direction: row;
   justify-content: end;
   gap: 1em;
+}
+
+.field--grow {
+  flex-grow: 1;
+}
+
+/* Form field width */
+.field--short {
+  width: 8em;
+}
+
+.field--medium {
+  width: 12em;
 }
 
 .field--grow {

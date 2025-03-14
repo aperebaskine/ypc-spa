@@ -10,6 +10,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductService } from '../../../services/product.service';
 import { OrderService } from '../../../services/order.service';
 import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { CartListItemComponent } from '../../common/cart-list-item/cart-list-item.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-order-page',
@@ -17,7 +22,12 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     AddressCardComponent,
     MatStepperModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDividerModule,
+    CartListItemComponent,
+    RouterModule
   ],
   templateUrl: './order-page.component.html',
   styleUrl: './order-page.component.scss'
@@ -30,10 +40,11 @@ export class OrderPageComponent {
   billingAddress?: Address;
   shippingAddress?: Address;
 
+  total?: number;
+
   success = false;
 
   constructor(
-    private productService: ProductService,
     private cartService: CartService,
     private addressService: AddressService,
     private orderService: OrderService
@@ -60,7 +71,9 @@ export class OrderPageComponent {
             salePrice: cartItem.salePrice
           } as OrderLine
         })
-      ))
+      ),
+        tap((orderLines) => this.total = orderLines.map((ol) => ol.quantity! * ol.salePrice!).reduce((a, b) => a + b))
+      )
       .subscribe(
         (orderLines) => this.orderLines = orderLines
       );
@@ -68,8 +81,8 @@ export class OrderPageComponent {
 
   placeOrder() {
     this.orderService.placeOrder(
-      this.billingAddress!.id!, 
-      this.shippingAddress!.id!, 
+      this.billingAddress!.id!,
+      this.shippingAddress!.id!,
       this.orderLines!
     ).subscribe(
       (order) => this.success = !!order

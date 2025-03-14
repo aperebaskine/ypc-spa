@@ -13,5 +13,6 @@ import { AddressEditorComponent } from "../../../address/address-editor/address-
 export class AddressCardComponent {
 
   @Input() address?: Address;
+  @Input() actions: ('select' | 'edit' | 'delete')[] = ['edit', 'delete'];
 
 }
