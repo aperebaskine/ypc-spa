@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 import { CartService } from '../../../services/cart.service';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-product-card',
@@ -15,22 +16,21 @@ import { CartService } from '../../../services/cart.service';
 export class ProductCardComponent {
   @Input() product?: Product;
 
-  src?: string;
+  src?: string = "/images/unknown-image.png";
 
-  constructor(private cartService: CartService) {
-   }
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService
+  ) {
+  }
 
   addToCart() {
     this.cartService.addItem({ id: this.product!.id, qty: 1, salePrice: this.product!.salePrice, name: this.product!.name });
   }
 
-  setDefaultImage() {
-    this.src = "/images/unknown-image.png";
-  }
-
   ngOnChanges(changes: SimpleChanges) {
-    if (this.product) {
-      this.src = `/images/product/${this.product.id}.webp`;
+    if (changes['product']?.currentValue) {
+      this.productService.findImage(changes['product'].currentValue.id).subscribe((src) => this.src = src);
     }
   }
 }

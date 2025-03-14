@@ -1,32 +1,16 @@
-.product-details {
-    display: grid;
-    grid-template-columns:
-        [one] 8% [two] auto [three] auto [four] 8%;
-    grid-template-rows:
-        [first] auto [second] auto [third] auto;
-
+:host > div {
+    padding: 2em 8em;
 }
 
-.product-images {
-    grid-column-start: two;
-    grid-column-end: two;
-    grid-row-start: first;
-    grid-row-end: second;
-    justify-self: end;
-    text-align: right;
+.container--horizontal {
+    justify-content: center;
+    align-items: start;
 }
 
 .product-images img {
-    width: 80%;
-}
-
-.product-data {
-    grid-column-start: three;
-    grid-column-end: three;
-    grid-row-start: first;
-    grid-row-end: second;
-    justify-self: start;
-    padding-top: 5%;
+    height: 28em;
+    width: 28em;
+    object-fit: contain;
 }
 
 .add-to-cart form {
@@ -37,20 +21,6 @@
 
 .add-to-cart button {
     height: 3.6em;
-}
-
-.product-description {
-    grid-column-start: two;
-    grid-column-end: four;
-    grid-row-start: second;
-    grid-row-end: third;
-}
-
-.product-attributes {
-    grid-column-start: two;
-    grid-column-end: four;
-    grid-row-start: third;
-    grid-row-end: third;
 }
 
 .product-attributes>ul>li {

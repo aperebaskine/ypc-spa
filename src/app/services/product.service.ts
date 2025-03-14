@@ -1,5 +1,6 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { DefaultService } from '../generated';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -46,5 +47,15 @@ export class ProductService {
       filters.orderBy ?? undefined,
       filters.ascDesc ?? undefined
     );
+  }
+
+  findImage(id: number) {
+    return this.defaultService
+      .findProductImageById(id)
+      .pipe(
+        map(
+          (image) => URL.createObjectURL(image)
+        )
+      );
   }
 }

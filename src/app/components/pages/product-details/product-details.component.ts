@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { CartService } from '../../../services/cart.service';
+import { map, Observable, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +18,9 @@ import { CartService } from '../../../services/cart.service';
   styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent {
+
   product?: Product;
+  imgSrc?: string = 'images/unknown-image.png';
   attributeValues?: string[];
 
   cartQty = new FormControl(1);
@@ -29,7 +32,14 @@ export class ProductDetailsComponent {
   ) {
     this.productService
       .findById(this.route.snapshot.params['id'])
-      .subscribe((product) => (this.product = product));
+      .pipe(
+        tap((product) => this.product = product),
+        map((product) => product.id),
+        switchMap((id) => this.productService.findImage(id)))
+      .subscribe(
+        (imgSrc) => this.imgSrc = imgSrc
+      );
+
   }
 
   addToCart(event: SubmitEvent) {
@@ -37,4 +47,5 @@ export class ProductDetailsComponent {
 
     this.cartService.addItem({ id: this.product!.id, qty: this.cartQty.value!, salePrice: this.product!.salePrice, name: this.product!.name });
   }
+
 }

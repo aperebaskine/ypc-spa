@@ -62,18 +62,15 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            component: DashboardProfileComponent,
-            outlet: 'dashboard',
+            component: DashboardProfileComponent
           },
           {
             path: 'addresses',
-            component: DashboardAddressesComponent,
-            outlet: 'dashboard',
+            component: DashboardAddressesComponent
           },
           {
             path: 'orders',
-            component: DashboardOrdersComponent,
-            outlet: 'dashboard',
+            component: DashboardOrdersComponent
           },
         ],
       },

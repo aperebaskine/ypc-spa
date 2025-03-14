@@ -2,14 +2,14 @@
     <mat-drawer mode="side" opened>
         <div class="dashboard-menu">
             <button mat-button i18n
-                [routerLink]="['/user/dashboard', {outlets: {dashboard: 'addresses'}}]">My
+                [routerLink]="['addresses']">My
                 addresses</button>
             <button mat-button i18n
-                [routerLink]="['/user/dashboard', {outlets: {dashboard: 'orders'}}]">My
+                [routerLink]="['orders']">My
                 orders</button>
         </div>
     </mat-drawer>
     <mat-drawer-content>
-        <router-outlet name="dashboard"></router-outlet>
+        <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
