@@ -3,14 +3,15 @@
         <mat-card-title-group>
             <mat-card-title>{{(user | async)?.fullName}}</mat-card-title>
             <mat-card-subtitle>{{(user | async)?.email}}</mat-card-subtitle>
-            <mat-card-subtitle i18n>Phone number: {{(user | async)?.phoneNumber}}</mat-card-subtitle>
+            <mat-card-subtitle i18n>Phone number: {{(user |
+                async)?.phoneNumber}}</mat-card-subtitle>
             <img mat-card-image [src]="avatar">
         </mat-card-title-group>
     </mat-card-header>
     <mat-card-actions>
-        <form class="avatar-form">
-            <input #avatarFileInput type="file" hidden (change)="fileSubmitted($event)">
-            <button mat-button type="button" (click)="avatarFileInput.click()">Upload avatar</button>
-        </form>
+        <input #avatarFileInput type="file" hidden
+            (change)="fileSubmitted($event)">
+        <button mat-button type="button"
+            (click)="avatarFileInput.click()">Upload avatar</button>
     </mat-card-actions>
 </mat-card>

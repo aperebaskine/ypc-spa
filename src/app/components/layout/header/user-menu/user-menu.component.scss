@@ -3,3 +3,9 @@
     align-items: center;
     gap: 1em;
 }
+
+@media(max-width: 54em) {
+    .button-text {
+        display: none;
+    }
+}

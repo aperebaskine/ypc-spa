@@ -7,6 +7,10 @@ body {
   height: 100%;
 }
 
+body:has(header) {
+  min-width: 48em;
+}
+
 html {
   color-scheme: light;
   @include mat.theme((color: mat.$violet-palette,
@@ -15,7 +19,7 @@ html {
 }
 
 html:not(.dark-mode) {
-  --mat-sys-surface: white;
+    --mat-sys-surface: white;
 }
 
 html.dark-mode {

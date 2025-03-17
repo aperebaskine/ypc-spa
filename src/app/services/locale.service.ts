@@ -34,7 +34,16 @@ export class LocaleService {
   }
 
   switchLocale(targetLocale: Locale) {
-    window.location.href = `${window.location.origin}/${targetLocale.basePath}${this.router.url}`;
+
+    if (!this.locales.find((locale) => locale.id == targetLocale.id)) {
+      this.switchLocale(this.locales.find((locale) => locale.isDefault)!);
+      return;
+    }
+
+    localStorage.setItem("locale", targetLocale.id);
+
+    let base = document.querySelector('base')?.getAttribute('href')!;
+    window.location.href = window.location.href.replace(this.currentLocaleId, targetLocale.id);
   }
 
 }

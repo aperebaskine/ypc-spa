@@ -1,5 +1,5 @@
 <div id="registration-page">
-    <img src="/images/logo.png" />
+    <img src="images/logo.png" />
     <p class="welcome-text" i18n>Welcome to YPC</p>
     <ng-container *ngIf="isAuthenticated | async; then registerSuccess else register"></ng-container>
 </div>
@@ -10,7 +10,7 @@
             <mat-step
                 [stepControl]="registrationForm.get('credentials')!"
                 formGroupName="credentials">
-                <ng-template matStepLabel>Credentials</ng-template>
+                <ng-template matStepLabel i18n>Credentials</ng-template>
                 <p *ngIf="error" class="error-text">An error occured. Please try again later.</p>
                 <div class="registration-step">
                     <mat-form-field [floatLabel]="'always'">
@@ -53,7 +53,7 @@
             </mat-step>
             <mat-step [stepControl]="registrationForm.get('personalData')!"
                 formGroupName="personalData">
-                <ng-template matStepLabel>Personal data</ng-template>
+                <ng-template matStepLabel i18n>Personal data</ng-template>
                 <div class="registration-step">
                     <mat-form-field [floatLabel]="'always'">
                         <mat-label i18n>First name</mat-label>
@@ -102,7 +102,7 @@
                 </div>
             </mat-step>
             <mat-step>
-                <ng-template matStepLabel>Confirm</ng-template>
+                <ng-template matStepLabel i18n>Confirm</ng-template>
                 <div class="registration-step">
                     <p i18n>You're almost done!</p>
                     <button mat-flat-button type="button" (click)="onSubmit()" i18n>Confirm

@@ -32,14 +32,10 @@ export class AuthenticationService {
       responseType: 'code',
       scope: 'openid profile email',
       strictDiscoveryDocumentValidation: false,
-      showDebugInformation: true,
+      showDebugInformation: true
     });
 
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then((value) => {
-      if (this.oauthService.hasValidIdToken()) {
-        this.tokenSubject.next(this.oauthService.getAccessToken());
-      }
-    });
+    this.oauthService.loadDiscoveryDocument();
 
     this.tokenSubject = new BehaviorSubject<string | null>(null);
     this.isAuthenticated = this.tokenSubject.pipe(

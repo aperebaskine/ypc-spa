@@ -1,7 +1,7 @@
-<form [formGroup]="form" (submit)="onSubmit()">
+<form [formGroup]="form" (submit)="search()">
     <mat-form-field appearance="outline">
         <input matInput type="search" formControlName="name" i18n-placeholder
-            placeholder="Search...">
+            placeholder="Search..." (input)="search()">
         <button type="submit" mat-icon-button matSuffix>
             <mat-icon>search</mat-icon>
         </button>

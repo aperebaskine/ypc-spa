@@ -12,17 +12,13 @@ import { OrderPageComponent } from './components/pages/order-page/order-page.com
 import { DashboardAddressesComponent } from './components/user/dashboard-addresses/dashboard-addresses.component';
 import { DashboardOrdersComponent } from './components/user/dashboard-orders/dashboard-orders.component';
 import { DashboardProfileComponent } from './components/dashboard/dashboard-profile/dashboard-profile.component';
-import { OauthCallbackComponent } from './components/pages/oauth-callback/oauth-callback.component';
+import { restoreGuard } from './guards/restore.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: MainPageComponent,
-  },
-  {
-    path: 'oauth-callback',
-    component: OauthCallbackComponent,
-    data: { layout: 'empty' },
+    canActivate: [restoreGuard]
   },
   {
     path: 'product-search',

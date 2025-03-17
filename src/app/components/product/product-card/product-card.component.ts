@@ -16,7 +16,7 @@ import { ProductService } from '../../../services/product.service';
 export class ProductCardComponent {
   @Input() product?: Product;
 
-  src?: string = "/images/unknown-image.png";
+  src?: string = "images/unknown-image.png";
 
   constructor(
     private productService: ProductService,

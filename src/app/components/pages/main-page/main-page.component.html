@@ -3,8 +3,8 @@
     <app-product-grid [products]="(newProducts | async)?.page"></app-product-grid>
     <h2 i18n>Sales</h2>
     <app-product-grid [products]="(sales | async)?.page"></app-product-grid>
-    <h2 i18n>Processors</h2>
+    <h2>{{(categories | async) | categoryName:1 }}</h2>
     <app-product-grid [products]="(cpus | async)?.page"></app-product-grid>
-    <h2 i18n>Graphics Cards</h2>
+    <h2>{{(categories | async) | categoryName:5 }}</h2>
     <app-product-grid [products]="(gpus | async)?.page"></app-product-grid>
 </div>

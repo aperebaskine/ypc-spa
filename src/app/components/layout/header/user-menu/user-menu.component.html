@@ -6,7 +6,9 @@
     <button mat-fab extended>
         <mat-icon
             [matBadge]="cartSize">shopping_cart</mat-icon>
-        <ng-container i18n>Cart</ng-container>
+        <div class="button-text">
+            <ng-container i18n>Cart</ng-container>
+        </div>
     </button>
 </a>
 
@@ -14,13 +16,17 @@
     <a [routerLink]="'login'">
         <button mat-fab extended>
             <mat-icon>login</mat-icon>
-            <ng-container i18n>Log in</ng-container>
+            <div class="button-text">
+                <ng-container i18n>Log in</ng-container>
+            </div>
         </button>
     </a>
     <a [routerLink]="'register'">
         <button mat-fab extended>
             <mat-icon>app_registration</mat-icon>
-            <ng-container i18n>Register</ng-container>
+            <div class="button-text">
+                <ng-container i18n>Register</ng-container>
+            </div>
         </button>
     </a>
 </ng-template>
@@ -30,11 +36,15 @@
     <a [routerLink]="['user/dashboard']">
         <button mat-fab extended>
             <mat-icon>account_circle</mat-icon>
-            <ng-container i18n>My account</ng-container>
+            <div class="button-text">
+                <ng-container i18n>My account</ng-container>
+            </div>
         </button>
     </a>
     <button mat-fab extended (click)="logout()">
         <mat-icon>logout</mat-icon>
-        <ng-container i18n>Log out</ng-container>
+        <div class="button-text">
+            <ng-container i18n>Log out</ng-container>
+        </div>
     </button>
 </ng-template>

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
 import { Cart } from '../model/cart';
 import { CartItem } from '../model/cartItem';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +17,18 @@ export class CartService {
   private readonly addedItemSubject!: Subject<CartItem>;
   public readonly addedItem!: Observable<CartItem>;
 
-  constructor() {
+  constructor(private authService: AuthenticationService) {
     this.cartSubject = new BehaviorSubject<Cart>(this.getCart());
     this.cart = this.cartSubject.asObservable();
 
     this.addedItemSubject = new Subject<CartItem>();
     this.addedItem = this.addedItemSubject.asObservable();
+
+    this.authService.isAuthenticated.subscribe((auth) => {
+      if (!auth) {
+        this.clear();
+      }
+    })
   }
 
   private getCart(): Cart {
@@ -86,6 +93,12 @@ export class CartService {
     }
 
     cart.products.splice(index, 1);
+    this.saveCart(cart);
+  }
+
+  clear() {
+    const cart = this.getCart();
+    cart.products = [];
     this.saveCart(cart);
   }
 

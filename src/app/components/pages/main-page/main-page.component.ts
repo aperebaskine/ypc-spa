@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ProductGridComponent } from '../../product/product-grid/product-grid.component';
 import { ProductService } from '../../../services/product.service';
 import { Observable } from 'rxjs';
-import { ProductResults } from '../../../generated';
+import { CategoryDTO, ProductResults } from '../../../generated';
 import { AsyncPipe } from '@angular/common';
+import { CategoryService } from '../../../services/category.service';
+import { CategoryNamePipe } from '../../../pipes/category-name.pipe';
 
 @Component({
   selector: 'app-main-page',
-  imports: [ProductGridComponent, AsyncPipe],
+  imports: [ProductGridComponent, AsyncPipe, CategoryNamePipe],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.scss',
 })
@@ -17,7 +19,14 @@ export class MainPageComponent implements OnInit {
   cpus?: Observable<ProductResults>;
   gpus?: Observable<ProductResults>;
 
-  constructor(private productService: ProductService) {}
+  categories?: Observable<CategoryDTO[]>;
+
+  constructor(
+    private productService: ProductService,
+    private categoryService: CategoryService  
+  ) {
+    this.categories = this.categoryService.findAll();
+  }
 
   ngOnInit() {
     this.newProducts = this.productService.findBy(1, 4, {

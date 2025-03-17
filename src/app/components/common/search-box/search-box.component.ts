@@ -27,7 +27,7 @@ export class SearchBoxComponent {
   constructor(private router: Router) {
   }
 
-  onSubmit() {
+  search() {
 
     let name = this.form.value.name;
 

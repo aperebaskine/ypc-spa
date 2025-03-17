@@ -185,6 +185,10 @@
           <context context-type="sourcefile">src/app/components/pages/order-page/order-page.component.html</context>
           <context context-type="linenumber">53</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="561897701456319077" datatype="html">
         <source>ID: <x id="INTERPOLATION" equiv-text="{{address.id}}"/></source>
@@ -283,7 +287,7 @@
         <target state="translated">Rechercher...</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/common/search-box/search-box.component.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8258325324649507024" datatype="html">
@@ -303,7 +307,7 @@
         <target state="translated">Panier</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">9</context>
+          <context context-type="linenumber">10</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pages/cart-details/cart-details.component.html</context>
@@ -315,7 +319,7 @@
         <target state="translated">Se connecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">20</context>
         </context-group>
       </trans-unit>
       <trans-unit id="3301086086650990787" datatype="html">
@@ -323,7 +327,7 @@
         <target state="translated">S'inscrire</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
@@ -335,7 +339,7 @@
         <target state="translated">Bonjour, <x id="INTERPOLATION" equiv-text="{{(user | async)?.firstName}}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">29,30</context>
+          <context context-type="linenumber">35,36</context>
         </context-group>
       </trans-unit>
       <trans-unit id="8893390761160292681" datatype="html">
@@ -343,7 +347,7 @@
         <target state="translated">Mon compte</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7507948636555938109" datatype="html">
@@ -351,7 +355,7 @@
         <target state="translated">Se déconnecter</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/layout/header/user-menu/user-menu.component.html</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">47</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1063195851397612585" datatype="html">
@@ -448,7 +452,7 @@
       </trans-unit>
       <trans-unit id="7435492290151236853" datatype="html">
         <source> Error: Invalid login and/or password. </source>
-        <target state="translated">Erreur: email et/ou mot de passe incorrect.</target>
+        <target state="translated"> Erreur: email et/ou mot de passe incorrect. </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
           <context context-type="linenumber">10,11</context>
@@ -496,7 +500,7 @@
       </trans-unit>
       <trans-unit id="4935303974225478320" datatype="html">
         <source> Log in with Google </source>
-        <target state="translated">Se connecter avec Google</target>
+        <target state="translated"> Se connecter avec Google </target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
           <context context-type="linenumber">31,32</context>
@@ -504,7 +508,7 @@
       </trans-unit>
       <trans-unit id="7555224818164315191" datatype="html">
         <source>Logged in successfully.</source>
-        <target state="translated">Connexion réussie</target>
+        <target state="translated">Connexion réussie.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pages/login-page/login-page.component.html</context>
           <context context-type="linenumber">37,38</context>
@@ -698,6 +702,14 @@
           <context context-type="linenumber">7,8</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4294913753867242891" datatype="html">
+        <source>Credentials</source>
+        <target state="translated">Identifiants</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="7285072439741532201" datatype="html">
         <source>Email already in use.</source>
         <target state="translated">Email déjà utilisé.</target>
@@ -720,6 +732,14 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
           <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3235499372902751598" datatype="html">
+        <source>Personal data</source>
+        <target state="translated">Données personelles</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/pages/registration-page/registration-page.component.html</context>
+          <context context-type="linenumber">56</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5342432350421167093" datatype="html">
@@ -923,11 +943,12 @@
         </context-group>
       </trans-unit>
       <trans-unit id="2689588626019086338" datatype="html">
-        <source>Phone number: <x id="INTERPOLATION" equiv-text="{{(user | async)?.phoneNumber}}"/></source>
+        <source>Phone number: <x id="INTERPOLATION" equiv-text="{{(user |&#10;                async)?.phoneNumber}}"/></source>
         <target state="translated">Numéro de téléphone: <x id="INTERPOLATION" equiv-text="{{(user | async)?.phoneNumber}}"/></target>
+        <note from="XLIFF Sync" annotates="general" priority="1">Source text has changed. Please review the translation.</note>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/components/user/user-card/user-card.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="linenumber">6,7</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2807800733729323332" datatype="html">
