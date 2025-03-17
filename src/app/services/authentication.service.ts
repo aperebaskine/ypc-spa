@@ -28,7 +28,7 @@ export class AuthenticationService {
       issuer: 'https://accounts.google.com',
       clientId:
         '722478146407-n3ipnqqdfoor39ia473u7rsb83hur6eh.apps.googleusercontent.com',
-      redirectUri: window.location.origin,
+      redirectUri: this.getRootUrl(),
       responseType: 'code',
       scope: 'openid profile email',
       strictDiscoveryDocumentValidation: false,
@@ -117,5 +117,11 @@ export class AuthenticationService {
         }),
         map((token) => token != null)
       );
+  }
+
+  getRootUrl() {
+    const base = document.querySelector("base")?.getAttribute("href");
+    console.log(base);
+    return `${window.location.origin}${base}`;
   }
 }

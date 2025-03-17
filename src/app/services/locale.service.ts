@@ -41,8 +41,6 @@ export class LocaleService {
     }
 
     localStorage.setItem("locale", targetLocale.id);
-
-    let base = document.querySelector('base')?.getAttribute('href')!;
     window.location.href = window.location.href.replace(this.currentLocaleId, targetLocale.id);
   }
 

@@ -5,5 +5,8 @@ mat-card {
 img {
     width: 10em;
     height: 10em;
-    object-fit: contain;
+    object-fit: cover;
+    border-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 }
