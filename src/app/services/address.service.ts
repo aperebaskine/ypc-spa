@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Address, DefaultService } from '../generated';
-import { BehaviorSubject, take, tap } from 'rxjs';
+import { BehaviorSubject, Observable, take, tap } from 'rxjs';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { UserService } from './user.service';
 export class AddressService {
 
   private readonly addressesSubject = new BehaviorSubject<Address[]>([]);
+  public readonly addresses = this.addressesSubject.asObservable();
 
   constructor(
     private defaultService: DefaultService,

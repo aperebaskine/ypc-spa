@@ -1,2 +1,4 @@
-<app-address-card [address]="address" [actions]="[]"></app-address-card>
-<app-address-editor [address]="address" [actions]="['select', 'edit']"></app-address-editor>
+<ng-container *ngIf="address">
+    <app-address-card [(address)]="address" [actions]="[]"></app-address-card>
+</ng-container>
+<button mat-button (click)="openDialog()" i18n>Select address</button>

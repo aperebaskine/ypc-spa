@@ -7,7 +7,6 @@ import { AddressCardComponent } from "../../common/address/address-card/address-
 import { Cart } from '../../../model/cart';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
-import { ProductService } from '../../../services/product.service';
 import { OrderService } from '../../../services/order.service';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';

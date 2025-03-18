@@ -1,4 +1,7 @@
-<div class="address-selector">
+<div class="address-selector container--vertical">
     <h3 i18n>Select address</h3>
-    <app-address-card></app-address-card>
+    <ng-container *ngFor="let address of addresses | async">
+        <app-address-card [address]="address" [actions]="[]"></app-address-card>
+        <button mat-button (click)="addressSelected(address)" i18n>Select address</button>
+    </ng-container>
 </div>
