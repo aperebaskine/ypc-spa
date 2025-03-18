@@ -7,6 +7,7 @@
       <div class="product-data">
         <h1>{{ product.name }}</h1>
         <h2>{{ product.salePrice | currency:'EUR' }}</h2>
+        <p i18n>Launch date: {{ product.launchDate | date }}</p>
         <div class="add-to-cart">
           <form (submit)="addToCart($event)">
             <mat-form-field appearance="outline">

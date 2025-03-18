@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddressFormComponent } from '../address-form/address-form.component';
 import { ConfirmDialogComponent } from '../../common/confirm-dialog/confirm-dialog.component';
 import { map } from 'rxjs';
+import { AddressSelectorDialogComponent } from '../address-selector-dialog/address-selector-dialog.component';
 
 @Component({
   selector: 'app-address-editor',
@@ -17,7 +18,6 @@ import { map } from 'rxjs';
 export class AddressEditorComponent {
 
   @Input() actions: ('select' | 'edit' | 'delete')[] = ['edit', 'delete'];
-  @Output() selected = new EventEmitter<boolean>();
 
   addressCount!: number;
 
@@ -30,10 +30,15 @@ export class AddressEditorComponent {
       .subscribe((addressCount) => this.addressCount = addressCount);
   }
 
-  @Input() address?: Address;
+  @Input() address?: Address | null;
+  @Output() addressChange = new EventEmitter<Address | null>;
 
   select() {
-    this.selected.emit(true);
+    const dialog = this.dialog.open(AddressSelectorDialogComponent);
+  
+    dialog.beforeClosed().subscribe((address?) => 
+      this.address = address
+    );
   }
 
   edit() {

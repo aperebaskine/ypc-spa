@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CartListItemComponent } from '../../common/cart-list-item/cart-list-item.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
+import { AddressSelectorComponent } from "../../address/address-selector/address-selector.component";
 
 @Component({
   selector: 'app-order-page',
@@ -27,8 +28,9 @@ import { RouterModule } from '@angular/router';
     MatInputModule,
     MatDividerModule,
     CartListItemComponent,
-    RouterModule
-  ],
+    RouterModule,
+    AddressSelectorComponent
+],
   templateUrl: './order-page.component.html',
   styleUrl: './order-page.component.scss'
 })

@@ -9,16 +9,12 @@
             <ng-template matStepLabel i18n>Address</ng-template>
             <div class="order-step">
                 <div class="address">
-                    <p>Billing address</p>
-                    <app-address-card [address]="billingAddress">
-
-                    </app-address-card>
+                    <p i18n>Billing address</p>
+                    <app-address-selector [(address)]="billingAddress"></app-address-selector>
                 </div>
                 <div class="address">
-                    <p>Shipping address</p>
-                    <app-address-card [address]="shippingAddress">
-
-                    </app-address-card>
+                    <p i18n>Shipping address</p>
+                    <app-address-selector [(address)]="billingAddress"></app-address-selector>
                 </div>
             </div>
             <button mat-button matStepperNext i18n>Next</button>
