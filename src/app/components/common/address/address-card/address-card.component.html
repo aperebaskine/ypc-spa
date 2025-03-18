@@ -1,5 +1,5 @@
-<ng-container *ngIf="address">
-  <mat-card appearance="outlined">
+<mat-card appearance="outlined">
+  <ng-container *ngIf="address">
     <mat-card-content>
       <p i18n>ID: {{ address.id }}</p>
       <p i18n>Street name: {{ address.streetName }}</p>
@@ -11,15 +11,15 @@
       <p i18n>Province: {{ address.province }}</p>
       <p i18n>Country: {{ address.country }}</p>
     </mat-card-content>
-    <mat-card-actions *ngIf="actions.length">
-      <ng-container *ngIf="actions.includes('edit')">
-        <button mat-button i18n (click)="this.edit()">
-          {{ address ? "Edit address" : "New address" }}
-        </button>
-      </ng-container>
-      <ng-container *ngIf="actions.includes('delete')">
-        <button mat-button i18n (click)="this.delete()">Delete address</button>
-      </ng-container>
-    </mat-card-actions>
-  </mat-card>
-</ng-container>
+  </ng-container>
+  <mat-card-actions *ngIf="actions.length">
+    <ng-container *ngIf="actions.includes('edit')">
+      <button mat-button i18n (click)="this.edit()">
+        {{ address ? "Edit address" : "New address" }}
+      </button>
+    </ng-container>
+    <ng-container *ngIf="address && actions.includes('delete')">
+      <button mat-button i18n (click)="this.delete()">Delete address</button>
+    </ng-container>
+  </mat-card-actions>
+</mat-card>
