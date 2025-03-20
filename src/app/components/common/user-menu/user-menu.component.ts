@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
-import { LocaleMenuComponent } from "../../../common/locale-menu/locale-menu.component";
-import { DarkModeToggleComponent } from "../../../common/theme-toggle/dark-mode-toggle.component";
-import { CartService } from '../../../../services/cart.service';
+import { LocaleMenuComponent } from "../locale-menu/locale-menu.component";
+import { DarkModeToggleComponent } from "../theme-toggle/dark-mode-toggle.component";
+import { CartService } from '../../../services/cart.service';
 import { RouterModule } from '@angular/router';
-import { UserService } from '../../../../services/user.service';
-import { Customer } from '../../../../generated';
+import { UserService } from '../../../services/user.service';
+import { Customer } from '../../../generated';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { AuthenticationService } from '../../../../services/authentication.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-user-menu',

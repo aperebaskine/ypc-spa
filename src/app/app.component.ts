@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { CartService } from './services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { LayoutManagerComponent } from "./components/layout/layout-manager/layout-manager.component";
+import { LayoutManagerComponent } from "./components/common/layout-manager/layout-manager.component";
 
 @Component({
   selector: 'app-root',

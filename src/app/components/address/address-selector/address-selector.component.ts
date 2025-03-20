@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Address } from '../../../generated';
-import { AddressCardComponent } from '../../common/address/address-card/address-card.component';
+import { AddressCardComponent } from '../address-card/address-card.component';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { AddressSelectorDialogComponent } from '../address-selector-dialog/address-selector-dialog.component';

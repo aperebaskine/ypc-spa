@@ -4,7 +4,7 @@ import { Cart } from '../../../model/cart';
 import { CommonModule } from '@angular/common';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { CartListItemComponent } from "../../common/cart-list-item/cart-list-item.component";
+import { CartListItemComponent } from "../../cart/cart-list-item/cart-list-item.component";
 import { RouterModule } from '@angular/router';
 
 @Component({

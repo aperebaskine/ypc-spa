@@ -77,7 +77,7 @@ export class RegistrationPageComponent {
   onSubmit() {
     const credentials = this.registrationForm.value.credentials;
     const personalData = this.registrationForm.value.personalData;
-    
+
     this.authService.register({
       firstName: personalData.firstName,
       lastName1: personalData.lastName1,
@@ -87,13 +87,12 @@ export class RegistrationPageComponent {
       phoneNumber: personalData.phoneNumber,
       email: credentials.email,
       password: credentials.password
-    }).subscribe({ 
-      
-      next: (next) => console.log(next),
+    }).subscribe({
       error: () => {
-      this.error = true;
-      this.stepper.reset();
-    } });
+        this.error = true;
+        this.stepper.reset();
+      }
+    });
   }
 
   goBack() {

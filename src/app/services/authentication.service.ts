@@ -98,7 +98,6 @@ export class AuthenticationService {
     email: string;
     password: string;
   }) {
-    console.log(data);
     return this.getDefaultService()
       .registerCustomer(
         data.firstName,
@@ -121,7 +120,6 @@ export class AuthenticationService {
 
   getRootUrl() {
     const base = document.querySelector("base")?.getAttribute("href");
-    console.log(base);
     return `${window.location.origin}${base}`;
   }
 }

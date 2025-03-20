@@ -163,7 +163,6 @@ export class AddressFormComponent implements OnInit {
 
   initDefaultToggle() {
     const toggle = this.form.get('isDefault')!;
-    console.log(this.addressCount);
 
     if (!this.address) {
       toggle.setValue(this.addressCount < 1);
@@ -181,7 +180,6 @@ export class AddressFormComponent implements OnInit {
   }
 
   initBillingToggle() {
-    console.log(this.addressCount);
     const toggle = this.form.get('isBilling')!;
 
     if (!this.address) {

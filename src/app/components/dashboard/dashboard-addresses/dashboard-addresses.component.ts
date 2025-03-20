@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Address } from '../../../generated';
 import { CommonModule } from '@angular/common';
-import { AddressCardComponent } from "../../common/address/address-card/address-card.component";
+import { AddressCardComponent } from "../../address/address-card/address-card.component";
 import { AddressService } from '../../../services/address.service';
 import { MatButtonModule } from '@angular/material/button';
 import { Observable, tap } from 'rxjs';

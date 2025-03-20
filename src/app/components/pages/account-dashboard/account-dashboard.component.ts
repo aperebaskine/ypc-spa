@@ -2,9 +2,9 @@ import { Component, Type } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
-import { DashboardAddressesComponent } from '../../user/dashboard-addresses/dashboard-addresses.component';
+import { DashboardAddressesComponent } from '../../dashboard/dashboard-addresses/dashboard-addresses.component';
 import { UserService } from '../../../services/user.service';
-import { DashboardOrdersComponent } from '../../user/dashboard-orders/dashboard-orders.component';
+import { DashboardOrdersComponent } from '../../dashboard/dashboard-orders/dashboard-orders.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

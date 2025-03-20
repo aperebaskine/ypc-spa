@@ -28,15 +28,13 @@ export class UserCardComponent {
   downloadAvatar() {
     this.userService.downloadAvatar().subscribe((url) => this.avatar = url);
   }
-  
+
   fileSubmitted(event: Event) {
     const input = event.target as HTMLInputElement;
 
     if (input.files?.length) {
-      console.log(input.files[0]);
+      this.userService.uploadAvatar(input.files.item(0)!).subscribe(() => this.downloadAvatar());
     }
-
-    this.userService.uploadAvatar(input.files!.item(0)!).subscribe(() => this.downloadAvatar());
   }
 
 }

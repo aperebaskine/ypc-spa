@@ -1,7 +1,7 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { NavbarComponent } from '../navbar/navbar.component';
-import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../../layout/header/header.component';
+import { NavbarComponent } from '../../layout/navbar/navbar.component';
+import { FooterComponent } from '../../layout/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { filter } from 'rxjs';

@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Address } from '../../../../generated';
+import { Address } from '../../../generated';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { AddressService } from '../../../../services/address.service';
+import { AddressService } from '../../../services/address.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { AddressSelectorDialogComponent } from '../../../address/address-selector-dialog/address-selector-dialog.component';
-import { AddressFormComponent } from '../../../address/address-form/address-form.component';
+import { AddressFormComponent } from '../../address/address-form/address-form.component';
 import { map } from 'rxjs';
-import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../common/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-address-card',

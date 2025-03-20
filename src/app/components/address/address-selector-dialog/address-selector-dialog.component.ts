@@ -3,7 +3,7 @@ import { AddressService } from '../../../services/address.service';
 import { Address } from '../../../generated';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { AddressCardComponent } from '../../common/address/address-card/address-card.component';
+import { AddressCardComponent } from '../../address/address-card/address-card.component';
 import { Observable } from 'rxjs';
 import { MatDialogRef } from '@angular/material/dialog';
 
