@@ -8,7 +8,6 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
-  HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
@@ -19,6 +18,7 @@ import {
 import { Configuration } from './generated';
 import { AuthenticationService } from './services/authentication.service';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,5 +38,11 @@ export const appConfig: ApplicationConfig = {
       provide: DEFAULT_CURRENCY_CODE,
       useValue: 'EUR',
     },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        floatLabel: 'always'
+      }
+    }
   ],
 };

@@ -13,7 +13,7 @@
                 <ng-template matStepLabel i18n>Credentials</ng-template>
                 <p *ngIf="error" class="error-text">An error occured. Please try again later.</p>
                 <div class="registration-step">
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>Email</mat-label>
                         <input matInput type="email" formControlName="email"
                             required>
@@ -23,7 +23,7 @@
                         <mat-error i18n>Email already in use.</mat-error>
                         }
                     </mat-form-field>
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>Password</mat-label>
                         <input matInput type="password"
                             formControlName="password"
@@ -35,7 +35,7 @@
                         <mat-error i18n>{{passwordHint}}</mat-error>
                         }
                     </mat-form-field>
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>Repeat password</mat-label>
                         <input matInput type="password"
                             formControlName="repeatPassword" required>
@@ -55,23 +55,23 @@
                 formGroupName="personalData">
                 <ng-template matStepLabel i18n>Personal data</ng-template>
                 <div class="registration-step">
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>First name</mat-label>
                         <input matInput type="text" formControlName="firstName"
                             required>
                     </mat-form-field>
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>Last name</mat-label>
                         <input matInput type="text"
                             formControlName="lastName1"
                             required>
                     </mat-form-field>
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>Second last name</mat-label>
                         <input matInput type="text"
                             formControlName="lastName2">
                     </mat-form-field>
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>Document type</mat-label>
                         <mat-select required formControlName="docType">
                             <mat-option *ngFor="let docType of docTypes | async"
@@ -80,12 +80,12 @@
                             </mat-option>
                         </mat-select>
                     </mat-form-field>
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>Document number</mat-label>
                         <input matInput type="text"
                             formControlName="docNumber">
                     </mat-form-field>
-                    <mat-form-field [floatLabel]="'always'">
+                    <mat-form-field >
                         <mat-label i18n>Phone number</mat-label>
                         <input matInput type="tel"
                             formControlName="phoneNumber">

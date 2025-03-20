@@ -10,11 +10,11 @@
     Error: Invalid login and/or password.
   </p>
   <form [formGroup]="loginForm" (submit)="this.login()">
-    <mat-form-field [floatLabel]="'always'">
+    <mat-form-field >
       <mat-label i18n>Email</mat-label>
       <input matInput type="text" formControlName="email" />
     </mat-form-field>
-    <mat-form-field [floatLabel]="'always'">
+    <mat-form-field >
       <mat-label i18n>Password</mat-label>
       <input matInput type="password" formControlName="password" />
       <mat-hint><a class="forgot-password" i18n>Forgot password?</a></mat-hint>

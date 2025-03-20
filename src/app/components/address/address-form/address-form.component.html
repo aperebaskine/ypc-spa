@@ -5,30 +5,30 @@
   <ng-container *ngIf="!address">
     <h3 i18n>New address</h3>
   </ng-container>
-  <mat-form-field [floatLabel]="'always'">
+  <mat-form-field>
     <mat-label i18n>Street name</mat-label>
     <input matInput type="text" formControlName="streetName" />
   </mat-form-field>
   <div class="container--horizontal">
-    <mat-form-field class="field--short" [floatLabel]="'always'">
+    <mat-form-field class="field--short">
       <mat-label i18n>Street number</mat-label>
       <input matInput type="number" formControlName="streetNumber" />
     </mat-form-field>
-    <mat-form-field class="field--short" [floatLabel]="'always'">
+    <mat-form-field class="field--short" >
       <mat-label i18n>Floor</mat-label>
       <input matInput type="number" formControlName="floor" />
     </mat-form-field>
-    <mat-form-field class="field--short" [floatLabel]="'always'">
+    <mat-form-field class="field--short" >
       <mat-label i18n>Door</mat-label>
       <input matInput type="text" formControlName="door" />
     </mat-form-field>
   </div>
   <div class="container--horizontal">
-    <mat-form-field class="field--short" [floatLabel]="'always'">
+    <mat-form-field class="field--short" >
       <mat-label i18n>ZIP Code</mat-label>
       <input matInput type="text" formControlName="zipCode" />
     </mat-form-field>
-    <mat-form-field class="field--grow" [floatLabel]="'always'">
+    <mat-form-field class="field--grow" >
       <mat-label i18n>City</mat-label>
       <input
         #cityInput
@@ -48,7 +48,7 @@
       </mat-autocomplete>
     </mat-form-field>
   </div>
-  <mat-form-field [floatLabel]="'always'">
+  <mat-form-field >
     <mat-label i18n>Province</mat-label>
     <mat-select formControlName="provinceId">
       <mat-option
@@ -58,7 +58,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field [floatLabel]="'always'">
+  <mat-form-field >
     <mat-label i18n>Country</mat-label>
     <mat-select formControlName="countryId">
       <mat-option

@@ -20,20 +20,20 @@
     <mat-step>
       <ng-template matStepLabel i18n>Payment method</ng-template>
       <div class="order-step credit-card-form container--vertical">
-        <mat-form-field [floatLabel]="'always'">
+        <mat-form-field >
           <mat-label i18n>Card holder</mat-label>
           <input matInput type="text" />
         </mat-form-field>
-        <mat-form-field [floatLabel]="'always'">
+        <mat-form-field >
           <mat-label i18n>Card number</mat-label>
           <input matInput type="number" />
         </mat-form-field>
         <div class="container--horizontal">
-          <mat-form-field class="field--short" [floatLabel]="'always'">
+          <mat-form-field class="field--short" >
             <mat-label i18n>Expiration date</mat-label>
             <input matInput type="text" />
           </mat-form-field>
-          <mat-form-field class="field--short" [floatLabel]="'always'">
+          <mat-form-field class="field--short" >
             <mat-label i18n>CVV</mat-label>
             <input matInput type="text" />
           </mat-form-field>
