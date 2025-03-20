@@ -7,11 +7,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
-import { CategoryService } from '../../../../services/category.service';
-import { Attribute, CategoryDTO } from '../../../../generated';
+import { CategoryService } from '../../../services/category.service';
+import { Attribute, CategoryDTO } from '../../../generated';
 import { debounceTime, Observable } from 'rxjs';
-import { AttributeService } from '../../../../services/attribute.service';
-import { AttributeSearchFilterComponent } from '../../../attribute/attribute-search-filter/attribute-search-filter.component';
+import { AttributeService } from '../../../services/attribute.service';
+import { AttributeSearchFilterComponent } from '../../attribute/attribute-search-filter/attribute-search-filter.component';
 
 @Component({
   selector: 'app-filter-sidebar',

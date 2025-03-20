@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { FilterSidebarComponent } from '../../product/search/filter-sidebar/filter-sidebar.component';
+import { FilterSidebarComponent } from '../../search/filter-sidebar/filter-sidebar.component';
 import { ProductService } from '../../../services/product.service';
 import { PageEvent } from '@angular/material/paginator';
 import { ProductResults } from '../../../generated';

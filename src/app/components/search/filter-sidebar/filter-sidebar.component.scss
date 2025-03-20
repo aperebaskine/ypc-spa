@@ -29,17 +29,14 @@ mat-form-field {
     gap: 16px;
 }
 
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
     display: none;
 }
 
-input.example-right-align {
+input.right-align {
     appearance: inherit;
     -moz-appearance: textfield;
-}
-
-.example-right-align {
     text-align: right;
 }
 
