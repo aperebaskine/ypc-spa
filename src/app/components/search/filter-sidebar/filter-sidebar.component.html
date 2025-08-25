@@ -11,7 +11,6 @@
         formControlName="name"
       />
     </mat-form-field>
-    <mat-divider></mat-divider>
     <mat-form-field floatLabel="always">
       <mat-label i18n>Category</mat-label>
       <mat-select formControlName="categoryId">
@@ -22,7 +21,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-divider></mat-divider>
     <mat-form-field floatLabel="always">
       <mat-label i18n>Launch date</mat-label>
       <mat-date-range-input [rangePicker]="picker">
@@ -42,7 +40,6 @@
         [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
-    <mat-divider></mat-divider>
     <div class="inline-form-elements">
       <mat-form-field style="width: 128px" floatLabel="always">
         <mat-label i18n>from</mat-label>
@@ -66,20 +63,17 @@
         <span matTextPrefix>€</span>
       </mat-form-field>
     </div>
-    <mat-divider></mat-divider>
     <p>
       <mat-slide-toggle labelPosition="before" formControlName="hasStock">
         <span i18n>In stock only</span>
       </mat-slide-toggle>
     </p>
-    <mat-divider></mat-divider>
     <ng-container *ngFor="let attribute of attributes | async">
       <ng-container *ngIf="attribute.values!.length > 1">
         <app-attribute-search-filter
           [attribute]="attribute"
           (attributeChange)="attributeCriteriaChanged($event)">
         </app-attribute-search-filter>
-        <mat-divider></mat-divider>
       </ng-container>
     </ng-container>
     <div class="form-reset-submit">
