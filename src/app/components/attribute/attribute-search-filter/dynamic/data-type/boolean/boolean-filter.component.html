@@ -1,6 +1,6 @@
-<p>
-  {{ attribute?.name }}
+<ng-container *ngIf="this.attribute">
+  <span>{{ attribute.name }}</span>
   <mat-slide-toggle
     (change)="handleToggle($event.checked)"
   ></mat-slide-toggle>
-</p>
+</ng-container>
