@@ -20,7 +20,7 @@ export class CartListItemComponent {
   @Input() item?: CartItem;
   @Input() controlsEnabled: boolean = true;
   productData?: Product;
-  productImageUrl?: string;
+  productImageUrl?: string = "images/unknown-image.png";
 
   constructor(
     private productService: ProductService,
