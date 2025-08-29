@@ -41,10 +41,10 @@ input.right-align {
     text-align: right;
 }
 
-mat-divider {
-    margin: 8px 0px;
-}
-
 mat-slide-toggle span {
     margin-right: 1em;
+}
+
+.attribute-filter-container:has(> *) {
+    margin: 1em 0em;
 }

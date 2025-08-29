@@ -1,14 +1,9 @@
 <ng-container *ngIf="this.attribute">
-  <p>{{ attribute.name }}</p>
-  <mat-slider
-    discrete
-    [displayWith]="formatLabel"
-    [min]="minValue"
-    [max]="maxValue"
-    [step]="step">
-    <input [(value)]="startValue" (change)="handleValueChange()"
-      matSliderStartThumb />
-    <input [(value)]="endValue" (change)="handleValueChange()"
-      matSliderEndThumb />
-  </mat-slider>
+  <span>{{ attribute.name }}</span>
+  <div class="slider-container">
+    <mat-slider discrete [displayWith]="formatLabel" [min]="minValue" [max]="maxValue" [step]="step">
+      <input [(value)]="startValue" (change)="handleValueChange()" matSliderStartThumb />
+      <input [(value)]="endValue" (change)="handleValueChange()" matSliderEndThumb />
+    </mat-slider>
+  </div>
 </ng-container>

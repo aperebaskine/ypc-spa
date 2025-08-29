@@ -3,20 +3,12 @@
   <form [formGroup]="searchForm" (submit)="submit()">
     <mat-form-field floatLabel="always">
       <mat-label i18n>Name</mat-label>
-      <input
-        matInput
-        type="text"
-        i18n-placeholder
-        placeholder="Example: Ryzen 4070"
-        formControlName="name"
-      />
+      <input matInput type="text" i18n-placeholder placeholder="Example: Ryzen 4070" formControlName="name" />
     </mat-form-field>
     <mat-form-field floatLabel="always">
       <mat-label i18n>Category</mat-label>
       <mat-select formControlName="categoryId">
-        <mat-option
-          *ngFor="let category of categories | async"
-          [value]="category.id">
+        <mat-option *ngFor="let category of categories | async" [value]="category.id">
           {{ category.name }}
         </mat-option>
       </mat-select>
@@ -24,58 +16,38 @@
     <mat-form-field floatLabel="always">
       <mat-label i18n>Launch date</mat-label>
       <mat-date-range-input [rangePicker]="picker">
-        <input
-          matStartDate
-          i18n-placeholder
-          placeholder="Start date"
-          formControlName="launchDateFrom" />
-        <input
-          matEndDate
-          i18n-placeholder
-          placeholder="End date"
-          formControlName="launchDateTo" />
+        <input matStartDate i18n-placeholder placeholder="Start date" formControlName="launchDateFrom" />
+        <input matEndDate i18n-placeholder placeholder="End date" formControlName="launchDateTo" />
       </mat-date-range-input>
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
     <div class="inline-form-elements">
       <mat-form-field style="width: 128px" floatLabel="always">
         <mat-label i18n>from</mat-label>
-        <input
-          matInput
-          type="number"
-          min="0"
-          class="right-align"
-          formControlName="priceMin" />
+        <input matInput type="number" min="0" class="right-align" formControlName="priceMin" />
         <span matTextPrefix>€</span>
       </mat-form-field>
       <span class="divider"> - </span>
       <mat-form-field style="width: 128px" floatLabel="always">
         <mat-label i18n>to</mat-label>
-        <input
-          matInput
-          type="number"
-          min="0"
-          class="right-align"
-          formControlName="priceMax" />
+        <input matInput type="number" min="0" class="right-align" formControlName="priceMax" />
         <span matTextPrefix>€</span>
       </mat-form-field>
     </div>
-    <p>
+    <div class="container--horizontal">
       <mat-slide-toggle labelPosition="before" formControlName="hasStock">
         <span i18n>In stock only</span>
       </mat-slide-toggle>
-    </p>
-    <ng-container *ngFor="let attribute of attributes | async">
-      <ng-container *ngIf="attribute.values!.length > 1">
-        <app-attribute-search-filter
-          [attribute]="attribute"
-          (attributeChange)="attributeCriteriaChanged($event)">
-        </app-attribute-search-filter>
+    </div>
+    <div class="attribute-filter-container">
+      <ng-container *ngFor="let attribute of attributes | async">
+        <ng-container *ngIf="attribute.values!.length > 1">
+          <app-attribute-search-filter [attribute]="attribute" (attributeChange)="attributeCriteriaChanged($event)">
+          </app-attribute-search-filter>
+        </ng-container>
       </ng-container>
-    </ng-container>
+    </div>
     <div class="form-reset-submit">
       <button mat-raised-button type="reset" i18n>Reset</button>
       <button mat-flat-button type="submit" i18n>Submit</button>

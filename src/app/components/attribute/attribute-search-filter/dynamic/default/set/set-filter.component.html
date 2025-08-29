@@ -1,5 +1,5 @@
 <ng-container *ngIf="this.attribute">
-  <p>{{ attribute.name }}</p>
+  <span>{{ attribute.name }}</span>
   <mat-checkbox
     *ngFor="let value of attribute?.values"
     [value]="value.value!.toString()"
