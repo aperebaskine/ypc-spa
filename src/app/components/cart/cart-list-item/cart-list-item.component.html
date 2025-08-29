@@ -1,16 +1,16 @@
 <ng-container *ngIf="productData">
     <div class="cart-list-item">
         <mat-list-item>
+            <img matListItemAvatar [src]="productImageUrl" [alt]="productData.name" />
             <p matListItemTitle>
-                <a
-                    [routerLink]="['/product', productData.id]">{{productData.name}}</a>
+                <a [routerLink]="['/product', productData.id]">{{productData.name}}</a>
             </p>
             <p matListItemLine>
                 <span i18n>Unit price:</span> {{ item!.salePrice |
                 currency:'EUR' }}<span *ngIf="!controlsEnabled" i18n> - Quantity: {{item!.qty}}</span>
             </p>
         </mat-list-item>
-        <div class="cart-list-item-options"  *ngIf="controlsEnabled">
+        <div class="cart-list-item-options" *ngIf="controlsEnabled">
             <button mat-icon-button (click)="incr(-1)">
                 <mat-icon>remove</mat-icon>
             </button>

@@ -20,6 +20,7 @@ export class CartListItemComponent {
   @Input() item?: CartItem;
   @Input() controlsEnabled: boolean = true;
   productData?: Product;
+  productImageUrl?: string;
 
   constructor(
     private productService: ProductService,
@@ -30,7 +31,10 @@ export class CartListItemComponent {
     if (changes['item']) {
       this.productService
         .findById(this.item!.id)
-        .subscribe((product) => this.productData = product);
+        .subscribe((product) => {
+          this.productData = product;
+          this.productService.findImage(product.id).subscribe((url) => this.productImageUrl = url);
+        });
     }
   }
 
