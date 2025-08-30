@@ -10,14 +10,15 @@
     Error: Invalid login and/or password.
   </p>
   <form [formGroup]="loginForm" (submit)="this.login()">
-    <mat-form-field >
+    <mat-form-field>
       <mat-label i18n>Email</mat-label>
       <input matInput type="text" formControlName="email" />
     </mat-form-field>
-    <mat-form-field >
+    <mat-form-field>
       <mat-label i18n>Password</mat-label>
       <input matInput type="password" formControlName="password" />
-      <mat-hint><a class="forgot-password" i18n>Forgot password?</a></mat-hint>
+      <ng-container *ngIf="false"><mat-hint><a class="forgot-password" i18n>Forgot
+            password?</a></mat-hint></ng-container>
     </mat-form-field>
     <div class="inline-form-buttons">
       <button type="submit" mat-flat-button i18n>Login</button>
