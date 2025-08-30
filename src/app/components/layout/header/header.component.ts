@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { SearchBoxComponent } from "../../common/search-box/search-box.component";
+import { LogoComponent } from "../../common/logo/logo.component";
 
 @Component({
   selector: 'app-header',
@@ -14,7 +15,8 @@ import { SearchBoxComponent } from "../../common/search-box/search-box.component
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    SearchBoxComponent
+    SearchBoxComponent,
+    LogoComponent
 ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'

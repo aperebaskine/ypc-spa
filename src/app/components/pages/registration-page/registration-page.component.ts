@@ -15,6 +15,7 @@ import { passwordValidator } from '../../../validators/passwordValidator';
 import { phoneNumberExistsValidator } from '../../../validators/phoneNumberExistsValidator';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Router } from '@angular/router';
+import { LogoComponent } from "../../common/logo/logo.component";
 
 @Component({
   selector: 'app-registration-page',
@@ -25,8 +26,9 @@ import { Router } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
-  ],
+    MatSelectModule,
+    LogoComponent
+],
   templateUrl: './registration-page.component.html',
   styleUrl: './registration-page.component.scss'
 })

@@ -7,16 +7,19 @@ import { AuthenticationService } from '../../../services/authentication.service'
 import { Observable } from 'rxjs';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { LogoComponent } from "../../common/logo/logo.component";
 
 @Component({
   selector: 'app-login-page',
   imports: [
+    LogoComponent,
     CommonModule,
     RouterModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
   ],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss'
@@ -44,7 +47,7 @@ export class LoginPageComponent {
       .subscribe({
         error: () => {
           this.loginForm.reset();
-          this.loginForm.setErrors({'incorrect': true});
+          this.loginForm.setErrors({ 'incorrect': true });
         }
       });
   }

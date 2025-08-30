@@ -1,5 +1,5 @@
 <div id="login-page">
-  <img src="images/logo.png" />
+  <app-logo></app-logo>
   <p class="welcome-text" i18n>Welcome to YPC</p>
   <ng-container *ngIf="isAuthenticated | async; then loginSuccess; else login">
   </ng-container>
