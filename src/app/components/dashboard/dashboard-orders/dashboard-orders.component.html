@@ -1,14 +1,15 @@
 <div class="container--vertical">
     <h3 i18n>My orders</h3>
-<ng-container *ngIf="this.orders; then cards else empty"></ng-container>
-
-<ng-template #cards>
-    <app-order-panel *ngFor="let order of this.orders"
-        [order]="order"></app-order-panel>
-</ng-template>
-
-<ng-template #empty>
-    <p i18n>You don't have any orders placed.</p>
-</ng-template>
-
+    <ng-container *ngIf="this.loading; then loading else orders"></ng-container>
 </div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
+
+<ng-template #orders>
+    <ng-container *ngIf="this.orders!.length < 1">
+        <p i18n>You don't have any orders placed.</p>
+    </ng-container>
+    <app-order-panel *ngFor="let order of this.orders" [order]="order"></app-order-panel>
+</ng-template>
