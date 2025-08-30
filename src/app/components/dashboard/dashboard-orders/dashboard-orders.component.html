@@ -3,8 +3,8 @@
 <ng-container *ngIf="this.orders; then cards else empty"></ng-container>
 
 <ng-template #cards>
-    <app-order-card *ngFor="let order of this.orders"
-        [order]="order"></app-order-card>
+    <app-order-panel *ngFor="let order of this.orders"
+        [order]="order"></app-order-panel>
 </ng-template>
 
 <ng-template #empty>

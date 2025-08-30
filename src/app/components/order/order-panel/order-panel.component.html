@@ -1,0 +1,15 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title i18n>Order #{{order?.id}}</mat-panel-title>
+    <mat-panel-description>{{order?.orderDate | date : "medium"}} - {{order?.state | orderState
+      }}</mat-panel-description>
+  </mat-expansion-panel-header>
+  <mat-list>
+    <ng-container *ngFor="let orderLine of order?.orderLines" i18n>
+      <app-order-line [orderLine]="orderLine" />
+    </ng-container>
+  </mat-list>
+  <div class="total-price">
+    <span i18n>Total: {{ order?.totalPrice | currency : "EUR" }}</span>
+  </div>
+</mat-expansion-panel>

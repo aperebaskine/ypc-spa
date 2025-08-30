@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { OrderService } from '../../../services/order.service';
 import { CustomerOrder } from '../../../generated';
-import { OrderCardComponent } from "../../order/order-card/order-card.component";
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { OrderPanelComponent } from "../../order/order-panel/order-panel.component";
 
 @Component({
   selector: 'app-dashboard-orders',
-  imports: [CommonModule, OrderCardComponent, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, OrderPanelComponent],
   templateUrl: './dashboard-orders.component.html',
   styleUrl: './dashboard-orders.component.scss'
 })

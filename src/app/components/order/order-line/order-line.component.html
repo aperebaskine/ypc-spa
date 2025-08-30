@@ -1,0 +1,10 @@
+<mat-list-item>
+    <img matListItemAvatar [src]="productImageUrl" [alt]="orderLine?.productName" />
+    <p matListItemTitle>
+        <a [routerLink]="['/product', orderLine?.productId]">{{orderLine?.productName}}</a>
+    </p>
+    <p matListItemLine>
+        <span i18n>Unit price:</span> {{ orderLine!.salePrice |
+        currency:'EUR' }}<span i18n> - Quantity: {{orderLine!.quantity}}</span>
+    </p>
+</mat-list-item>
