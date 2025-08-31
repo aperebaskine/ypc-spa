@@ -1,13 +1,14 @@
 <div class="container--vertical">
   <h3 i18n>My addresses</h3>
   <app-address-card [actions]="['edit']"></app-address-card>
-  <ng-container
-    *ngIf="this.addresses; then cards; else empty"></ng-container>
+  <ng-container *ngIf="this.addresses; then cards; else empty"></ng-container>
 
   <ng-template #cards>
-    <ng-container *ngFor="let address of addresses | async">
-      <app-address-card [address]="address"> </app-address-card>
-    </ng-container>
+    <div class="addresses">
+      <ng-container *ngFor="let address of addresses | async">
+        <app-address-card [address]="address"> </app-address-card>
+      </ng-container>
+    </div>
   </ng-template>
 
   <ng-template #empty>
