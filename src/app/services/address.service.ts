@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Address, DefaultService } from '../generated';
-import { BehaviorSubject, Observable, take, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
 import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddressService {
-
   private readonly addressesSubject = new BehaviorSubject<Address[]>([]);
   public readonly addresses = this.addressesSubject.asObservable();
 
@@ -25,7 +24,17 @@ export class AddressService {
   }
 
   getAddresses() {
-    return this.addressesSubject.asObservable();
+    return this.addressesSubject
+      .asObservable()
+      .pipe(
+        map((addresses) =>
+          addresses.sort((a, b) =>
+            a.default === b.default
+              ? +b.billing! - +a.billing!
+              : +b.default! - +a.default!
+          )
+        )
+      );
   }
 
   updateAddresses() {
@@ -45,9 +54,8 @@ export class AddressService {
         address.streetNumber ?? undefined,
         address.floor ?? undefined,
         address.door ?? undefined
-      ).pipe(
-        tap(() => this.updateAddresses())
-      );
+      )
+      .pipe(tap(() => this.updateAddresses()));
   }
 
   update(address: Address) {
@@ -62,16 +70,13 @@ export class AddressService {
         address.streetNumber ?? undefined,
         address.floor ?? undefined,
         address.door ?? undefined
-      ).pipe(
-        tap(() => this.updateAddresses())
-      );
+      )
+      .pipe(tap(() => this.updateAddresses()));
   }
 
   delete(id: number) {
     return this.defaultService
       .deleteAddressById(id)
-      .pipe(
-        tap(() => this.updateAddresses())
-      );
+      .pipe(tap(() => this.updateAddresses()));
   }
 }
