@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { Address } from '../../../generated';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddressFormComponent } from '../../address/address-form/address-form.component';
 import { map } from 'rxjs';
 import { ConfirmDialogComponent } from '../../common/confirm-dialog/confirm-dialog.component';
+import { MatExpansionPanelContent } from "../../../../../node_modules/@angular/material/expansion/index";
 
 @Component({
   selector: 'app-address-card',
@@ -24,13 +25,27 @@ export class AddressCardComponent {
   addressCount?: number;
   @Input() actions: ('edit' | 'delete')[] = ['edit', 'delete'];
 
+  subtitle: string = "";
+
   constructor(
     private addressService: AddressService,
     private dialog: MatDialog
   ) {
     this.addressService.getAddresses()
-          .pipe(map((addresses) => addresses.length))
-          .subscribe((addressCount) => this.addressCount = addressCount);
+      .pipe(map((addresses) => addresses.length))
+      .subscribe((addressCount) => this.addressCount = addressCount);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['address']) {
+      if (this.address?.default) {
+        this.subtitle = $localize`Default address`;
+      } else if (this.address?.billing) {
+        this.subtitle = $localize`Billing address`;
+      } else {
+        this.subtitle = "";
+      }
+    }
   }
 
   edit() {

@@ -1,18 +1,26 @@
 <mat-card appearance="outlined">
   <ng-container *ngIf="address">
+    <mat-card-header>
+      <mat-card-title i18n>Address #{{address.id}}</mat-card-title>
+      <mat-card-subtitle *ngIf="this.subtitle">{{this.subtitle}}</mat-card-subtitle>
+    </mat-card-header>
     <mat-card-content>
-      <p i18n>ID: {{ address.id }}</p>
-      <p i18n>Street name: {{ address.streetName }}</p>
-      <p i18n>Street number: {{ address.streetNumber ?? "N/A" }}</p>
-      <p i18n *ngIf="address.floor">Floor: {{ address.floor }}</p>
-      <p i18n *ngIf="address.door">Door: {{ address.door }}</p>
-      <p i18n>ZIP Code: {{ address.zipCode }}</p>
-      <p i18n>City: {{ address.city }}</p>
-      <p i18n>Province: {{ address.province }}</p>
-      <p i18n>Country: {{ address.country }}</p>
+      <p class="address-street">
+        <span>{{ address.streetName }}</span>
+        <ng-container *ngIf="address.streetNumber; then streetNumber else noStreetNumber"></ng-container>
+      </p>
+      <p class="address-street-2">
+        <span *ngIf="address.floor" i18n>Floor {{address.floor}}</span>
+        <span *ngIf="address.floor && address.door" i18n>,&nbsp;</span>
+        <span *ngIf="address.door" i18n>{{address.door}}</span>
+      </p>
+      <p class="address-city">
+        {{ address.city }}, {{ address.province }}, {{ address.zipCode }}
+      </p>
+      <p>{{ address.country }}</p>
     </mat-card-content>
   </ng-container>
-  <mat-card-actions *ngIf="actions.length">
+  <mat-card-actions *ngIf="actions.length" [align]="'end'">
     <ng-container *ngIf="actions.includes('edit')">
       <button mat-button i18n (click)="this.edit()">
         {{ address ? "Edit address" : "New address" }}
@@ -23,3 +31,11 @@
     </ng-container>
   </mat-card-actions>
 </mat-card>
+
+<ng-template #streetNumber>
+  <span>, {{address?.streetNumber}}</span>
+</ng-template>
+
+<ng-template #noStreetNumber>
+  <span i18n>&nbsp;(no number)</span>
+</ng-template>
