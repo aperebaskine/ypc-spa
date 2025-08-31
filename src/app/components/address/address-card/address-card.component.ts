@@ -7,8 +7,7 @@ import { AddressService } from '../../../services/address.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddressFormComponent } from '../../address/address-form/address-form.component';
 import { map } from 'rxjs';
-import { ConfirmDialogComponent } from '../../common/confirm-dialog/confirm-dialog.component';
-import { MatExpansionPanelContent } from "../../../../../node_modules/@angular/material/expansion/index";
+import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-address-card',
