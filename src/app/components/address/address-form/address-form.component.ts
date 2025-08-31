@@ -14,6 +14,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BehaviorSubject, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { AddressService } from '../../../services/address.service';
+import { MATERIAL_DEFAULT_PROVIDERS } from '../../../providers/material-providers';
 
 @Component({
   selector: 'app-address-form',
@@ -27,6 +28,7 @@ import { AddressService } from '../../../services/address.service';
     MatAutocompleteModule,
     MatButtonModule,
   ],
+  providers: [...MATERIAL_DEFAULT_PROVIDERS],
   templateUrl: './address-form.component.html',
   styleUrl: './address-form.component.scss',
 })
