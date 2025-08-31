@@ -1,10 +1,4 @@
 <form class="container--vertical" [formGroup]="form">
-  <ng-container *ngIf="address">
-    <h3 i18n>Edit address</h3>
-  </ng-container>
-  <ng-container *ngIf="!address">
-    <h3 i18n>New address</h3>
-  </ng-container>
   <mat-form-field>
     <mat-label i18n>Street name</mat-label>
     <input matInput type="text" formControlName="streetName" />
@@ -58,7 +52,7 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field >
+  <mat-form-field>
     <mat-label i18n>Country</mat-label>
     <mat-select formControlName="countryId">
       <mat-option
@@ -73,12 +67,5 @@
       address</mat-slide-toggle>
     <mat-slide-toggle labelPosition="before" formControlName="isBilling">Billing
       address</mat-slide-toggle>
-  </div>
-  <div class="container--horizontal-end">
-    <button mat-button type="button" (click)="cancel()" i18n>Cancel</button>
-    <button mat-button type="button" (click)="initializeForm()"
-      i18n>Reset</button>
-    <button mat-flat-button type="button" (click)="submit()"
-      i18n>Confirm</button>
   </div>
 </form>

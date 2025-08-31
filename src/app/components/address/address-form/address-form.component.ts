@@ -1,7 +1,14 @@
-import { Component, inject, Input, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  Input,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Address, City, Country, Province } from '../../../generated';
 import { CommonModule } from '@angular/common';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CountryService } from '../../../services/country.service';
 import { ProvinceService } from '../../../services/province.service';
 import { CityService } from '../../../services/city.service';
@@ -13,8 +20,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { BehaviorSubject, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
-import { AddressService } from '../../../services/address.service';
 import { MATERIAL_DEFAULT_PROVIDERS } from '../../../providers/material-providers';
+import { AddressService } from '../../../services/address.service';
 
 @Component({
   selector: 'app-address-form',
@@ -33,8 +40,11 @@ import { MATERIAL_DEFAULT_PROVIDERS } from '../../../providers/material-provider
   styleUrl: './address-form.component.scss',
 })
 export class AddressFormComponent implements OnInit {
-  @Input() address?: Address = inject(MAT_DIALOG_DATA).address;
-  addressCount: number = inject(MAT_DIALOG_DATA).addressCount!;
+  @Input() address?: Address;
+  @Input() onCancel?: () => {};
+  @Output() addressSubmitted: EventEmitter<Address> =
+    new EventEmitter<Address>();
+  addressCount: number = 0;
 
   form = inject(FormBuilder).group({
     id: [null as number | null],
@@ -61,10 +71,10 @@ export class AddressFormComponent implements OnInit {
   filteredCitySubject = new BehaviorSubject<City[]>([]);
 
   constructor(
+    private addressService: AddressService,
     private countryService: CountryService,
     private provinceService: ProvinceService,
-    private cityService: CityService,
-    private dialogRef: MatDialogRef<AddressFormComponent>
+    private cityService: CityService
   ) {
   }
 
@@ -123,7 +133,10 @@ export class AddressFormComponent implements OnInit {
       }
     });
 
-    this.initializeForm();
+    this.addressService.getAddresses().subscribe((addresses) => {
+      this.addressCount = addresses.length;
+      this.initializeForm();
+    });
   }
 
   filterCities(event: Event) {
@@ -155,12 +168,14 @@ export class AddressFormComponent implements OnInit {
     this.initBillingToggle();
   }
 
-  cancel() {
-    this.dialogRef.close();
+  reset() {
+    this.initializeForm();
   }
 
   submit() {
-    this.dialogRef.close(this.form.getRawValue());
+    if (this.form.valid) {
+      this.addressSubmitted.emit(this.form.getRawValue() as Address);
+    }
   }
 
   initDefaultToggle() {

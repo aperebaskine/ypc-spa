@@ -1,0 +1,8 @@
+<h2 mat-dialog-title i18n>{{ address ? "Edit address" : "New address" }}</h2>
+<mat-dialog-content></mat-dialog-content>
+<app-address-form [address]="address" (addressSubmitted)="onSubmit($event)" #form></app-address-form>
+<mat-dialog-actions>
+  <button mat-button type="button" (click)="cancel()" i18n>Cancel</button>
+  <button mat-button type="button" (click)="this.form.reset()" i18n>Reset</button>
+  <button mat-flat-button type="button" (click)="this.form.submit()" i18n>Confirm</button>
+</mat-dialog-actions>

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { Address } from '../../../generated';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
@@ -8,6 +14,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddressFormComponent } from '../../address/address-form/address-form.component';
 import { map } from 'rxjs';
 import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dialog.component';
+import { AddressFormDialogComponent } from '../../dialogs/address-form-dialog/address-form-dialog.component';
 
 @Component({
   selector: 'app-address-card',
@@ -17,23 +24,17 @@ import { ConfirmDialogComponent } from '../../dialogs/confirm-dialog/confirm-dia
   styleUrl: './address-card.component.scss',
 })
 export class AddressCardComponent {
-
   @Input() address?: Address;
   @Output() addressChange = new EventEmitter<Address>();
 
-  addressCount?: number;
   @Input() actions: ('edit' | 'delete')[] = ['edit', 'delete'];
 
-  subtitle: string = "";
+  subtitle: string = '';
 
   constructor(
     private addressService: AddressService,
     private dialog: MatDialog
-  ) {
-    this.addressService.getAddresses()
-      .pipe(map((addresses) => addresses.length))
-      .subscribe((addressCount) => this.addressCount = addressCount);
-  }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['address']) {
@@ -42,15 +43,15 @@ export class AddressCardComponent {
       } else if (this.address?.billing) {
         this.subtitle = $localize`Billing address`;
       } else {
-        this.subtitle = "";
+        this.subtitle = '';
       }
     }
   }
 
   edit() {
-    const dialog = this.dialog.open(AddressFormComponent, {
+    const dialog = this.dialog.open(AddressFormDialogComponent, {
       disableClose: true,
-      data: { address: this.address, addressCount: this.addressCount },
+      data: { address: this.address },
     });
 
     dialog.beforeClosed().subscribe((address: Address) => {
