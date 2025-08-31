@@ -24,10 +24,10 @@ import { AddressFormDialogComponent } from '../../dialogs/address-form-dialog/ad
   styleUrl: './address-card.component.scss',
 })
 export class AddressCardComponent {
-  @Input() address?: Address;
+  @Input() address!: Address;
   @Output() addressChange = new EventEmitter<Address>();
 
-  @Input() actions: ('edit' | 'delete')[] = ['edit', 'delete'];
+  @Input() actions: boolean = false;
 
   subtitle: string = '';
 
@@ -59,11 +59,7 @@ export class AddressCardComponent {
         return;
       }
 
-      if (address.id) {
-        this.addressService.update(address).subscribe();
-      } else {
-        this.addressService.create(address).subscribe();
-      }
+      this.addressService.update(address).subscribe();
     });
   }
 
