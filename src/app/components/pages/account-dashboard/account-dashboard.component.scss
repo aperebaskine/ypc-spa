@@ -1,10 +1,5 @@
-mat-drawer-container {
-    min-height: 40em;
-}
-
-mat-drawer-container,
-mat-drawer-content {
-    background-color: var(--mat-sys-surface);
+mat-drawer-container, mat-drawer {
+    background-color: inherit;
 }
 
 .dashboard-menu {
