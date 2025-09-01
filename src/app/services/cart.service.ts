@@ -54,7 +54,7 @@ export class CartService {
 
       cart.products[index].qty += item.qty;
     } else {
-      cart.products.push({ id: item.id, qty: item.qty, salePrice: item.salePrice });
+      cart.products.push({ id: item.id, name: item.name, qty: item.qty, salePrice: item.salePrice });
     }
 
     this.addedItemSubject.next(item);
