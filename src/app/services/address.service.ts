@@ -40,7 +40,7 @@ export class AddressService {
   updateAddresses() {
     this.defaultService
       .findAllAddresses()
-      .subscribe((addresses) => this.addressesSubject.next(addresses));
+      .subscribe((addresses) => this.addressesSubject.next(addresses ?? []));
   }
 
   create(address: Address) {
