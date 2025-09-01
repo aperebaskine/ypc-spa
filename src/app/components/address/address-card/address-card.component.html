@@ -25,6 +25,7 @@
     </mat-card-content>
   </ng-container>
   <mat-card-actions *ngIf="this.actions" [align]="'end'">
+    <ng-content></ng-content>
     <button mat-button i18n (click)="this.edit()">Edit</button>
     <button mat-button i18n (click)="this.delete()">Delete</button>
   </mat-card-actions>
