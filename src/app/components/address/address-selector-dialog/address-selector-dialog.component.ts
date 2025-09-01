@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { AddressCardComponent } from '../../address/address-card/address-card.component';
 import { Observable } from 'rxjs';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { AddressCreatorComponent } from "../address-creator/address-creator.component";
 
 @Component({
   selector: 'app-address-selector-dialog',
-  imports: [CommonModule, MatButtonModule, AddressCardComponent],
+  imports: [CommonModule, MatButtonModule, AddressCardComponent, MatDialogModule, AddressCreatorComponent],
   templateUrl: './address-selector-dialog.component.html',
   styleUrl: './address-selector-dialog.component.scss',
 })

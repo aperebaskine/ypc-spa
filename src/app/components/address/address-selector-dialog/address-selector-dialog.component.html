@@ -1,7 +1,18 @@
 <div class="address-selector container--vertical">
-    <h3 i18n>Select address</h3>
-    <ng-container *ngFor="let address of addresses | async">
-        <app-address-card [address]="address" [actions]="[]"></app-address-card>
-        <button mat-button (click)="addressSelected(address)" i18n>Select address</button>
-    </ng-container>
+  <h2 mat-dialog-title i18n>Select address</h2>
+  <mat-dialog-content>
+    <div class="container--horizontal addresses-select">
+      <p *ngIf="(addresses | async)!.length < 1" i18n>You do not have any addresses.</p>
+      <ng-container *ngFor="let address of addresses | async">
+        <app-address-card [address]="address" [actions]="true">
+          <button mat-button (click)="addressSelected(address)" i18n>
+            Select
+          </button>
+        </app-address-card>
+      </ng-container>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <app-address-creator></app-address-creator>
+  </mat-dialog-actions>
 </div>

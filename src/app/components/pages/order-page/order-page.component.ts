@@ -3,7 +3,7 @@ import { CartService } from '../../../services/cart.service';
 import { AddressService } from '../../../services/address.service';
 import { Address, OrderLine } from '../../../generated';
 import { map, reduce, tap } from 'rxjs';
-import { AddressCardComponent } from "../../address/address-card/address-card.component";
+import { AddressCardComponent } from '../../address/address-card/address-card.component';
 import { Cart } from '../../../model/cart';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
@@ -11,10 +11,11 @@ import { OrderService } from '../../../services/order.service';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CartListItemComponent } from '../../cart/cart-list-item/cart-list-item.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
-import { AddressSelectorComponent } from "../../address/address-selector/address-selector.component";
+import { AddressSelectorComponent } from '../../address/address-selector/address-selector.component';
+import { OrderLineComponent } from '../../order/order-line/order-line.component';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-order-page',
@@ -26,15 +27,15 @@ import { AddressSelectorComponent } from "../../address/address-selector/address
     MatFormFieldModule,
     MatInputModule,
     MatDividerModule,
-    CartListItemComponent,
+    OrderLineComponent,
     RouterModule,
-    AddressSelectorComponent
-],
+    AddressSelectorComponent,
+    MatListModule,
+  ],
   templateUrl: './order-page.component.html',
-  styleUrl: './order-page.component.scss'
+  styleUrl: './order-page.component.scss',
 })
 export class OrderPageComponent {
-
   orderLines?: OrderLine[];
   addresses?: Address[];
 
@@ -50,44 +51,49 @@ export class OrderPageComponent {
     private addressService: AddressService,
     private orderService: OrderService
   ) {
-
-    this.addressService.getAddresses()
+    this.addressService
+      .getAddresses()
       .pipe(
-        tap((addresses) =>
-          this.billingAddress = addresses.find((a) => a.billing)!
+        tap(
+          (addresses) =>
+            (this.billingAddress = addresses.find((a) => a.billing)!)
         ),
-        tap((addresses) =>
-          this.shippingAddress = addresses.find((a) => a.default)!
+        tap(
+          (addresses) =>
+            (this.shippingAddress = addresses.find((a) => a.default)!)
         )
-      ).subscribe(
-        (addresses) => this.addresses = addresses
-      );
+      )
+      .subscribe((addresses) => (this.addresses = addresses));
 
     this.cartService.cart
-      .pipe(map(
-        (cart: Cart) => cart.products.map((cartItem) => {
-          return {
-            productId: cartItem.id,
-            quantity: cartItem.qty,
-            salePrice: cartItem.salePrice
-          } as OrderLine
-        })
-      ),
-        tap((orderLines) => this.total = orderLines.map((ol) => ol.quantity! * ol.salePrice!).reduce((a, b) => a + b))
+      .pipe(
+        map((cart: Cart) =>
+          cart.products.map((cartItem) => {
+            return {
+              productId: cartItem.id,
+              productName: cartItem.name,
+              quantity: cartItem.qty,
+              salePrice: cartItem.salePrice,
+            } as OrderLine;
+          })
+        ),
+        tap(
+          (orderLines) =>
+            (this.total = orderLines
+              .map((ol) => ol.quantity! * ol.salePrice!)
+              .reduce((a, b) => a + b))
+        )
       )
-      .subscribe(
-        (orderLines) => this.orderLines = orderLines
-      );
+      .subscribe((orderLines) => (this.orderLines = orderLines));
   }
 
   placeOrder() {
-    this.orderService.placeOrder(
-      this.billingAddress!.id!,
-      this.shippingAddress!.id!,
-      this.orderLines!
-    ).subscribe(
-      (order) => this.success = !!order
-    );
+    this.orderService
+      .placeOrder(
+        this.billingAddress!.id!,
+        this.shippingAddress!.id!,
+        this.orderLines!
+      )
+      .subscribe((order) => (this.success = !!order));
   }
-
 }

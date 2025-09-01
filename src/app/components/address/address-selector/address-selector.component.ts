@@ -18,11 +18,10 @@ export class AddressSelectorComponent {
   @Output() addressChange = new EventEmitter<Address | undefined>();
 
   constructor(private dialog: MatDialog) {
-
   }
 
   openDialog() {
-    const dialog = this.dialog.open(AddressSelectorDialogComponent);
+    const dialog = this.dialog.open(AddressSelectorDialogComponent, {minWidth: '20vw'});
 
     dialog.beforeClosed().subscribe((address) => {
       if (address) {

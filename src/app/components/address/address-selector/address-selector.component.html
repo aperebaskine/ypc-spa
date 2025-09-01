@@ -1,4 +1,13 @@
-<ng-container *ngIf="address">
-    <app-address-card [(address)]="address" [actions]="[]"></app-address-card>
+<ng-container *ngIf="address; then selection else noSelection">
 </ng-container>
-<button mat-button (click)="openDialog()" i18n>Select address</button>
+
+<ng-template #selection>
+    <app-address-card [(address)]="address!" [actions]="true">
+        <button mat-button (click)="openDialog()" i18n>Change</button>
+    </app-address-card>
+</ng-template>
+
+<ng-template #noSelection>
+    <p i18n>No address selected.</p>
+    <button mat-button (click)="openDialog()" i18n>Select address</button>
+</ng-template>
