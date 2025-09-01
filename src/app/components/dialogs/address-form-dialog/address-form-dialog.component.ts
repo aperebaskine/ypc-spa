@@ -18,7 +18,9 @@ export class AddressFormDialogComponent {
   @ViewChild(AddressFormComponent) form!: AddressFormComponent;
   @Input() address?: Address = inject(MAT_DIALOG_DATA).address;
 
-  constructor(private dialogRef: MatDialogRef<AddressFormDialogComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<AddressFormDialogComponent>,
+  ) {}
 
   cancel() {
     this.dialogRef.close();

@@ -1,5 +1,6 @@
 <div class="container--vertical">
   <h3 i18n>My addresses</h3>
+  <app-address-creator></app-address-creator>
   <ng-container *ngIf="this.addresses; then cards; else empty"></ng-container>
   <ng-template #cards>
     <div class="addresses">
