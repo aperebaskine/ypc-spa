@@ -21,7 +21,7 @@ export class AddressSelectorComponent {
   }
 
   openDialog() {
-    const dialog = this.dialog.open(AddressSelectorDialogComponent, {minWidth: '20vw'});
+    const dialog = this.dialog.open(AddressSelectorDialogComponent);
 
     dialog.beforeClosed().subscribe((address) => {
       if (address) {
