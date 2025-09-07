@@ -120,6 +120,6 @@ export class AuthenticationService {
 
   getRootUrl() {
     const base = document.querySelector("base")?.getAttribute("href");
-    return `${window.location.origin}${base}`;
+    return base === "/" ? window.location.origin : `${window.location.origin}${base}`;
   }
 }
