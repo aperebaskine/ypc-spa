@@ -79,7 +79,7 @@ export class AuthenticationService {
       );
   }
 
-  async initOAuthFlow() {
+  initOAuthFlow() {
     this.getCustomerApi()
       .loginCustomerWithOAuth('http://localhost:4200')
       .subscribe((response) => (document.location = response));
