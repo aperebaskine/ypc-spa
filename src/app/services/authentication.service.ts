@@ -4,39 +4,31 @@ import {
   Injectable,
   runInInjectionContext,
 } from '@angular/core';
-import { Configuration, DefaultService } from '../generated';
+import {
+  Configuration,
+  CustomerService as CustomerApi,
+  SessionService as SessionApi,
+} from '../generated';
 import { BehaviorSubject, map, Observable, shareReplay, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
   // Lazily injected, use getter method
-  private defaultService: DefaultService | null = null;
+  private customerApi: CustomerApi | null = null;
+  private sessionApi: SessionApi | null = null;
 
   private readonly tokenSubject!: BehaviorSubject<string | null>;
   public readonly isAuthenticated!: Observable<boolean>;
 
+  private readonly base = document.querySelector('base')?.getAttribute('href');
+
   constructor(
     private environmentInjector: EnvironmentInjector,
-    private oauthService: OAuthService,
     private router: Router
   ) {
-    this.oauthService.configure({
-      issuer: 'https://accounts.google.com',
-      clientId:
-        '722478146407-n3ipnqqdfoor39ia473u7rsb83hur6eh.apps.googleusercontent.com',
-      redirectUri: this.getRootUrl(),
-      responseType: 'code',
-      scope: 'openid profile email',
-      strictDiscoveryDocumentValidation: false,
-      showDebugInformation: true
-    });
-
-    this.oauthService.loadDiscoveryDocument();
-
     this.tokenSubject = new BehaviorSubject<string | null>(null);
     this.isAuthenticated = this.tokenSubject.pipe(
       map((token) => token != null),
@@ -44,15 +36,26 @@ export class AuthenticationService {
     );
   }
 
-  private getDefaultService(): DefaultService {
-    if (this.defaultService === null) {
-      this.defaultService = runInInjectionContext(
+  private getSessionApi(): SessionApi {
+    if (this.sessionApi === null) {
+      this.sessionApi = runInInjectionContext(
         this.environmentInjector,
-        () => (this.defaultService = inject(DefaultService))
+        () => (this.sessionApi = inject(SessionApi))
       );
     }
 
-    return this.defaultService!;
+    return this.sessionApi!;
+  }
+
+  private getCustomerApi(): CustomerApi {
+    if (this.customerApi === null) {
+      this.customerApi = runInInjectionContext(
+        this.environmentInjector,
+        () => (this.customerApi = inject(CustomerApi))
+      );
+    }
+
+    return this.customerApi!;
   }
 
   getApiCredentials(): Configuration {
@@ -60,11 +63,12 @@ export class AuthenticationService {
       credentials: {
         bearerAuth: () => this.tokenSubject.getValue() ?? undefined,
       },
+      withCredentials: true,
     });
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.getDefaultService()
+    return this.getCustomerApi()
       .loginCustomer(email, password)
       .pipe(
         tap({
@@ -75,8 +79,16 @@ export class AuthenticationService {
       );
   }
 
-  async oAuthLogin() {
-    this.oauthService.initCodeFlow();
+  async initOAuthFlow() {
+    this.getCustomerApi()
+      .loginCustomerWithOAuth("http://localhost:4200")
+      .subscribe((response) => document.location = response);
+  }
+
+  refresh() {
+    this.getSessionApi()
+      .refreshSession()
+      .subscribe((token) => this.tokenSubject.next(token));
   }
 
   logout() {
@@ -89,29 +101,29 @@ export class AuthenticationService {
   }
 
   register(data: {
-    firstName: string;
-    lastName1: string;
+    firstName?: string;
+    lastName1?: string;
     lastName2?: string;
-    docType: string;
-    docNumber: string;
-    phoneNumber: string;
+    docType?: string;
+    docNumber?: string;
+    phoneNumber?: string;
     email: string;
     password: string;
   }) {
-    return this.getDefaultService()
+    return this.getCustomerApi()
       .registerCustomer(
-        data.firstName,
-        data.lastName1,
-        data.docType,
-        data.docNumber,
-        data.phoneNumber,
         data.email,
         data.password,
-        data.lastName2
+        data.firstName,
+        data.lastName1,
+        data.lastName2,
+        data.docType,
+        data.docNumber,
+        data.phoneNumber
       )
       .pipe(
         tap({
-          next: (response) => this.tokenSubject.next(response.token ?? null),
+          next: (response) => this.tokenSubject.next(response ?? null),
           error: () => this.tokenSubject.next(null),
         }),
         map((token) => token != null)
@@ -119,7 +131,8 @@ export class AuthenticationService {
   }
 
   getRootUrl() {
-    const base = document.querySelector("base")?.getAttribute("href");
-    return base === "/" ? window.location.origin : `${window.location.origin}${base}`;
+    return this.base === '/'
+      ? window.location.origin
+      : `${window.location.origin}${this.base}`;
   }
 }

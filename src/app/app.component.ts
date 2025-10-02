@@ -4,6 +4,7 @@ import { CartService } from './services/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { LayoutManagerComponent } from "./components/common/layout-manager/layout-manager.component";
 import { MATERIAL_DEFAULT_PROVIDERS } from './providers/material-providers';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ export class AppComponent {
 
   constructor(
     private snackBar: MatSnackBar,
+    private authService: AuthenticationService,
     private cartService: CartService
   ) { }
 
@@ -30,5 +32,7 @@ export class AppComponent {
         $localize`Dismiss`,
         { verticalPosition: 'top', duration: 1800 }
       ));
+
+      setTimeout(() => this.authService.refresh(), 1500);
   }
 }

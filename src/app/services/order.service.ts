@@ -1,5 +1,5 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { DefaultService, OrderLine } from '../generated';
+import { MeService as MeApi, OrderLine } from '../generated';
 import { CartService } from './cart.service';
 import { tap } from 'rxjs';
 
@@ -9,7 +9,7 @@ import { tap } from 'rxjs';
 export class OrderService {
 
   constructor(
-    private defaultService: DefaultService,
+    private orderApi: MeApi,
     private cartService: CartService,
     @Inject(LOCALE_ID) private locale: string
   ) { }
@@ -19,7 +19,7 @@ export class OrderService {
     shippingAddressId: number,
     orderLines: OrderLine[]
   ) {
-    return this.defaultService.createOrder(
+    return this.orderApi.createMyOrder(
       billingAddressId, 
       shippingAddressId, 
       JSON.stringify(orderLines)
@@ -35,6 +35,6 @@ export class OrderService {
   }
 
   findAll() {
-    return this.defaultService.findAllOrders(this.locale);
+    return this.orderApi.getMyOrders(this.locale);
   }
 }

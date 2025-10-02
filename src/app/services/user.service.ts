@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Customer, DefaultService, Exists } from '../generated';
+import { Customer, CustomerService as CustomerApi, MeService as MeApi } from '../generated';
 import { AuthenticationService } from './authentication.service';
-import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,8 @@ export class UserService {
   public readonly user!: Observable<Customer | null>;
 
   constructor(
-    private defaultService: DefaultService,
+    private meApi: MeApi,
+    private customerApi: CustomerApi,
     private authService: AuthenticationService
   ) {
     this.userSubject = new BehaviorSubject<Customer | null>(null);
@@ -27,21 +28,21 @@ export class UserService {
   }
 
   updateUser() {
-    this.defaultService
-      .getAuthenticatedUser()
+    this.meApi
+      .getMe()
       .subscribe((user) => this.userSubject.next(user));
   }
 
-  exists(exists: { email?: string; phoneNumber?: string }) {
-    return this.defaultService.exists(exists.email ?? undefined, exists.phoneNumber ?? undefined);
+  exists(email: string) {
+    return this.customerApi.customerEmailExists(email);
   }
 
   uploadAvatar(avatar: File) {
-    return this.defaultService
-      .uploadAvatar(avatar);
+    return this.meApi
+      .uploadMyAvatar(avatar);
   }
 
   downloadAvatar() {
-    return this.defaultService.downloadAvatar().pipe(map((blob) => URL.createObjectURL(blob)));
+    return this.meApi.getMyAvatar().pipe(map((blob) => URL.createObjectURL(blob)));
   }
 }

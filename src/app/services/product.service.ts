@@ -1,5 +1,5 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { DefaultService } from '../generated';
+import { ProductService as ProductApi } from '../generated';
 import { map } from 'rxjs';
 
 @Injectable({
@@ -7,12 +7,12 @@ import { map } from 'rxjs';
 })
 export class ProductService {
   constructor(
-    private defaultService: DefaultService,
+    private productApi: ProductApi,
     @Inject(LOCALE_ID) private locale: string) {
   }
 
   findById(id: number) {
-    return this.defaultService.findProductById(this.locale, id);
+    return this.productApi.findProductById(this.locale, id);
   }
 
   findBy(
@@ -31,7 +31,7 @@ export class ProductService {
       ascDesc?: 'asc' | 'desc'
     }
   ) {
-    return this.defaultService.findProductBy(
+    return this.productApi.findProductBy(
       this.locale,
       pos,
       pageSize,
@@ -50,7 +50,7 @@ export class ProductService {
   }
 
   findImage(id: number) {
-    return this.defaultService
+    return this.productApi
       .findProductImageById(id)
       .pipe(
         map(

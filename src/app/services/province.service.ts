@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { DefaultService } from '../generated';
+import { GeoService as GeoApi } from '../generated';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProvinceService {
 
-  constructor(private defaultService: DefaultService) { }
+  constructor(private geoApi: GeoApi) { }
 
   findByCountry(countryId: string) {
-    return this.defaultService.findProvincesByCountry(countryId);
+    return this.geoApi.findProvincesByCountry(countryId);
   }
 }

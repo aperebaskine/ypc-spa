@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { DefaultService } from '../generated';
+import { IdentityService as IdentityApi } from '../generated';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentTypeService {
 
-  constructor(private defaultService: DefaultService) { }
+  constructor(private identityApi: IdentityApi) { }
 
   findAll() {
-    return this.defaultService.findAllDoctypes();
+    return this.identityApi.findAllDoctypes();
   }
   
 }

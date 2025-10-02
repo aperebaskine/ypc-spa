@@ -5,7 +5,6 @@ import {
   Input,
   OnInit,
   Output,
-  SimpleChanges,
 } from '@angular/core';
 import { Address, City, Country, Province } from '../../../generated';
 import { CommonModule } from '@angular/common';
@@ -47,7 +46,7 @@ export class AddressFormComponent implements OnInit {
   addressCount: number = 0;
 
   form = inject(FormBuilder).group({
-    id: [null as number | null],
+    name: ['', Validators.required],
     streetName: ['', Validators.required],
     streetNumber: [0],
     floor: [0],
@@ -75,8 +74,7 @@ export class AddressFormComponent implements OnInit {
     private countryService: CountryService,
     private provinceService: ProvinceService,
     private cityService: CityService
-  ) {
-  }
+  ) {}
 
   displayCity() {
     return (value: any) => {
@@ -151,7 +149,7 @@ export class AddressFormComponent implements OnInit {
 
   initializeForm() {
     this.form.reset({
-      id: this.address?.id ?? null,
+      name: this.address?.name ?? '',
       streetName: this.address?.streetName ?? '',
       streetNumber: this.address?.streetNumber ?? null,
       floor: this.address?.floor ?? null,
@@ -160,8 +158,8 @@ export class AddressFormComponent implements OnInit {
       cityId: this.address?.cityId ?? null,
       provinceId: this.address?.provinceId ?? null,
       countryId: this.address?.countryId ?? null,
-      isDefault: this.address?.default ?? false,
-      isBilling: this.address?.billing ?? false,
+      isDefault: this.address?.isDefault ?? false,
+      isBilling: this.address?.isBilling ?? false,
     });
 
     this.initDefaultToggle();
@@ -188,9 +186,9 @@ export class AddressFormComponent implements OnInit {
         toggle.disable();
       }
     } else {
-      toggle.setValue(this.address.default!);
+      toggle.setValue(this.address.isDefault!);
 
-      if (this.address.default!) {
+      if (this.address.isDefault!) {
         toggle.disable();
       }
     }
@@ -206,9 +204,9 @@ export class AddressFormComponent implements OnInit {
         toggle.disable();
       }
     } else {
-      toggle.setValue(this.address.billing!);
+      toggle.setValue(this.address.isBilling!);
 
-      if (this.address.billing!) {
+      if (this.address.isBilling!) {
         toggle.disable();
       }
     }

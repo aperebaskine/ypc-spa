@@ -56,11 +56,11 @@ export class OrderPageComponent {
       .pipe(
         tap(
           (addresses) =>
-            (this.billingAddress = addresses.find((a) => a.billing)!)
+            (this.billingAddress = addresses.find((a) => a.isBilling)!)
         ),
         tap(
           (addresses) =>
-            (this.shippingAddress = addresses.find((a) => a.default)!)
+            (this.shippingAddress = addresses.find((a) => a.isDefault)!)
         )
       )
       .subscribe((addresses) => (this.addresses = addresses));

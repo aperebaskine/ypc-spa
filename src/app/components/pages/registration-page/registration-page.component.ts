@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 import { DocumentTypeService } from '../../../services/document-type.service';
 import { CommonModule, Location } from '@angular/common';
 import { passwordValidator } from '../../../validators/passwordValidator';
-import { phoneNumberExistsValidator } from '../../../validators/phoneNumberExistsValidator';
 import { AuthenticationService } from '../../../services/authentication.service';
 import { Router } from '@angular/router';
 import { LogoComponent } from "../../common/logo/logo.component";
@@ -60,7 +59,7 @@ export class RegistrationPageComponent {
       lastName2: [''],
       docType: ['', Validators.required],
       docNumber: ['', Validators.required],
-      phoneNumber: ['', Validators.required, phoneNumberExistsValidator()]
+      phoneNumber: ['', Validators.required]
     })
   })
 

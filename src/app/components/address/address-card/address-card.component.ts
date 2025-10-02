@@ -38,9 +38,9 @@ export class AddressCardComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['address']) {
-      if (this.address?.default) {
+      if (this.address?.isDefault) {
         this.subtitle = $localize`Default address`;
-      } else if (this.address?.billing) {
+      } else if (this.address?.isBilling) {
         this.subtitle = $localize`Billing address`;
       } else {
         this.subtitle = '';

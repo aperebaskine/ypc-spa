@@ -1,25 +1,42 @@
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { DefaultService } from '../generated';
+import { ProductService as ProductApi } from '../generated';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AttributeService {
-
-  constructor(private defaultService: DefaultService,
-    @Inject(LOCALE_ID) private locale: string) {
-  }
+  constructor(
+    private productApi: ProductApi,
+    @Inject(LOCALE_ID) private locale: string
+  ) {}
 
   findById(id: number, unassignedValues: boolean = false, categoryId?: number) {
-    return this.defaultService.findAttributeById(this.locale, id, categoryId, unassignedValues);
+    return this.productApi.findAttributeById(
+      this.locale,
+      id,
+      categoryId,
+      unassignedValues
+    );
   }
 
-  findByName(name: string, unassignedValues: boolean = false, categoryId?: number) {
-    return this.defaultService.findAttributeByName(this.locale, name, categoryId, unassignedValues);
+  findByName(
+    name: string,
+    unassignedValues: boolean = false,
+    categoryId?: number
+  ) {
+    return this.productApi.findAttributeByName(
+      this.locale,
+      name,
+      categoryId,
+      unassignedValues
+    );
   }
 
   findByCategory(categoryId: number, unassignedValues: boolean = false) {
-    return this.defaultService.findAttributeByCategory(this.locale, categoryId, unassignedValues);
+    return this.productApi.findAttributeByCategory(
+      this.locale,
+      categoryId,
+      unassignedValues
+    );
   }
-
 }

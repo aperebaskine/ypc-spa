@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Address, DefaultService } from '../generated';
-import { BehaviorSubject, map, Observable, take, tap } from 'rxjs';
+import { Address, MeService as MeApi } from '../generated';
+import { BehaviorSubject, map, tap } from 'rxjs';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -10,10 +10,7 @@ export class AddressService {
   private readonly addressesSubject = new BehaviorSubject<Address[]>([]);
   public readonly addresses = this.addressesSubject.asObservable();
 
-  constructor(
-    private defaultService: DefaultService,
-    private userService: UserService
-  ) {
+  constructor(private meApi: MeApi, private userService: UserService) {
     this.userService.user.subscribe((user) => {
       if (user == null) {
         this.addressesSubject.next([]);
@@ -29,26 +26,27 @@ export class AddressService {
       .pipe(
         map((addresses) =>
           addresses.sort((a, b) =>
-            a.default === b.default
-              ? +b.billing! - +a.billing!
-              : +b.default! - +a.default!
+            a.isDefault === b.isDefault
+              ? +b.isBilling! - +a.isBilling!
+              : +b.isDefault! - +a.isDefault!
           )
         )
       );
   }
 
   updateAddresses() {
-    this.defaultService
-      .findAllAddresses()
+    this.meApi
+      .getMyAddresses()
       .subscribe((addresses) => this.addressesSubject.next(addresses ?? []));
   }
 
   create(address: Address) {
-    return this.defaultService
-      .createAddress(
-        address.streetName!,
-        address.zipCode!,
-        address.cityId!,
+    return this.meApi
+      .createMyAddress(
+        address.name,
+        address.streetName,
+        address.zipCode,
+        address.cityId,
         address.isDefault ?? false,
         address.isBilling ?? false,
         address.streetNumber ?? undefined,
@@ -59,12 +57,13 @@ export class AddressService {
   }
 
   update(address: Address) {
-    return this.defaultService
-      .updateAddress(
+    return this.meApi
+      .updateMyAddress(
         address.id!,
-        address.streetName!,
-        address.zipCode!,
-        address.cityId!,
+        address.name,
+        address.streetName,
+        address.zipCode,
+        address.cityId,
         address.isDefault ?? false,
         address.isBilling ?? false,
         address.streetNumber ?? undefined,
@@ -75,8 +74,8 @@ export class AddressService {
   }
 
   delete(id: number) {
-    return this.defaultService
-      .deleteAddressById(id)
+    return this.meApi
+      .deleteMyAddress(id)
       .pipe(tap(() => this.updateAddresses()));
   }
 }

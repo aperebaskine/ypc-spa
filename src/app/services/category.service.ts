@@ -1,6 +1,6 @@
 import { Inject, Injectable, LOCALE_ID, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CategoryDTO, DefaultService } from '../generated';
+import { CategoryDTO, ProductService as ProductApi } from '../generated';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +8,11 @@ import { CategoryDTO, DefaultService } from '../generated';
 export class CategoryService {
 
   constructor(
-    private defaultService: DefaultService,
+    private productApi: ProductApi,
     @Inject(LOCALE_ID) private locale: string) {
   }
 
   findAll() {
-    return this.defaultService.findAllCategories(this.locale);
+    return this.productApi.findAllCategories(this.locale);
   }
 }

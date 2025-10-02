@@ -61,7 +61,7 @@ export class LoginPageComponent {
   }
 
   oAuth() {
-    this.authService.oAuthLogin();
+    this.authService.initOAuthFlow();
   }
 
 }
