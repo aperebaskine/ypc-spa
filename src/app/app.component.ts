@@ -33,6 +33,6 @@ export class AppComponent {
         { verticalPosition: 'top', duration: 1800 }
       ));
 
-      setTimeout(() => this.authService.refresh(), 1500);
+      this.authService.refresh();
   }
 }
