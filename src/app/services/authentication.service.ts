@@ -81,8 +81,8 @@ export class AuthenticationService {
 
   async initOAuthFlow() {
     this.getCustomerApi()
-      .loginCustomerWithOAuth("http://localhost:4200")
-      .subscribe((response) => document.location = response);
+      .loginCustomerWithOAuth('http://localhost:4200')
+      .subscribe((response) => (document.location = response));
   }
 
   refresh() {
@@ -92,7 +92,9 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.tokenSubject.next(null);
+    this.getCustomerApi()
+      .logoutCustomer()
+      .subscribe(() => this.tokenSubject.next(null));
 
     // TODO: Clean this up
     if (this.router.url.startsWith('/user')) {
