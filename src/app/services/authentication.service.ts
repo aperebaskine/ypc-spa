@@ -60,6 +60,7 @@ export class AuthenticationService {
 
   getApiCredentials(): Configuration {
     return new Configuration({
+      basePath: `${window.location.origin}/ypc-rest-api`, // TODO: Resolve path dynamically
       credentials: {
         bearerAuth: () => this.tokenSubject.getValue() ?? undefined,
       },
