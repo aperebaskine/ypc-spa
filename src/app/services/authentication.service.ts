@@ -60,7 +60,7 @@ export class AuthenticationService {
 
   getApiCredentials(): Configuration {
     return new Configuration({
-      basePath: `${window.location.origin}/ypc-rest-api`, // TODO: Resolve path dynamically
+      basePath: `${window.location.origin}/ypc-rest-api`, // TODO: Resolve path dynamically or with config file
       credentials: {
         bearerAuth: () => this.tokenSubject.getValue() ?? undefined,
       },
@@ -82,7 +82,7 @@ export class AuthenticationService {
 
   initOAuthFlow() {
     this.getCustomerApi()
-      .loginCustomerWithOAuth('http://localhost:4200')
+      .loginCustomerWithOAuth()
       .subscribe((response) => (document.location = response));
   }
 
