@@ -1,11 +1,5 @@
+import { Injectable } from '@angular/core';
 import {
-  EnvironmentInjector,
-  inject,
-  Injectable,
-  runInInjectionContext,
-} from '@angular/core';
-import {
-  Configuration,
   CustomerService as CustomerApi,
   SessionService as SessionApi,
 } from '../generated';
@@ -36,15 +30,13 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.customerApi
-      .loginCustomer(email, password)
-      .pipe(
-        tap({
-          next: (token) => this.tokenSubject.next(token),
-          error: () => this.tokenSubject.next(undefined),
-        }),
-        map((token) => token != null)
-      );
+    return this.customerApi.loginCustomer(email, password).pipe(
+      tap({
+        next: (token) => this.tokenSubject.next(token),
+        error: () => this.tokenSubject.next(undefined),
+      }),
+      map((token) => token != null)
+    );
   }
 
   initOAuthFlow() {
