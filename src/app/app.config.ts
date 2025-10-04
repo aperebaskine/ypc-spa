@@ -16,9 +16,9 @@ import {
   provideNativeDateAdapter,
 } from '@angular/material/core';
 import { Configuration } from './generated';
-import { AuthenticationService } from './services/authentication.service';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { ApiConfigService } from './services/api-config.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,9 +30,9 @@ export const appConfig: ApplicationConfig = {
     provideNativeDateAdapter(MAT_NATIVE_DATE_FORMATS),
     {
       provide: Configuration,
-      useFactory: (authService: AuthenticationService) =>
-        authService.getApiCredentials(),
-      deps: [AuthenticationService],
+      useFactory: (apiConfigService: ApiConfigService) =>
+        apiConfigService.getConfiguration(),
+      deps: [ApiConfigService],
     },
     {
       provide: DEFAULT_CURRENCY_CODE,
@@ -41,8 +41,8 @@ export const appConfig: ApplicationConfig = {
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: {
-        floatLabel: 'always'
-      }
-    }
+        floatLabel: 'always',
+      },
+    },
   ],
 };

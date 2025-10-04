@@ -11,89 +11,58 @@ import {
 } from '../generated';
 import { BehaviorSubject, map, Observable, shareReplay, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { ApiConfigService } from './api-config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  // Lazily injected, use getter method
-  private customerApi: CustomerApi | null = null;
-  private sessionApi: SessionApi | null = null;
-
-  private readonly tokenSubject!: BehaviorSubject<string | null>;
+  private readonly tokenSubject!: BehaviorSubject<string | undefined>;
   public readonly isAuthenticated!: Observable<boolean>;
 
   constructor(
-    private environmentInjector: EnvironmentInjector,
+    private apiConfigService: ApiConfigService,
+    private customerApi: CustomerApi,
+    private sessionApi: SessionApi,
     private router: Router
   ) {
-    this.tokenSubject = new BehaviorSubject<string | null>(null);
+    this.tokenSubject = new BehaviorSubject<string | undefined>(undefined);
     this.isAuthenticated = this.tokenSubject.pipe(
       map((token) => token != null),
       shareReplay(1)
     );
-  }
-
-  private getSessionApi(): SessionApi {
-    if (this.sessionApi === null) {
-      this.sessionApi = runInInjectionContext(
-        this.environmentInjector,
-        () => (this.sessionApi = inject(SessionApi))
-      );
-    }
-
-    return this.sessionApi!;
-  }
-
-  private getCustomerApi(): CustomerApi {
-    if (this.customerApi === null) {
-      this.customerApi = runInInjectionContext(
-        this.environmentInjector,
-        () => (this.customerApi = inject(CustomerApi))
-      );
-    }
-
-    return this.customerApi!;
-  }
-
-  getApiCredentials(): Configuration {
-    return new Configuration({
-      basePath: `${window.location.origin}/ypc-rest-api`, // TODO: Resolve path dynamically or with config file
-      credentials: {
-        bearerAuth: () => this.tokenSubject.getValue() ?? undefined,
-      },
-      withCredentials: true,
-    });
+    this.apiConfigService.setTokenSource(this.tokenSubject.asObservable());
+    this.refresh();
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.getCustomerApi()
+    return this.customerApi
       .loginCustomer(email, password)
       .pipe(
         tap({
           next: (token) => this.tokenSubject.next(token),
-          error: () => this.tokenSubject.next(null),
+          error: () => this.tokenSubject.next(undefined),
         }),
         map((token) => token != null)
       );
   }
 
   initOAuthFlow() {
-    this.getCustomerApi()
+    this.customerApi
       .loginCustomerWithOAuth()
       .subscribe((response) => (document.location = response));
   }
 
   refresh() {
-    this.getSessionApi()
+    this.sessionApi
       .refreshSession()
       .subscribe((token) => this.tokenSubject.next(token));
   }
 
   logout() {
-    this.getCustomerApi()
+    this.customerApi
       .logoutCustomer()
-      .subscribe(() => this.tokenSubject.next(null));
+      .subscribe(() => this.tokenSubject.next(undefined));
 
     // TODO: Clean this up
     if (this.router.url.startsWith('/user')) {
@@ -111,7 +80,7 @@ export class AuthenticationService {
     email: string;
     password: string;
   }) {
-    return this.getCustomerApi()
+    return this.customerApi
       .registerCustomer(
         data.email,
         data.password,
@@ -125,10 +94,9 @@ export class AuthenticationService {
       .pipe(
         tap({
           next: (response) => this.tokenSubject.next(response ?? null),
-          error: () => this.tokenSubject.next(null),
+          error: () => this.tokenSubject.next(undefined),
         }),
         map((token) => token != null)
       );
   }
-
 }
