@@ -23,8 +23,6 @@ export class AuthenticationService {
   private readonly tokenSubject!: BehaviorSubject<string | null>;
   public readonly isAuthenticated!: Observable<boolean>;
 
-  private readonly base = document.querySelector('base')?.getAttribute('href');
-
   constructor(
     private environmentInjector: EnvironmentInjector,
     private router: Router
@@ -133,9 +131,4 @@ export class AuthenticationService {
       );
   }
 
-  getRootUrl() {
-    return this.base === '/'
-      ? window.location.origin
-      : `${window.location.origin}${this.base}`;
-  }
 }
