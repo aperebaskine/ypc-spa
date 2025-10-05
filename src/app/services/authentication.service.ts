@@ -22,39 +22,25 @@ export class AuthenticationService {
     this.isAuthenticated$ = this.tokenSubject
       .asObservable()
       .pipe(map((token) => !!token));
-    this.refresh();
-  }
-
-  getToken(): string | undefined {
-    return this.tokenSubject.getValue();
+    this.refreshSession();
   }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.customerApi.loginCustomer(email, password).pipe(
-      tap({
-        next: (token) => this.tokenSubject.next(token),
-        error: () => this.tokenSubject.next(undefined),
-      }),
-      map((token) => token != null)
-    );
+    const response = this.customerApi.loginCustomer(email, password);
+    return this.handleTokenResponse(response);
   }
 
-  initOAuthFlow() {
+  initOAuthFlow(): void {
     this.customerApi
       .loginCustomerWithOAuth()
       .subscribe((response) => (document.location = response));
   }
 
-  refresh() {
-    this.sessionApi
-      .refreshSession()
-      .subscribe((token) => this.tokenSubject.next(token));
-  }
-
   logout() {
     this.customerApi
       .logoutCustomer()
-      .subscribe(() => this.tokenSubject.next(undefined));
+      .pipe(tap(() => this.tokenSubject.next(undefined)))
+      .subscribe();
 
     // TODO: Clean this up
     if (this.router.url.startsWith('/user')) {
@@ -71,24 +57,38 @@ export class AuthenticationService {
     phoneNumber?: string;
     email: string;
     password: string;
-  }) {
-    return this.customerApi
-      .registerCustomer(
-        data.email,
-        data.password,
-        data.firstName,
-        data.lastName1,
-        data.lastName2,
-        data.docType,
-        data.docNumber,
-        data.phoneNumber
-      )
-      .pipe(
-        tap({
-          next: (response) => this.tokenSubject.next(response ?? null),
-          error: () => this.tokenSubject.next(undefined),
-        }),
-        map((token) => token != null)
-      );
+  }): Observable<boolean> {
+    const response = this.customerApi.registerCustomer(
+      data.email,
+      data.password,
+      data.firstName,
+      data.lastName1,
+      data.lastName2,
+      data.docType,
+      data.docNumber,
+      data.phoneNumber
+    );
+    return this.handleTokenResponse(response);
+  }
+
+  refreshSession(): Observable<boolean> {
+    const response = this.sessionApi.refreshSession();
+    return this.handleTokenResponse(response);
+  }
+
+  getToken(): string | undefined {
+    return this.tokenSubject.getValue();
+  }
+
+  private handleTokenResponse(
+    response: Observable<string>
+  ): Observable<boolean> {
+    return response.pipe(
+      tap({
+        next: (token) => this.tokenSubject.next(token),
+        error: () => this.tokenSubject.next(undefined),
+      }),
+      map((token) => !!token)
+    );
   }
 }
