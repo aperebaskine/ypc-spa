@@ -30,22 +30,25 @@ export class AuthenticationService {
     return this.handleTokenResponse(response);
   }
 
-  initOAuthFlow(): void {
-    this.customerApi
-      .loginCustomerWithOAuth()
-      .subscribe((response) => (document.location = response));
+  oauth(): Observable<void> {
+    return this.customerApi.loginCustomerWithOAuth().pipe(
+      tap((response) => (document.location = response)),
+      map(() => {})
+    );
   }
 
-  logout() {
-    this.customerApi
+  logout(): Observable<any> {
+    return this.customerApi
       .logoutCustomer()
-      .pipe(tap(() => this.tokenSubject.next(undefined)))
-      .subscribe();
-
-    // TODO: Clean this up
-    if (this.router.url.startsWith('/user')) {
-      this.router.navigate(['login']);
-    }
+      .pipe(
+        tap(() => this.tokenSubject.next(undefined)),
+        tap(() => {
+          // TODO: Clean this up
+          if (this.router.url.startsWith('/user')) {
+            this.router.navigate(['login']);
+          }
+        })
+      );
   }
 
   register(data: {

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
-import { LocaleMenuComponent } from "../locale-menu/locale-menu.component";
-import { DarkModeToggleComponent } from "../theme-toggle/dark-mode-toggle.component";
+import { LocaleMenuComponent } from '../locale-menu/locale-menu.component';
+import { DarkModeToggleComponent } from '../theme-toggle/dark-mode-toggle.component';
 import { CartService } from '../../../services/cart.service';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../../services/user.service';
@@ -21,7 +21,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
     MatIconModule,
     MatBadgeModule,
     DarkModeToggleComponent,
-    LocaleMenuComponent
+    LocaleMenuComponent,
   ],
   templateUrl: './user-menu.component.html',
   styleUrl: './user-menu.component.scss',
@@ -43,6 +43,6 @@ export class UserMenuComponent {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout().subscribe();
   }
 }
