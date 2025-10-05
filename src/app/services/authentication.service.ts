@@ -21,9 +21,8 @@ export class AuthenticationService {
     private router: Router
   ) {
     this.tokenSubject = new BehaviorSubject<string | undefined>(undefined);
-    this.isAuthenticated = this.tokenSubject.pipe(
-      map((token) => token != null),
-      shareReplay(1)
+    this.isAuthenticated = this.tokenSubject.asObservable().pipe(
+      map((token) => !!token)
     );
     this.apiConfigService.setTokenSource(this.tokenSubject.asObservable());
     this.refresh();
