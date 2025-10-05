@@ -22,7 +22,7 @@ export class AuthenticationService {
     this.isAuthenticated$ = this.tokenSubject
       .asObservable()
       .pipe(map((token) => !!token));
-    this.refreshSession();
+    this.refreshSession().subscribe();
   }
 
   login(email: string, password: string): Observable<boolean> {
