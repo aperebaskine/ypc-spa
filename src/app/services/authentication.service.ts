@@ -5,28 +5,28 @@ import {
 } from '../generated';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { ApiConfigService } from './api-config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthenticationService {
-  private readonly tokenSubject!: BehaviorSubject<string | undefined>;
-  public readonly isAuthenticated!: Observable<boolean>;
+  private readonly tokenSubject: BehaviorSubject<string | undefined>;
+  public readonly isAuthenticated: Observable<boolean>;
 
   constructor(
-    private apiConfigService: ApiConfigService,
     private customerApi: CustomerApi,
     private sessionApi: SessionApi,
     private router: Router
   ) {
     this.tokenSubject = new BehaviorSubject<string | undefined>(undefined);
-    const token$ = this.tokenSubject.asObservable();
-    this.isAuthenticated = token$.pipe(
-      map((token) => !!token)
-    );
-    this.apiConfigService.setTokenSource(token$);
+    this.isAuthenticated = this.tokenSubject
+      .asObservable()
+      .pipe(map((token) => !!token));
     this.refresh();
+  }
+
+  getToken(): string | undefined {
+    return this.tokenSubject.getValue();
   }
 
   login(email: string, password: string): Observable<boolean> {

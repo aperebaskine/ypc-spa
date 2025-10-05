@@ -1,31 +1,37 @@
-import { Injectable } from '@angular/core';
+import {
+  EnvironmentInjector,
+  inject,
+  Injectable,
+  runInInjectionContext,
+} from '@angular/core';
 import { Configuration } from '../generated';
-import { Observable, Subscription, tap } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiConfigService {
+  private authService: AuthenticationService | undefined;
 
-  private token: string | undefined = undefined;
-  private subscription: Subscription | null = null;
+  constructor(private injector: EnvironmentInjector) {}
 
-  constructor() {
-  }
+  private getToken(): string | undefined {
+    if (!this.authService) {
+      this.authService = runInInjectionContext(this.injector, () =>
+        inject(AuthenticationService)
+      );
+    }
 
-  setTokenSource(source: Observable<string | undefined>) {
-    this.subscription?.unsubscribe();
-    this.subscription = source.pipe(tap((token) => this.token = token)).subscribe();
+    return this.authService.getToken();
   }
 
   getConfiguration(): Configuration {
-      return new Configuration({
-        basePath: `${window.location.origin}/ypc-rest-api`, // TODO: Resolve path dynamically or with config file
-        credentials: {
-          bearerAuth: () => this.token,
-        },
-        withCredentials: true,
-      });
-    }
-
+    return new Configuration({
+      basePath: `${window.location.origin}/ypc-rest-api`, // TODO: Resolve path dynamically or with config file
+      credentials: {
+        bearerAuth: () => this.getToken(),
+      },
+      withCredentials: true,
+    });
+  }
 }
