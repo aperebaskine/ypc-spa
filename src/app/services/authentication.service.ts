@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
   private readonly tokenSubject: BehaviorSubject<string | undefined>;
-  public readonly isAuthenticated: Observable<boolean>;
+  public readonly isAuthenticated$: Observable<boolean>;
 
   constructor(
     private customerApi: CustomerApi,
@@ -19,7 +19,7 @@ export class AuthenticationService {
     private router: Router
   ) {
     this.tokenSubject = new BehaviorSubject<string | undefined>(undefined);
-    this.isAuthenticated = this.tokenSubject
+    this.isAuthenticated$ = this.tokenSubject
       .asObservable()
       .pipe(map((token) => !!token));
     this.refresh();

@@ -18,7 +18,7 @@ export class UserService {
     this.userSubject = new BehaviorSubject<Customer | null>(null);
     this.user = this.userSubject.asObservable();
 
-    this.authService.isAuthenticated.subscribe((isAuthenticated) => {
+    this.authService.isAuthenticated$.subscribe((isAuthenticated) => {
       if (isAuthenticated) {
         this.updateUser();
       } else {

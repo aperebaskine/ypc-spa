@@ -24,7 +24,7 @@ export class CartService {
     this.addedItemSubject = new Subject<CartItem>();
     this.addedItem = this.addedItemSubject.asObservable();
 
-    this.authService.isAuthenticated.subscribe((auth) => {
+    this.authService.isAuthenticated$.subscribe((auth) => {
       if (!auth) {
         this.clear();
       }

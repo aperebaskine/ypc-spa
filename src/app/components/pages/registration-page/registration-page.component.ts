@@ -72,7 +72,7 @@ export class RegistrationPageComponent {
     private location: Location
   ) {
     this.docTypes = this.docTypeService.findAll();
-    this.isAuthenticated = this.authService.isAuthenticated;
+    this.isAuthenticated = this.authService.isAuthenticated$;
   }
 
   onSubmit() {

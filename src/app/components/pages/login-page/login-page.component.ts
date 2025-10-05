@@ -38,7 +38,7 @@ export class LoginPageComponent {
     private router: Router,
     private location: Location
   ) {
-    this.isAuthenticated = this.authService.isAuthenticated;
+    this.isAuthenticated = this.authService.isAuthenticated$;
   }
 
   login() {
