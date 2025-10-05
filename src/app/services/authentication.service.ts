@@ -3,7 +3,7 @@ import {
   CustomerService as CustomerApi,
   SessionService as SessionApi,
 } from '../generated';
-import { BehaviorSubject, map, Observable, shareReplay, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ApiConfigService } from './api-config.service';
 
@@ -21,10 +21,11 @@ export class AuthenticationService {
     private router: Router
   ) {
     this.tokenSubject = new BehaviorSubject<string | undefined>(undefined);
-    this.isAuthenticated = this.tokenSubject.asObservable().pipe(
+    const token$ = this.tokenSubject.asObservable();
+    this.isAuthenticated = token$.pipe(
       map((token) => !!token)
     );
-    this.apiConfigService.setTokenSource(this.tokenSubject.asObservable());
+    this.apiConfigService.setTokenSource(token$);
     this.refresh();
   }
 
