@@ -3,7 +3,7 @@ import {
   CustomerService as CustomerApi,
   SessionService as SessionApi,
 } from '../generated';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, EMPTY, map, Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpContext, HttpContextToken } from '@angular/common/http';
 
@@ -24,9 +24,7 @@ export class AuthenticationService {
     this.tokenSubject = new BehaviorSubject<string | undefined>(undefined);
     this.isAuthenticated$ = this.tokenSubject
       .asObservable()
-      .pipe(
-        tap((token) => console.log(token)),
-        map((token) => !!token));
+      .pipe(map((token) => !!token));
     this.refreshSession().subscribe();
   }
 
@@ -35,10 +33,12 @@ export class AuthenticationService {
     return this.handleTokenResponse(response);
   }
 
-  oauth(): Observable<void> {
+  oauth(): Observable<never> {
     return this.customerApi.loginCustomerWithOAuth().pipe(
-      tap((response) => (document.location = response)),
-      map(() => {})
+      switchMap((url) => {
+        document.location = url;
+        return EMPTY;
+      })
     );
   }
 
@@ -82,7 +82,7 @@ export class AuthenticationService {
       context: new HttpContext().set(SHOULD_REFRESH, false),
     });
     return this.handleTokenResponse(response);
-  }
+  };
 
   getToken(): string | undefined {
     return this.tokenSubject.getValue();
