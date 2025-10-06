@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import {
   AuthenticationService,
-  REFRESH_SESSION_IF_UNAUTHORIZED,
+  REFRESH_SESSION_ON_UNAUTHORIZED,
 } from '../services/authentication.service';
 import { catchError, switchMap, throwError } from 'rxjs';
 import { EnvironmentInjector, inject, runInInjectionContext } from '@angular/core';
@@ -17,7 +17,7 @@ export const sessionRefreshInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((error: HttpErrorResponse) => {
       if (
         error.status !== HttpStatusCode.Unauthorized ||
-        !req.context.get(REFRESH_SESSION_IF_UNAUTHORIZED)
+        !req.context.get(REFRESH_SESSION_ON_UNAUTHORIZED)
       ) {
         return throwError(() => error);
       }
