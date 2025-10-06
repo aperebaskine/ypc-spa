@@ -8,12 +8,10 @@ import {
   SHOULD_REFRESH,
 } from '../services/authentication.service';
 import { catchError, switchMap, throwError } from 'rxjs';
-import { inject } from '@angular/core';
+import { EnvironmentInjector, inject, runInInjectionContext } from '@angular/core';
 
 export const sessionRefreshInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log(req);
-
-  let authService = inject(AuthenticationService);
+  const injector = inject(EnvironmentInjector);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -24,6 +22,7 @@ export const sessionRefreshInterceptor: HttpInterceptorFn = (req, next) => {
         return throwError(() => error);
       }
 
+      const authService = runInInjectionContext(injector, () => inject(AuthenticationService));
       return authService.refreshSession().pipe(
         switchMap(() => {
           const newReq = req.clone({
