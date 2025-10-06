@@ -28,21 +28,24 @@ export class AuthenticationService {
     this.refreshSession().subscribe();
   }
 
-  login(email: string, password: string): Observable<boolean> {
+  readonly login: (email: string, password: string) => Observable<boolean> = (
+    email,
+    password
+  ) => {
     const response = this.customerApi.loginCustomer(email, password);
     return this.handleTokenResponse(response);
-  }
+  };
 
-  oauth(): Observable<never> {
+  readonly oauth: () => Observable<never> = () => {
     return this.customerApi.loginCustomerWithOAuth().pipe(
       switchMap((url) => {
         document.location = url;
         return EMPTY;
       })
     );
-  }
+  };
 
-  logout(): Observable<any> {
+  readonly logout: () => Observable<any> = () => {
     return this.customerApi.logoutCustomer().pipe(
       tap(() => this.tokenSubject.next(undefined)),
       tap(() => {
@@ -52,9 +55,9 @@ export class AuthenticationService {
         }
       })
     );
-  }
+  };
 
-  register(data: {
+  readonly register: (data: {
     firstName?: string;
     lastName1?: string;
     lastName2?: string;
@@ -63,7 +66,7 @@ export class AuthenticationService {
     phoneNumber?: string;
     email: string;
     password: string;
-  }): Observable<boolean> {
+  }) => Observable<boolean> = (data) => {
     const response = this.customerApi.registerCustomer(
       data.email,
       data.password,
@@ -75,20 +78,18 @@ export class AuthenticationService {
       data.phoneNumber
     );
     return this.handleTokenResponse(response);
-  }
+  };
 
-  refreshSession: () => Observable<boolean> = () => {
+  readonly refreshSession: () => Observable<boolean> = () => {
     const response = this.sessionApi.refreshSession('body', false, {
       context: new HttpContext().set(SHOULD_REFRESH, false),
     });
     return this.handleTokenResponse(response);
   };
 
-  getToken(): string | undefined {
-    return this.tokenSubject.getValue();
-  }
+  readonly getToken: () => string | undefined = () => this.tokenSubject.getValue();
 
-  getAuthHeader(): string | undefined {
+  readonly getAuthHeader: () => string | undefined = () => {
     const token = this.tokenSubject.getValue();
     return !!token ? `Bearer ${token}` : undefined;
   }
