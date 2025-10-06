@@ -7,7 +7,7 @@ import { BehaviorSubject, EMPTY, map, Observable, switchMap, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpContext, HttpContextToken } from '@angular/common/http';
 
-export const SHOULD_REFRESH = new HttpContextToken<boolean>(() => true);
+export const REFRESH_SESSION_IF_UNAUTHORIZED = new HttpContextToken<boolean>(() => true);
 
 @Injectable({
   providedIn: 'root',
@@ -82,7 +82,7 @@ export class AuthenticationService {
 
   readonly refreshSession: () => Observable<boolean> = () => {
     const response = this.sessionApi.refreshSession('body', false, {
-      context: new HttpContext().set(SHOULD_REFRESH, false),
+      context: new HttpContext().set(REFRESH_SESSION_IF_UNAUTHORIZED, false),
     });
     return this.handleTokenResponse(response);
   };
