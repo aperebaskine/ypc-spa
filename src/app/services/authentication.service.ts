@@ -5,6 +5,9 @@ import {
 } from '../generated';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { HttpContext, HttpContextToken } from '@angular/common/http';
+
+export const SHOULD_REFRESH = new HttpContextToken<boolean>(() => true);
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +24,9 @@ export class AuthenticationService {
     this.tokenSubject = new BehaviorSubject<string | undefined>(undefined);
     this.isAuthenticated$ = this.tokenSubject
       .asObservable()
-      .pipe(map((token) => !!token));
+      .pipe(
+        tap((token) => console.log(token)),
+        map((token) => !!token));
     this.refreshSession().subscribe();
   }
 
@@ -38,17 +43,15 @@ export class AuthenticationService {
   }
 
   logout(): Observable<any> {
-    return this.customerApi
-      .logoutCustomer()
-      .pipe(
-        tap(() => this.tokenSubject.next(undefined)),
-        tap(() => {
-          // TODO: Clean this up
-          if (this.router.url.startsWith('/user')) {
-            this.router.navigate(['login']);
-          }
-        })
-      );
+    return this.customerApi.logoutCustomer().pipe(
+      tap(() => this.tokenSubject.next(undefined)),
+      tap(() => {
+        // TODO: Clean this up
+        if (this.router.url.startsWith('/user')) {
+          this.router.navigate(['login']);
+        }
+      })
+    );
   }
 
   register(data: {
@@ -74,13 +77,20 @@ export class AuthenticationService {
     return this.handleTokenResponse(response);
   }
 
-  refreshSession(): Observable<boolean> {
-    const response = this.sessionApi.refreshSession();
+  refreshSession: () => Observable<boolean> = () => {
+    const response = this.sessionApi.refreshSession('body', false, {
+      context: new HttpContext().set(SHOULD_REFRESH, false),
+    });
     return this.handleTokenResponse(response);
   }
 
   getToken(): string | undefined {
     return this.tokenSubject.getValue();
+  }
+
+  getAuthHeader(): string | undefined {
+    const token = this.tokenSubject.getValue();
+    return !!token ? `Bearer ${token}` : undefined;
   }
 
   private handleTokenResponse(

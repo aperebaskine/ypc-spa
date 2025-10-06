@@ -9,6 +9,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {
   provideHttpClient,
+  withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import {
@@ -19,13 +20,14 @@ import { Configuration } from './generated';
 import { provideOAuthClient } from 'angular-oauth2-oidc';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ApiConfigService } from './services/api-config.service';
+import { sessionRefreshInterceptor } from './interceptors/session-refresh.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([sessionRefreshInterceptor])),
     provideOAuthClient(),
     provideNativeDateAdapter(MAT_NATIVE_DATE_FORMATS),
     {
