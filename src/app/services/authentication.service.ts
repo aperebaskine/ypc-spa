@@ -3,11 +3,21 @@ import {
   CustomerService as CustomerApi,
   SessionService as SessionApi,
 } from '../generated';
-import { BehaviorSubject, EMPTY, map, Observable, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  distinctUntilChanged,
+  EMPTY,
+  map,
+  Observable,
+  switchMap,
+  tap,
+} from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpContext, HttpContextToken } from '@angular/common/http';
 
-export const REFRESH_SESSION_ON_UNAUTHORIZED = new HttpContextToken<boolean>(() => true);
+export const REFRESH_SESSION_ON_UNAUTHORIZED = new HttpContextToken<boolean>(
+  () => true
+);
 
 @Injectable({
   providedIn: 'root',
@@ -22,9 +32,10 @@ export class AuthenticationService {
     private router: Router
   ) {
     this.tokenSubject = new BehaviorSubject<string | undefined>(undefined);
-    this.isAuthenticated$ = this.tokenSubject
-      .asObservable()
-      .pipe(map((token) => !!token));
+    this.isAuthenticated$ = this.tokenSubject.asObservable().pipe(
+      map((token) => !!token),
+      distinctUntilChanged()
+    );
     this.refreshSession().subscribe();
   }
 
@@ -87,12 +98,13 @@ export class AuthenticationService {
     return this.handleTokenResponse(response);
   };
 
-  readonly getToken: () => string | undefined = () => this.tokenSubject.getValue();
+  readonly getToken: () => string | undefined = () =>
+    this.tokenSubject.getValue();
 
   readonly getAuthHeader: () => string | undefined = () => {
     const token = this.tokenSubject.getValue();
     return !!token ? `Bearer ${token}` : undefined;
-  }
+  };
 
   private handleTokenResponse(
     response: Observable<string>
