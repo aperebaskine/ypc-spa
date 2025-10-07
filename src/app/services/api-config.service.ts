@@ -12,10 +12,20 @@ import { AuthenticationService } from './authentication.service';
 })
 export class ApiConfigService {
   private authService: AuthenticationService | undefined;
+  private configuration: Configuration;
 
-  constructor(private injector: EnvironmentInjector) {}
+  constructor(private injector: EnvironmentInjector) {
+    this.configuration = new Configuration({
+      // TODO: Resolve path dynamically or with config file
+      basePath: `${window.location.origin}/ypc-rest-api`,
+      credentials: {
+        bearerAuth: this.getToken,
+      },
+      withCredentials: true,
+    });
+  }
 
-  private getToken(): string | undefined {
+  private getToken = (): string | undefined => {
     if (!this.authService) {
       this.authService = runInInjectionContext(this.injector, () =>
         inject(AuthenticationService)
@@ -23,15 +33,7 @@ export class ApiConfigService {
     }
 
     return this.authService.getToken();
-  }
+  };
 
-  getConfiguration(): Configuration {
-    return new Configuration({
-      basePath: `${window.location.origin}/ypc-rest-api`, // TODO: Resolve path dynamically or with config file
-      credentials: {
-        bearerAuth: () => this.getToken(),
-      },
-      withCredentials: true,
-    });
-  }
+  getConfiguration = (): Configuration => this.configuration;
 }
