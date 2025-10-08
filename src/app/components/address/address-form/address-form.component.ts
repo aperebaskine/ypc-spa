@@ -46,6 +46,7 @@ export class AddressFormComponent implements OnInit {
   addressCount: number = 0;
 
   form = inject(FormBuilder).group({
+    id: [0],
     name: ['', Validators.required],
     streetName: ['', Validators.required],
     streetNumber: [0],
@@ -149,6 +150,7 @@ export class AddressFormComponent implements OnInit {
 
   initializeForm() {
     this.form.reset({
+      id: this.address?.id ?? null,
       name: this.address?.name ?? '',
       streetName: this.address?.streetName ?? '',
       streetNumber: this.address?.streetNumber ?? null,
